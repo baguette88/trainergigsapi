@@ -61,17 +61,18 @@ paths:
             text/csv:
               schema:
                 type: string
-  /board.json:
+  /ai-training-jobs-roles.json:
     get:
-      operationId: getBoard
-      summary: The live board, every open role
+      operationId: getRoles
+      summary: Every open role, one line each
+      description: Goes live with the site's next release.
       responses:
         "200":
-          description: The board. Each row is a list in the order of the fields list.
+          description: The roles file.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Board"
+                $ref: "#/components/schemas/Roles"
   /feed.xml:
     get:
       operationId: getFeed
@@ -328,78 +329,62 @@ components:
         url:
           type: string
           format: uri
-    Board:
+    Roles:
       type: object
-      required: [built, fields, rows, providers, cats, places, v]
+      required: [source, counted, license, fields, totals, roles]
       properties:
-        built:
+        source:
+          type: string
+          format: uri
+        counted:
           type: string
           format: date
-        new_since:
-          type: string
-          format: date
-        v:
+          description: The day the roles were counted.
+        license:
           type: string
         fields:
-          type: array
-          description: The names of the values in each row, in order.
-          items:
-            type: string
-        rows:
-          type: array
-          description: One list per open role, in the order of the fields list.
-          items:
-            $ref: "#/components/schemas/BoardRow"
-        providers:
           type: object
-          description: Platform name to its apply details.
-          additionalProperties:
-            type: object
-            properties:
-              label:
-                type: string
-              note:
-                type: [string, "null"]
-              signup:
-                type: [string, "null"]
-        cats:
-          type: object
-          description: Field key to its label.
+          description: What each role field holds, in one sentence each.
           additionalProperties:
             type: string
-        places:
+        totals:
+          $ref: "#/components/schemas/DailyTotals"
+        roles:
           type: array
-          description: Tables of country codes. A row's places value is an index into this list.
+          description: Sorted by platform, then title, then url.
           items:
-            type: array
-            items:
-              type: string
-    BoardRow:
-      type: array
-      description: >
-        Values in the order of the board's fields list: key, page, title, cat, provider, pay, paymin, unit,
-        salary, posted, seen, rank, regions, skills, flags, apply, paylabel, where, more, places, bounty_usd.
-        Link to a role at https://trainergigs.com/ followed by its page value.
-      prefixItems:
-        - type: string
-          description: key, the role's id
-        - type: string
-          description: page, the role's page name
-        - type: string
-          description: title
-        - type: string
-          description: cat, a key of cats
-        - type: string
-          description: provider, the platform's name
-        - type: [number, string]
-          description: pay, the upper end of listed pay, or an empty string
-        - type: [number, string]
-          description: paymin, the lower end of listed pay, or an empty string
-        - type: string
-          description: unit, one of hr, task, yr, hrtask or an empty string
-        - type: [number, string]
-          description: salary, a yearly figure when unit is yr, otherwise an empty string
-        - type: string
-          description: posted, a day or an empty string
-        - type: string
-          description: seen, the day the board first saw the listing
+            $ref: "#/components/schemas/Role"
+    Role:
+      type: object
+      required: [url, title, platform, field, kind, pay_min, pay_max, pay_unit, paid_per_task, where, posted]
+      additionalProperties: false
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The role's own page on trainergigs.com.
+        title:
+          type: string
+        platform:
+          type: string
+        field:
+          type: string
+          description: The board's name for the role's field of work.
+        kind:
+          type: string
+          enum: [role, study]
+        pay_min:
+          type: [number, "null"]
+        pay_max:
+          type: [number, "null"]
+        pay_unit:
+          type: [string, "null"]
+          enum: [hr, task, yr, null]
+        paid_per_task:
+          type: boolean
+          description: True when the listing gives an hourly figure but says it pays per task.
+        where:
+          type: string
+        posted:
+          type: [string, "null"]
+          format: date

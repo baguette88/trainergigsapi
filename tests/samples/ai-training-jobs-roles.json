@@ -1,0 +1,50 @@
+{
+ "source": "https://trainergigs.com",
+ "counted": "2026-11-11",
+ "license": "CC BY 4.0. Credit: Data: TrainerGigs, https://trainergigs.com",
+ "fields": {
+  "url": "The role's own page on trainergigs.com.",
+  "title": "The listing's title.",
+  "platform": "The platform that lists the role.",
+  "field": "The board's name for the role's field of work.",
+  "kind": "role, or study for a paid research study. Studies are counted apart and are never called roles.",
+  "pay_min": "The lower end of the listed pay as a number, or null when the listing states no pay.",
+  "pay_max": "The upper end of the listed pay as a number, or null when the listing states no pay.",
+  "pay_unit": "The unit of the listed pay: hr, task or yr, or null when the listing states no pay.",
+  "paid_per_task": "true when the listing gives an hourly figure but says it pays per task, otherwise false.",
+  "where": "The board's short place text, empty when no country is named.",
+  "posted": "The day the platform itself dated the listing, or null when it gives none."
+ },
+ "totals": {
+  "open_roles": 3077,
+  "platforms_with_open_roles": 33,
+  "paid_research_studies": 440,
+  "roles_that_state_pay": 2259,
+  "roles_with_hourly_pay": 2098,
+  "median_listed_hourly_usd": 40.0,
+  "q1_listed_hourly_usd": 35.5,
+  "q3_listed_hourly_usd": 75.0
+ },
+ "roles": [
+{"url":"https://trainergigs.com/job-affirm-7860703003","title":"Operations Enablement Lead","platform":"Affirm","field":"Education","kind":"role","pay_min":130000,"pay_max":180000,"pay_unit":"yr","paid_per_task":false,"where":"","posted":"2026-08-24"},
+{"url":"https://trainergigs.com/job-affirm-7860705003","title":"Operations Enablement Lead","platform":"Affirm","field":"Education","kind":"role","pay_min":101000,"pay_max":151000,"pay_unit":"yr","paid_per_task":false,"where":"","posted":"2026-08-24"},
+{"url":"https://trainergigs.com/job-affirm-8009629003","title":"Operations Enablement Manager","platform":"Affirm","field":"Education","kind":"role","pay_min":165000,"pay_max":225000,"pay_unit":"yr","paid_per_task":false,"where":"","posted":"2026-10-27"},
+{"url":"https://trainergigs.com/job-affirm-8009631003","title":"Operations Enablement Manager","platform":"Affirm","field":"Education","kind":"role","pay_min":128000,"pay_max":188000,"pay_unit":"yr","paid_per_task":false,"where":"","posted":"2026-10-27"},
+{"url":"https://trainergigs.com/job-alignerr-01b96a0b-9f9f-49f8-be80-0c3f9bcd6b84","title":"AI / Emerging Tech Security Analyst","platform":"Alignerr","field":"Software Engineering","kind":"role","pay_min":40,"pay_max":60,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
+{"url":"https://trainergigs.com/job-alignerr-345af0a7-7d2c-48e4-b416-b43d870dcd94","title":"AI Chatbot Tester","platform":"Alignerr","field":"Generalist","kind":"role","pay_min":40,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
+{"url":"https://trainergigs.com/job-alignerr-01c90817-6e93-4b25-9759-1fd2155a3cf4","title":"AI Data Quality Analyst","platform":"Alignerr","field":"Business & Operations","kind":"role","pay_min":40,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
+{"url":"https://trainergigs.com/job-alignerr-0cd826b6-bff4-4a1d-b136-3737d6d064fe","title":"AI Ethics Reviewer","platform":"Alignerr","field":"Business & Operations","kind":"role","pay_min":40,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
+{"url":"https://trainergigs.com/job-alignerr-e0369c6d-d530-42b7-aca6-bbaae0d5241f","title":"AI Penetration Tester","platform":"Alignerr","field":"Software Engineering","kind":"role","pay_min":60,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
+{"url":"https://trainergigs.com/job-alignerr-13f3dddc-8aff-4216-ba14-0910898254d7","title":"AI Penetration Testing Expert","platform":"Alignerr","field":"Software Engineering","kind":"role","pay_min":60,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
+{"url":"https://trainergigs.com/job-alignerr-050d1238-60b5-4ef0-be9f-111c67d55ccc","title":"AI Policy, Ethics & Compliance Analyst","platform":"Alignerr","field":"Finance","kind":"role","pay_min":40,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
+{"url":"https://trainergigs.com/job-alignerr-b687c780-2b77-4c7a-a546-7feb5af50197","title":"AI Red Team Analyst","platform":"Alignerr","field":"Software Engineering","kind":"role","pay_min":15,"pay_max":75,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
+{"url":"https://trainergigs.com/job-alignerr-30215b34-4d7f-49ad-b529-f7318c525447","title":"AI Red Team Penetration Tester","platform":"Alignerr","field":"Software Engineering","kind":"role","pay_min":60,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
+{"url":"https://trainergigs.com/job-alignerr-04bd31fe-3b6b-431f-9297-aa10922ce6c7","title":"AI Red Team Tester","platform":"Alignerr","field":"Business & Operations","kind":"role","pay_min":40,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
+{"url":"https://trainergigs.com/job-anthropic-5183044008","title":"Anthropic Fellows Program, AI Safety & Security","platform":"Anthropic","field":"Other","kind":"role","pay_min":null,"pay_max":null,"pay_unit":null,"paid_per_task":false,"where":"","posted":"2026-04-09"},
+{"url":"https://trainergigs.com/job-anthropic-5406367008","title":"Cyber Evaluations Engineer","platform":"Anthropic","field":"Software Engineering","kind":"role","pay_min":300000,"pay_max":405000,"pay_unit":"yr","paid_per_task":false,"where":"","posted":"2026-09-01"},
+{"url":"https://trainergigs.com/job-appen-42fcca1d-361a-4e5b-89a0-efaadabe3e6f","title":"Gig Guru Wanted: Dive into Flexible Pay-by-Task Opportunities for Arabic Speakers in United States","platform":"Appen","field":"Language & Audio","kind":"role","pay_min":0.01,"pay_max":0.01,"pay_unit":"task","paid_per_task":false,"where":"US","posted":"2026-08-26"},
+{"url":"https://trainergigs.com/job-invisible-4654183101","title":"Attorney Specialist - Freelance AI Trainer Project","platform":"Invisible","field":"Law","kind":"role","pay_min":50,"pay_max":75,"pay_unit":"hr","paid_per_task":false,"where":"","posted":"2025-08-12"},
+{"url":"https://trainergigs.com/job-respondent-6adbb623853a4c36eca25263","title":"$130USD In Store Interview for Adults: We Want To See What's In Your Basket (45 min study)","platform":"Respondent","field":"Research Studies","kind":"study","pay_min":130,"pay_max":130,"pay_unit":"task","paid_per_task":false,"where":"","posted":"2026-10-23"},
+{"url":"https://trainergigs.com/job-micro1-68fc2230-56cf-4d7f-a4d0-037b4515b01b","title":"AI Trainer (Earth & Environmental Sciences)","platform":"micro1","field":"Science & Research","kind":"role","pay_min":60,"pay_max":120,"pay_unit":"hr","paid_per_task":true,"where":"58 countries","posted":"2026-11-09"}
+]
+}

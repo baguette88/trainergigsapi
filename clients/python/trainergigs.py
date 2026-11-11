@@ -12,12 +12,8 @@ import urllib.request
 BASE = "https://trainergigs.com"
 DAILY = "/ai-training-jobs-data"
 WEEKLY = "/ai-training-jobs-weekly"
-BOARD = "/board.json"
-USER_AGENT = "trainergigs-python-client/1.0 (hello@trainergigs.com)"
-
-ROW_FIELDS_FALLBACK = ("key", "page", "title", "cat", "provider", "pay", "paymin", "unit",
-                       "salary", "posted", "seen", "rank", "regions", "skills", "flags",
-                       "apply", "paylabel", "where", "more", "places", "bounty_usd")
+ROLES = "/ai-training-jobs-roles.json"
+USER_AGENT = "trainergigs-api-client/1.0"
 
 
 def _get(path, base=BASE, timeout=30):
@@ -46,54 +42,43 @@ def weekly_csv(base=BASE):
     return list(csv.DictReader(io.StringIO(_get(WEEKLY + ".csv", base))))
 
 
-def board(base=BASE):
-    """board.json as a dict. The rows are lists, in the order of the "fields" list."""
-    return json.loads(_get(BOARD, base))
-
-
-def role_dicts(data):
-    """Turn the rows of a board.json dict into dicts keyed by field name.
-
-    Adds "url", the role's own page on trainergigs.com, and "field_label",
-    the readable name of the role's field."""
-    names = data.get("fields") or list(ROW_FIELDS_FALLBACK)
-    cats = data.get("cats", {})
-    out = []
-    for row in data["rows"]:
-        role = dict(zip(names, row))
-        role["url"] = BASE + "/" + role["page"]
-        role["field_label"] = cats.get(role["cat"], role["cat"])
-        out.append(role)
-    return out
+def roles_file(base=BASE):
+    """The roles file as a dict: source, counted, license, fields, totals and roles."""
+    return json.loads(_get(ROLES, base))
 
 
 def hourly_midpoint(role):
     """The listed hourly pay of a role, a range at its midpoint, or None.
 
-    Only roles whose unit is "hr" count. The site counts a range at its midpoint."""
-    if role.get("unit") != "hr":
+    Only roles whose pay_unit is "hr" count. The site counts a range at its midpoint."""
+    if role.get("pay_unit") != "hr":
         return None
-    high, low = role.get("pay"), role.get("paymin")
-    if not isinstance(high, (int, float)):
+    high, low = role.get("pay_max"), role.get("pay_min")
+    if high is None and low is None:
         return None
-    if not isinstance(low, (int, float)):
+    if high is None:
+        high = low
+    if low is None:
         low = high
     return (high + low) / 2
 
 
-def roles(field=None, platform=None, min_pay=None, data=None):
-    """Open roles from the board, filtered.
+def roles(field=None, platform=None, min_pay=None, kind="role", data=None):
+    """Open roles from the roles file, filtered. Each role has a "url", its own page on trainergigs.com.
 
-    field: a field key such as "law" or its label such as "Finance" (case does not matter).
-    platform: a platform name as the data gives it (case does not matter).
+    field: the field's name as the file gives it, such as "Law" (case does not matter).
+    platform: a platform name as the file gives it (case does not matter).
     min_pay: keep roles whose listed hourly pay, at the midpoint of a range, is at least this.
-    data: a board.json dict you already hold. Without it the live board is fetched."""
-    found = role_dicts(data if data is not None else board())
+    kind: "role" (the default), "study", or None for both.
+    data: a roles file dict you already hold. Without it the live file is fetched."""
+    found = (data if data is not None else roles_file())["roles"]
     out = []
     for role in found:
-        if field and field.lower() not in (role["cat"].lower(), role["field_label"].lower()):
+        if kind and role["kind"] != kind:
             continue
-        if platform and platform.lower() != role["provider"].lower():
+        if field and field.lower() != role["field"].lower():
+            continue
+        if platform and platform.lower() != role["platform"].lower():
             continue
         if min_pay is not None:
             mid = hourly_midpoint(role)
@@ -104,10 +89,11 @@ def roles(field=None, platform=None, min_pay=None, data=None):
 
 
 def main():
-    data = board()
-    print("Board built", data.get("built"))
+    data = roles_file()
+    print("Counted on", data.get("counted"))
     for role in roles(data=data)[:5]:
-        print("-", role["title"], "|", role["provider"], "|", role["paylabel"], "|", role["url"])
+        pay = role["pay_min"], role["pay_max"], role["pay_unit"]
+        print("-", role["title"], "|", role["platform"], "|", pay, "|", role["url"])
     print("Data: TrainerGigs, https://trainergigs.com")
 
 

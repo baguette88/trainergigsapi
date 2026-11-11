@@ -14,7 +14,7 @@ All addresses are on `https://trainergigs.com`. A CDN caches each file for 5 min
 | `/ai-training-jobs-data.csv` | CSV | The same rows as the daily JSON | Rebuilt daily |
 | `/ai-training-jobs-weekly.json` | JSON | Every closed week, with a total row and rows by platform and field | A week is added after it closes |
 | `/ai-training-jobs-weekly.csv` | CSV | The same weeks as one long table | A week is added after it closes |
-| `/board.json` | JSON | The live board, every open role, one row per role | With each site build. The `built` field gives the day |
+| `/ai-training-jobs-roles.json` | JSON | Every open role, one line each, with its own page on trainergigs.com | Rebuilt daily. Goes live with the site's next release |
 | `/feed.xml` | RSS | Roles on the board | With the site build |
 | `/feed-weekly.xml` | RSS | One item per closed week | A week is added after it closes |
 | `/feed-changes.xml` | RSS | Platforms whose open roles grew, week by week | A week is added after it closes |
@@ -83,35 +83,34 @@ How to read them, from the file's own notes and method:
 
 The weekly CSV (`ai-training-jobs-weekly.csv`) has one row per week, platform and field. Its columns are `week`, `week_start`, `week_end`, `last_day`, `days_counted`, `closed_on`, `revised`, `platform`, `field`, `open_sunday`, `open_prev_sunday`, `listed_any_day`, `new_roles`, `gone_roles`, `renewed`, `newly_tracked`, `old_postings`, `roles_100_plus`, `roles_with_hourly_pay`, `median_listed_hourly_usd`, `q1_listed_hourly_usd`, `q3_listed_hourly_usd`, `platforms_read`, `feeds_not_read`, `languages_named`, `countries_named`, `days_listed_median`, `days_listed_n`. Platform and field are blank on the week's total row. Field is blank on a platform's row. Platform is blank on a field's row. The week's own numbers, from `platforms_read` to `days_listed_n`, are on its total row only.
 
-### Board file: `board.json`
+### Roles file: `ai-training-jobs-roles.json`
 
-Top level: `built`, `new_since`, `v`, `fields`, `rows`, `providers`, `cats`, `places`.
+This file goes live with the site's next release. Until then the address does not answer.
 
-* `fields` lists the names of the columns in each row.
-* `rows` holds one list per open role, in the order of `fields`.
-* `cats` maps a field key to its label.
-* `providers` maps a platform name to its apply label.
-* `places` is a table of country codes. A row's `places` value is an index into it.
+Top level: `source`, `counted`, `license`, `fields`, `totals`, `roles`.
 
-Row values this repository documents:
+* `counted` is the day the roles were counted.
+* `fields` says in one sentence what each role field holds.
+* `totals` holds the same numbers as `totals` in the daily file.
+* `roles` is sorted by platform, then title, then address.
+
+Each item in `roles`:
 
 | Field | Meaning |
 |---|---|
-| `key` | The role's id |
-| `page` | The role's page name. The page is `https://trainergigs.com/<page>` |
+| `url` | The role's own page on trainergigs.com |
 | `title` | The listing's title |
-| `cat` | The field key, a key of `cats` |
-| `provider` | The platform's name |
-| `pay` | The upper end of the listed pay as a number, empty when none is listed |
-| `paymin` | The lower end of the listed pay as a number, empty when none is listed |
-| `unit` | `hr`, `task`, `yr`, `hrtask` (an hourly figure on a role paid per task) or empty |
-| `salary` | The yearly figure when `unit` is `yr`, otherwise empty |
-| `posted` | The day the platform dated the listing, when it does |
-| `seen` | The day the board first saw the listing |
-| `paylabel` | The pay as the listing states it, or `Pay not listed` |
-| `where` | A short place text |
+| `platform` | The platform that lists the role |
+| `field` | The board's name for the role's field of work |
+| `kind` | `role`, or `study` for a paid research study. Studies are counted apart and are never called roles |
+| `pay_min` | The lower end of the listed pay as a number, or null when the listing states no pay |
+| `pay_max` | The upper end of the listed pay as a number, or null when the listing states no pay |
+| `pay_unit` | `hr`, `task` or `yr`, or null when the listing states no pay |
+| `paid_per_task` | True when the listing gives an hourly figure but says it pays per task, otherwise false |
+| `where` | The board's short place text, empty when no country is named |
+| `posted` | The day the platform itself dated the listing, or null when it gives none |
 
-Link to a role through its page on trainergigs.com. The other row values are there for the site's own pages and are not part of this reference.
+The rows marked `role` add up to `totals.open_roles`. The rows marked `study` add up to `totals.paid_research_studies`. The file holds no apply address and no description. Link to a role through its `url`.
 
 ## Examples
 
@@ -122,14 +121,14 @@ curl -s https://trainergigs.com/ai-training-jobs-data.json
 curl -s https://trainergigs.com/ai-training-jobs-weekly.csv -o weekly.csv
 ```
 
-Python, standard library only (`examples/example.py`). Send a `User-Agent` header of your own. A request with Python's default one was refused with HTTP 403 when this was written:
+Python, standard library only (`examples/example.py`):
 
 ```python
 import json
 import urllib.request
 
 url = "https://trainergigs.com/ai-training-jobs-data.json"
-req = urllib.request.Request(url, headers={"User-Agent": "my-script/1.0"})
+req = urllib.request.Request(url, headers={"User-Agent": "trainergigs-api-client/1.0"})
 with urllib.request.urlopen(req, timeout=30) as resp:
     data = json.load(resp)
 print(data["date"], data["totals"]["open_roles"], "open roles")
@@ -151,7 +150,7 @@ Google Sheets, on the CSV:
 =IMPORTDATA("https://trainergigs.com/ai-training-jobs-data.csv")
 ```
 
-A small client with filters is in `clients/python/trainergigs.py`. Run `python3 clients/python/trainergigs.py` to print five open roles. Run `python3 -m unittest` inside `clients/python` to test it against the saved files in `tests/samples/`. The board sample is a cut of 20 rows.
+A small client with filters is in `clients/python/trainergigs.py`. Run `python3 clients/python/trainergigs.py` to print five open roles. That demo reads the roles file, so it works once the file is live. Run `python3 -m unittest` inside `clients/python` to test it against the saved files in `tests/samples/`. The roles sample is a cut of 20 rows.
 
 ## How the numbers are counted
 
