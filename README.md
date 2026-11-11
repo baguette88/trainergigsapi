@@ -10,11 +10,11 @@ All addresses are on `https://trainergigs.com`. A CDN caches each file for 5 min
 
 | Address | Format | What it holds | How often it changes |
 |---|---|---|---|
-| `/ai-training-jobs-data.json` | JSON | Open roles by platform and field, the day's totals, the counting method | Rebuilt daily |
-| `/ai-training-jobs-data.csv` | CSV | The same rows as the daily JSON | Rebuilt daily |
+| `/ai-training-jobs-data.json` | JSON | Open roles by platform and field, the day's totals, the counting method | With the site build |
+| `/ai-training-jobs-data.csv` | CSV | The same rows as the daily JSON | With the site build |
 | `/ai-training-jobs-weekly.json` | JSON | Every closed week, with a total row and rows by platform and field | A week is added after it closes |
 | `/ai-training-jobs-weekly.csv` | CSV | The same weeks as one long table | A week is added after it closes |
-| `/ai-training-jobs-roles.json` | JSON | Every open role, one line each, with its own page on trainergigs.com | Rebuilt daily |
+| `/ai-training-jobs-roles.json` | JSON | Every open role, one line each, with its own page on trainergigs.com | With the site build |
 | `/feed.xml` | RSS | Roles on the board | With the site build |
 | `/feed-weekly.xml` | RSS | One item per closed week | A week is added after it closes |
 | `/feed-changes.xml` | RSS | Platforms whose open roles grew, week by week | A week is added after it closes |
@@ -29,7 +29,7 @@ These files send `Access-Control-Allow-Origin: *`. A web page on any site can re
 
 ## Counts on Nov 11, 2026
 
-The daily file for Nov 11, 2026 states 3,100 open roles on 33 platforms and 437 paid research studies, which it counts apart from the roles. For any other day, fetch the file. The live number is always in `totals` in the daily JSON.
+Read on Nov 11, 2026, the daily file stated 3,100 open roles on 33 platforms and 437 paid research studies, which it counts apart from the roles. The file can change through the day. For any other day, fetch the file. The live number is always in `totals` in the daily JSON.
 
 ## Field reference
 
@@ -140,7 +140,7 @@ const data = await res.json()
 console.log(data.date, data.totals.open_roles, "open roles")
 ```
 
-This runs in Node. In a browser it fails until the site sends the header described above.
+This runs in Node. It also runs in a browser page on any site, as a module script.
 
 Google Sheets, on the CSV:
 
@@ -148,7 +148,7 @@ Google Sheets, on the CSV:
 =IMPORTDATA("https://trainergigs.com/ai-training-jobs-data.csv")
 ```
 
-A small client with filters is in `clients/python/trainergigs.py`. Run `python3 clients/python/trainergigs.py` to print five open roles. That demo reads the roles file, so it works once the file is live. Run `python3 -m unittest` inside `clients/python` to test it against the saved files in `tests/samples/`. The roles sample is a cut of 20 rows.
+A small client with filters is in `clients/python/trainergigs.py`. Run `python3 clients/python/trainergigs.py` to print five open roles. That demo reads the live roles file. Run `python3 -m unittest` inside `clients/python` to test it against the saved files in `tests/samples/`. The roles sample is a cut of 20 rows.
 
 ## How the numbers are counted
 

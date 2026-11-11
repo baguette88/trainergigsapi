@@ -23,7 +23,7 @@ paths:
       summary: Open roles by platform and field, with the day's totals
       responses:
         "200":
-          description: The daily file, rebuilt daily.
+          description: The daily file, rebuilt with the site build.
           content:
             application/json:
               schema:
@@ -65,7 +65,7 @@ paths:
     get:
       operationId: getRoles
       summary: Every open role, one line each
-      description: Rebuilt daily. Each role links to its own page on trainergigs.com.
+      description: Rebuilt with the site build. Each role links to its own page on trainergigs.com.
       responses:
         "200":
           description: The roles file.
