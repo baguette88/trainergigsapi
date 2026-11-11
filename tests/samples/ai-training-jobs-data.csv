@@ -19,14 +19,14 @@ Alignerr,Generalist,18,18,80.0,0,0,2026-11-11,role
 Alignerr,Other,12,12,56.25,0,0,2026-11-11,role
 Alignerr,Arts & Design,2,2,,0,0,2026-11-11,role
 Alignerr,Education,2,2,,0,0,2026-11-11,role
-Respondent,Research Studies,392,0,,137,1,2026-11-11,study
+Respondent,Research Studies,394,0,,138,1,2026-11-11,study
 Respondent,Finance,45,0,,11,0,2026-11-11,study
 micro1,Other,93,85,60.0,18,58,2026-11-11,role
 micro1,Law,61,50,133.75,7,58,2026-11-11,role
+micro1,Medicine,37,32,97.5,14,58,2026-11-11,role
 micro1,Language & Audio,35,35,47.5,1,58,2026-11-11,role
-micro1,Medicine,33,30,97.5,10,58,2026-11-11,role
 micro1,Applied Engineering,31,29,87.5,9,58,2026-11-11,role
-micro1,Software Engineering,27,8,89.5,6,58,2026-11-11,role
+micro1,Software Engineering,28,8,89.5,9,58,2026-11-11,role
 micro1,Arts & Design,25,25,70.0,4,58,2026-11-11,role
 micro1,Generalist,25,16,25.0,6,58,2026-11-11,role
 micro1,Finance,22,17,75.0,3,58,2026-11-11,role
@@ -53,14 +53,14 @@ Mercor,Other,9,9,65.0,3,107,2026-11-11,role
 Mercor,Generalist,3,2,,0,107,2026-11-11,role
 Mercor,Humanities,2,2,,0,0,2026-11-11,role
 Welo Data,Language & Audio,226,60,24.0,5,95,2026-11-11,role
-Welo Data,Other,53,2,,0,36,2026-11-11,role
-Welo Data,Business & Operations,14,0,,0,0,2026-11-11,role
+Welo Data,Other,52,2,,0,36,2026-11-11,role
+Welo Data,Business & Operations,13,0,,0,0,2026-11-11,role
 Welo Data,Software Engineering,7,0,,0,7,2026-11-11,role
 Welo Data,Medicine,5,0,,2,0,2026-11-11,role
 Welo Data,Arts & Design,4,4,,0,1,2026-11-11,role
 Welo Data,Finance,1,1,,0,1,2026-11-11,role
 Turing,Language & Audio,52,15,15.0,0,0,2026-11-11,role
-Turing,Other,46,2,,3,11,2026-11-11,role
+Turing,Other,45,2,,3,11,2026-11-11,role
 Turing,Software Engineering,44,2,,4,16,2026-11-11,role
 Turing,Finance,20,0,,0,1,2026-11-11,role
 Turing,Science & Research,18,0,,2,10,2026-11-11,role
@@ -89,7 +89,7 @@ Rise Data Labs,Arts & Design,3,3,,0,220,2026-11-11,role
 Rise Data Labs,Law,2,1,,0,220,2026-11-11,role
 Rise Data Labs,Generalist,1,1,,0,220,2026-11-11,role
 Braintrust,Language & Audio,38,9,20.0,29,0,2026-11-11,role
-Braintrust,Software Engineering,20,17,57.0,12,0,2026-11-11,role
+Braintrust,Software Engineering,20,17,57.0,13,0,2026-11-11,role
 Braintrust,Other,15,12,25.5,10,0,2026-11-11,role
 Braintrust,Medicine,9,8,38.0,1,0,2026-11-11,role
 Braintrust,Arts & Design,6,6,,3,0,2026-11-11,role

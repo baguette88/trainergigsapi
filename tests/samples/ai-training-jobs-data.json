@@ -11,12 +11,12 @@
   "totals holds the day's numbers as the site's pages state them. roles_that_state_pay counts the roles that state pay in any unit. The median and its quartiles are over every listing that states hourly pay."
  ],
  "totals": {
-  "open_roles": 3100,
+  "open_roles": 3102,
   "platforms_with_open_roles": 33,
-  "paid_research_studies": 437,
-  "roles_that_state_pay": 2279,
-  "roles_with_hourly_pay": 2118,
-  "median_listed_hourly_usd": 39.75,
+  "paid_research_studies": 439,
+  "roles_that_state_pay": 2282,
+  "roles_with_hourly_pay": 2120,
+  "median_listed_hourly_usd": 39.0,
   "q1_listed_hourly_usd": 35.0,
   "q3_listed_hourly_usd": 75.0
  },
@@ -255,10 +255,10 @@
   {
    "platform": "Respondent",
    "field": "Research Studies",
-   "open_roles": 392,
+   "open_roles": 394,
    "roles_with_hourly_pay": 0,
    "median_listed_hourly_usd": null,
-   "posted_last_7_days": 137,
+   "posted_last_7_days": 138,
    "countries_named": 1,
    "feed_read": "2026-11-11",
    "kind": "study"
@@ -298,22 +298,22 @@
   },
   {
    "platform": "micro1",
-   "field": "Language & Audio",
-   "open_roles": 35,
-   "roles_with_hourly_pay": 35,
-   "median_listed_hourly_usd": 47.5,
-   "posted_last_7_days": 1,
+   "field": "Medicine",
+   "open_roles": 37,
+   "roles_with_hourly_pay": 32,
+   "median_listed_hourly_usd": 97.5,
+   "posted_last_7_days": 14,
    "countries_named": 58,
    "feed_read": "2026-11-11",
    "kind": "role"
   },
   {
    "platform": "micro1",
-   "field": "Medicine",
-   "open_roles": 33,
-   "roles_with_hourly_pay": 30,
-   "median_listed_hourly_usd": 97.5,
-   "posted_last_7_days": 10,
+   "field": "Language & Audio",
+   "open_roles": 35,
+   "roles_with_hourly_pay": 35,
+   "median_listed_hourly_usd": 47.5,
+   "posted_last_7_days": 1,
    "countries_named": 58,
    "feed_read": "2026-11-11",
    "kind": "role"
@@ -332,10 +332,10 @@
   {
    "platform": "micro1",
    "field": "Software Engineering",
-   "open_roles": 27,
+   "open_roles": 28,
    "roles_with_hourly_pay": 8,
    "median_listed_hourly_usd": 89.5,
-   "posted_last_7_days": 6,
+   "posted_last_7_days": 9,
    "countries_named": 58,
    "feed_read": "2026-11-11",
    "kind": "role"
@@ -629,7 +629,7 @@
   {
    "platform": "Welo Data",
    "field": "Other",
-   "open_roles": 53,
+   "open_roles": 52,
    "roles_with_hourly_pay": 2,
    "median_listed_hourly_usd": null,
    "posted_last_7_days": 0,
@@ -640,7 +640,7 @@
   {
    "platform": "Welo Data",
    "field": "Business & Operations",
-   "open_roles": 14,
+   "open_roles": 13,
    "roles_with_hourly_pay": 0,
    "median_listed_hourly_usd": null,
    "posted_last_7_days": 0,
@@ -706,7 +706,7 @@
   {
    "platform": "Turing",
    "field": "Other",
-   "open_roles": 46,
+   "open_roles": 45,
    "roles_with_hourly_pay": 2,
    "median_listed_hourly_usd": null,
    "posted_last_7_days": 3,
@@ -1028,7 +1028,7 @@
    "open_roles": 20,
    "roles_with_hourly_pay": 17,
    "median_listed_hourly_usd": 57.0,
-   "posted_last_7_days": 12,
+   "posted_last_7_days": 13,
    "countries_named": 0,
    "feed_read": "2026-11-11",
    "kind": "role"

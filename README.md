@@ -29,7 +29,7 @@ These files send `Access-Control-Allow-Origin: *`. A web page on any site can re
 
 ## Counts on Nov 11, 2026
 
-Read on Nov 11, 2026, the daily file stated 3,100 open roles on 33 platforms and 437 paid research studies, which it counts apart from the roles. The file can change through the day. For any other day, fetch the file. The live number is always in `totals` in the daily JSON.
+Read on Nov 11, 2026, the daily file stated 3,102 open roles on 33 platforms and 439 paid research studies, which it counts apart from the roles. The file can change through the day. For any other day, fetch the file. The live number is always in `totals` in the daily JSON.
 
 ## Field reference
 

@@ -16,13 +16,13 @@
   "posted": "The day the platform itself dated the listing, or null when it gives none."
  },
  "totals": {
-  "open_roles": 3077,
+  "open_roles": 3102,
   "platforms_with_open_roles": 33,
-  "paid_research_studies": 440,
-  "roles_that_state_pay": 2259,
-  "roles_with_hourly_pay": 2098,
-  "median_listed_hourly_usd": 40.0,
-  "q1_listed_hourly_usd": 35.5,
+  "paid_research_studies": 439,
+  "roles_that_state_pay": 2282,
+  "roles_with_hourly_pay": 2120,
+  "median_listed_hourly_usd": 39.0,
+  "q1_listed_hourly_usd": 35.0,
   "q3_listed_hourly_usd": 75.0
  },
  "roles": [
@@ -31,9 +31,9 @@
 {"url":"https://trainergigs.com/job-affirm-8009629003","title":"Operations Enablement Manager","platform":"Affirm","field":"Education","kind":"role","pay_min":165000,"pay_max":225000,"pay_unit":"yr","paid_per_task":false,"where":"","posted":"2026-10-27"},
 {"url":"https://trainergigs.com/job-affirm-8009631003","title":"Operations Enablement Manager","platform":"Affirm","field":"Education","kind":"role","pay_min":128000,"pay_max":188000,"pay_unit":"yr","paid_per_task":false,"where":"","posted":"2026-10-27"},
 {"url":"https://trainergigs.com/job-alignerr-01b96a0b-9f9f-49f8-be80-0c3f9bcd6b84","title":"AI / Emerging Tech Security Analyst","platform":"Alignerr","field":"Software Engineering","kind":"role","pay_min":40,"pay_max":60,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
-{"url":"https://trainergigs.com/job-alignerr-345af0a7-7d2c-48e4-b416-b43d870dcd94","title":"AI Chatbot Tester","platform":"Alignerr","field":"Generalist","kind":"role","pay_min":40,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
-{"url":"https://trainergigs.com/job-alignerr-01c90817-6e93-4b25-9759-1fd2155a3cf4","title":"AI Data Quality Analyst","platform":"Alignerr","field":"Business & Operations","kind":"role","pay_min":40,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
-{"url":"https://trainergigs.com/job-alignerr-0cd826b6-bff4-4a1d-b136-3737d6d064fe","title":"AI Ethics Reviewer","platform":"Alignerr","field":"Business & Operations","kind":"role","pay_min":40,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
+{"url":"https://trainergigs.com/job-alignerr-0bf90eeb-8f9d-4eb2-ade1-d27021f676e3","title":"AI Chatbot Tester","platform":"Alignerr","field":"Generalist","kind":"role","pay_min":40,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
+{"url":"https://trainergigs.com/job-alignerr-012bd84c-5066-48d2-ad84-318e4ad52b09","title":"AI Data Quality Analyst","platform":"Alignerr","field":"Business & Operations","kind":"role","pay_min":40,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
+{"url":"https://trainergigs.com/job-alignerr-2fa37466-7538-4101-818d-393afc0d6f37","title":"AI Ethics Reviewer","platform":"Alignerr","field":"Generalist","kind":"role","pay_min":40,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
 {"url":"https://trainergigs.com/job-alignerr-e0369c6d-d530-42b7-aca6-bbaae0d5241f","title":"AI Penetration Tester","platform":"Alignerr","field":"Software Engineering","kind":"role","pay_min":60,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
 {"url":"https://trainergigs.com/job-alignerr-13f3dddc-8aff-4216-ba14-0910898254d7","title":"AI Penetration Testing Expert","platform":"Alignerr","field":"Software Engineering","kind":"role","pay_min":60,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},
 {"url":"https://trainergigs.com/job-alignerr-050d1238-60b5-4ef0-be9f-111c67d55ccc","title":"AI Policy, Ethics & Compliance Analyst","platform":"Alignerr","field":"Finance","kind":"role","pay_min":40,"pay_max":120,"pay_unit":"hr","paid_per_task":false,"where":"","posted":null},

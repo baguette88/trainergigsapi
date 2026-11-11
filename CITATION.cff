@@ -7,9 +7,9 @@ authors:
     email: "hello@trainergigs.com"
     website: "https://trainergigs.com"
 url: "https://trainergigs.com/ai-training-jobs-data.json"
-repository-code: "https://github.com/trainergigs/ai-training-jobs-api"
+repository-code: "https://github.com/baguette88/ai-training-jobs-api"
 license: CC-BY-4.0
-abstract: "Open remote AI training roles by platform and field, rebuilt daily, and every closed week by platform and field. Free to use with credit."
+abstract: "Open remote AI training roles by platform and field, dated by day, and every closed week by platform and field. Free to use with credit."
 keywords:
   - "AI training jobs"
   - "remote work"
