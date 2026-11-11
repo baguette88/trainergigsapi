@@ -6,6 +6,48 @@ Looking for the jobs themselves? Search every open role by field, country and li
 
 This repository holds a field reference, an OpenAPI description, a small Python client, runnable examples and a dated archive of the daily and weekly files.
 
+## Quick start
+
+The roles open to people in Nigeria that list $20 an hour or more, best paid first:
+
+```sh
+git clone https://github.com/baguette88/trainergigsapi && cd trainergigsapi
+python3 clients/python/trainergigs.py roles --country NG --min-pay 20 --limit 10
+```
+
+The same in Python, with the standard library only:
+
+```python
+import sys
+sys.path.insert(0, "clients/python")
+import trainergigs as tg
+
+for role in tg.roles(country="NG", min_pay=20):
+    print(tg.line(role))
+```
+
+And in JavaScript, in Node 18 or newer or in a browser page on any site:
+
+```js
+import { roles } from "./clients/js/trainergigs.mjs"
+
+for (const role of await roles({ country: "NG", minPay: 20 })) {
+  console.log(role.title, role.platform, role.url)
+}
+```
+
+Every role links to its own page on trainergigs.com. The full listing and the way to apply are there.
+
+Both clients take the same filters: a country code, a field, a platform, a least hourly pay and a day (`since`). A role whose listing names no country is left out of a country search unless you ask for it (`--unnamed`, `unnamed=True`, `unnamed: true`).
+
+### What you can build
+
+* A daily post of new roles in a Discord channel: `examples/discord_new_roles.py` does it with a webhook and remembers what it posted.
+* A page of roles for one country or one field on your own site, read by `fetch` from the roles file.
+* A sheet that tracks open roles by platform week by week, from the weekly CSV.
+
+Link each role to its `url` as it is. The tag on it tells the site that the visit came through this data, which is how the data stays free.
+
 ## Endpoints
 
 All addresses are on `https://trainergigs.com`. A CDN caches each file for 5 minutes.
@@ -93,12 +135,14 @@ Top level: `source`, `counted`, `license`, `fields`, `totals`, `roles`.
 * `fields` says in one sentence what each role field holds.
 * `totals` holds the same numbers as `totals` in the daily file.
 * `roles` is sorted by platform, then title, then address.
+* The file's version history is in `CHANGELOG.md`. A field is never taken away without a new major version.
 
 Each item in `roles`:
 
 | Field | Meaning |
 |---|---|
-| `url` | The role's own page on trainergigs.com |
+| `id` | The role's key on the site, the last part of its address. It stays the same for as long as the role is open |
+| `url` | The role's own page on trainergigs.com, with the tag `src=api`. Link to it as it is |
 | `title` | The listing's title |
 | `platform` | The platform that lists the role |
 | `field` | The board's name for the role's field of work |
@@ -108,6 +152,7 @@ Each item in `roles`:
 | `pay_unit` | `hr`, `task` or `yr`, or null when the listing states no pay |
 | `paid_per_task` | True when the listing gives an hourly figure but says it pays per task, otherwise false |
 | `where` | The board's short place text, empty when no country is named |
+| `countries` | The two-letter codes of the countries the listing names for applicants, in its order. Empty when it names none |
 | `posted` | The day the platform itself dated the listing, or null when it gives none |
 
 The rows marked `role` add up to `totals.open_roles`. The rows marked `study` add up to `totals.paid_research_studies`. The file holds no apply address and no description. Link to a role through its `url`.
@@ -150,7 +195,7 @@ Google Sheets, on the CSV:
 =IMPORTDATA("https://trainergigs.com/ai-training-jobs-data.csv")
 ```
 
-A small client with filters is in `clients/python/trainergigs.py`. Run `python3 clients/python/trainergigs.py` to print five open roles. That demo reads the live roles file. Run `python3 -m unittest` inside `clients/python` to test it against the saved files in `tests/samples/`. The roles sample is a cut of 20 rows.
+The clients are `clients/python/trainergigs.py` and `clients/js/trainergigs.mjs`. `python3 clients/python/trainergigs.py --help` lists the command line's filters, and `--json` prints the roles as data. Run `python3 clients/python/trainergigs.py` to print five open roles. That demo reads the live roles file. Run `python3 -m unittest` inside `clients/python` to test it against the saved files in `tests/samples/`. The roles sample is a cut of 20 rows.
 
 ## How the numbers are counted
 

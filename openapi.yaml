@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: TrainerGigs AI training jobs data
-  version: "1.0.0"
+  version: "1.1.0"
   summary: Free, read-only files on remote AI training jobs.
   description: |
     Free files from trainergigs.com. No key. A CDN caches each file for 5 minutes.
@@ -356,13 +356,16 @@ components:
             $ref: "#/components/schemas/Role"
     Role:
       type: object
-      required: [url, title, platform, field, kind, pay_min, pay_max, pay_unit, paid_per_task, where, posted]
+      required: [id, url, title, platform, field, kind, pay_min, pay_max, pay_unit, paid_per_task, where, countries, posted]
       additionalProperties: false
       properties:
+        id:
+          type: string
+          description: The role's key on the site, the last part of its address. It stays the same for as long as the role is open.
         url:
           type: string
           format: uri
-          description: The role's own page on trainergigs.com.
+          description: The role's own page on trainergigs.com, with the tag src=api. Link to it as it is.
         title:
           type: string
         platform:
@@ -385,6 +388,12 @@ components:
           description: True when the listing gives an hourly figure but says it pays per task.
         where:
           type: string
+        countries:
+          type: array
+          items:
+            type: string
+            pattern: "^[A-Z]{2}$"
+          description: The two-letter codes of the countries the listing names for applicants, in its order. Empty when it names none.
         posted:
           type: [string, "null"]
           format: date

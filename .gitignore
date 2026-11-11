@@ -5,3 +5,4 @@ __pycache__/
 *.pem
 *.key
 .DS_Store
+seen_roles.json
