@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this data, please cite it. Data: TrainerGigs, https://trainergigs.com"
+title: "AI training jobs data"
+type: dataset
+authors:
+  - name: "TrainerGigs"
+    email: "hello@trainergigs.com"
+    website: "https://trainergigs.com"
+url: "https://trainergigs.com/ai-training-jobs-data.json"
+repository-code: "https://github.com/trainergigs/ai-training-jobs-api"
+license: CC-BY-4.0
+abstract: "Open remote AI training roles by platform and field, rebuilt daily, and every closed week by platform and field. Free to use with credit."
+keywords:
+  - "AI training jobs"
+  - "remote work"
+  - "job market data"
+  - "open data"
+date-released: "2026-11-11"

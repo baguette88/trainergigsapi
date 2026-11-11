@@ -1,0 +1,405 @@
+openapi: 3.1.0
+info:
+  title: TrainerGigs AI training jobs data
+  version: "1.0.0"
+  summary: Free, read-only files on remote AI training jobs.
+  description: |
+    Free files from trainergigs.com. No key. A CDN caches each file for 5 minutes.
+    The files send no Access-Control-Allow-Origin header today, so a browser page on another site cannot fetch them.
+    Credit line: "Data: TrainerGigs, https://trainergigs.com". Pay is as each listing states it.
+  contact:
+    name: TrainerGigs
+    email: hello@trainergigs.com
+    url: https://trainergigs.com
+  license:
+    name: CC BY 4.0 (data), MIT (code)
+    url: https://creativecommons.org/licenses/by/4.0/
+servers:
+  - url: https://trainergigs.com
+paths:
+  /ai-training-jobs-data.json:
+    get:
+      operationId: getDaily
+      summary: Open roles by platform and field, with the day's totals
+      responses:
+        "200":
+          description: The daily file, rebuilt daily.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Daily"
+  /ai-training-jobs-data.csv:
+    get:
+      operationId: getDailyCsv
+      summary: The daily rows as CSV
+      responses:
+        "200":
+          description: One row per platform and field. The columns are the fields of a daily row.
+          content:
+            text/csv:
+              schema:
+                type: string
+  /ai-training-jobs-weekly.json:
+    get:
+      operationId: getWeekly
+      summary: Every closed week
+      responses:
+        "200":
+          description: The weekly file.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Weekly"
+  /ai-training-jobs-weekly.csv:
+    get:
+      operationId: getWeeklyCsv
+      summary: Every closed week by platform and field, as CSV
+      responses:
+        "200":
+          description: One row per week, platform and field.
+          content:
+            text/csv:
+              schema:
+                type: string
+  /board.json:
+    get:
+      operationId: getBoard
+      summary: The live board, every open role
+      responses:
+        "200":
+          description: The board. Each row is a list in the order of the fields list.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Board"
+  /feed.xml:
+    get:
+      operationId: getFeed
+      summary: RSS feed of roles on the board
+      responses:
+        "200":
+          description: RSS 2.0.
+          content:
+            application/xml:
+              schema:
+                type: string
+  /feed-weekly.xml:
+    get:
+      operationId: getFeedWeekly
+      summary: RSS feed with one item per closed week
+      responses:
+        "200":
+          description: RSS 2.0.
+          content:
+            application/xml:
+              schema:
+                type: string
+  /feed-changes.xml:
+    get:
+      operationId: getFeedChanges
+      summary: RSS feed of platforms whose open roles grew, week by week
+      responses:
+        "200":
+          description: RSS 2.0.
+          content:
+            application/xml:
+              schema:
+                type: string
+  /sitemap.xml:
+    get:
+      operationId: getSitemap
+      summary: Sitemap of every page
+      responses:
+        "200":
+          description: Sitemap protocol XML.
+          content:
+            application/xml:
+              schema:
+                type: string
+  /llms.txt:
+    get:
+      operationId: getLlmsTxt
+      summary: A plain list of every page, with its number of the day
+      responses:
+        "200":
+          description: Plain text.
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    Daily:
+      type: object
+      required: [name, date, source, method, totals, fields, rows]
+      properties:
+        name:
+          type: string
+        date:
+          type: string
+          format: date
+          description: The day the numbers were counted.
+        source:
+          type: string
+          format: uri
+        method:
+          type: array
+          description: How the numbers are counted, one sentence per item.
+          items:
+            type: string
+        totals:
+          $ref: "#/components/schemas/DailyTotals"
+        fields:
+          type: array
+          description: The names of the fields of a row, in CSV column order.
+          items:
+            type: string
+        rows:
+          type: array
+          items:
+            $ref: "#/components/schemas/DailyRow"
+    DailyTotals:
+      type: object
+      required: [open_roles, platforms_with_open_roles, paid_research_studies, roles_that_state_pay]
+      properties:
+        open_roles:
+          type: integer
+        platforms_with_open_roles:
+          type: integer
+        paid_research_studies:
+          type: integer
+        roles_that_state_pay:
+          type: integer
+        roles_with_hourly_pay:
+          type: integer
+        median_listed_hourly_usd:
+          type: number
+        q1_listed_hourly_usd:
+          type: number
+        q3_listed_hourly_usd:
+          type: number
+    DailyRow:
+      type: object
+      required: [platform, field, open_roles, roles_with_hourly_pay, median_listed_hourly_usd, posted_last_7_days, countries_named, feed_read, kind]
+      properties:
+        platform:
+          type: string
+        field:
+          type: string
+        open_roles:
+          type: integer
+        roles_with_hourly_pay:
+          type: integer
+        median_listed_hourly_usd:
+          type: [number, "null"]
+          description: Null when fewer than 8 roles state hourly pay.
+        posted_last_7_days:
+          type: integer
+        countries_named:
+          type: integer
+        feed_read:
+          type: string
+          description: The day the platform's listings were read.
+        kind:
+          type: string
+          enum: [role, study]
+    Weekly:
+      type: object
+      required: [name, source, method, notes, revisions, weeks]
+      properties:
+        name:
+          type: string
+        source:
+          type: string
+          format: uri
+        method:
+          type: array
+          items:
+            type: string
+        notes:
+          type: array
+          items:
+            type: string
+        revisions:
+          type: array
+          items:
+            type: object
+            properties:
+              platform:
+                type: string
+              first_day:
+                type: string
+                format: date
+              last_day:
+                type: string
+                format: date
+              why:
+                type: string
+        weeks:
+          type: array
+          items:
+            $ref: "#/components/schemas/Week"
+    Week:
+      type: object
+      description: One closed week. A field may be null when the week has no value for it.
+      required: [week, week_start, week_end, last_day, url]
+      properties:
+        week:
+          type: string
+          description: ISO week such as 2026-W45.
+        week_start:
+          type: string
+          format: date
+        week_end:
+          type: string
+          format: date
+        last_day:
+          type: string
+          format: date
+          description: The week's day of record.
+        days_counted:
+          type: integer
+        days_missing:
+          type: array
+          items:
+            type: string
+            format: date
+        closed_on:
+          type: string
+          format: date
+        revised:
+          type: [string, "null"]
+        open_sunday:
+          type: integer
+        open_prev_sunday:
+          type: integer
+        studies_sunday:
+          type: integer
+        listed_any_day:
+          type: integer
+        new_roles:
+          type: integer
+        renewed_new:
+          type: integer
+        gone_roles:
+          type: integer
+        renewed_gone:
+          type: integer
+        newly_tracked:
+          type: integer
+        old_postings:
+          type: [integer, "null"]
+        roles_100_plus:
+          type: integer
+        roles_100_plus_prev:
+          type: integer
+        roles_with_hourly_pay:
+          type: integer
+        median_listed_hourly_usd:
+          type: [number, "null"]
+        q1_listed_hourly_usd:
+          type: [number, "null"]
+        q3_listed_hourly_usd:
+          type: [number, "null"]
+        platforms_read:
+          type: integer
+        feeds_not_read:
+          type: array
+          items:
+            type: string
+        languages_named:
+          type: integer
+        countries_named:
+          type: [integer, "null"]
+        days_listed_median:
+          type: [number, "null"]
+        days_listed_n:
+          type: [integer, "null"]
+        roles_sunday:
+          type: integer
+        roles_prev_sunday:
+          type: integer
+        roles_new:
+          type: integer
+        roles_gone:
+          type: integer
+        platforms_with_roles:
+          type: integer
+        url:
+          type: string
+          format: uri
+    Board:
+      type: object
+      required: [built, fields, rows, providers, cats, places, v]
+      properties:
+        built:
+          type: string
+          format: date
+        new_since:
+          type: string
+          format: date
+        v:
+          type: string
+        fields:
+          type: array
+          description: The names of the values in each row, in order.
+          items:
+            type: string
+        rows:
+          type: array
+          description: One list per open role, in the order of the fields list.
+          items:
+            $ref: "#/components/schemas/BoardRow"
+        providers:
+          type: object
+          description: Platform name to its apply details.
+          additionalProperties:
+            type: object
+            properties:
+              label:
+                type: string
+              note:
+                type: [string, "null"]
+              signup:
+                type: [string, "null"]
+        cats:
+          type: object
+          description: Field key to its label.
+          additionalProperties:
+            type: string
+        places:
+          type: array
+          description: Tables of country codes. A row's places value is an index into this list.
+          items:
+            type: array
+            items:
+              type: string
+    BoardRow:
+      type: array
+      description: >
+        Values in the order of the board's fields list: key, page, title, cat, provider, pay, paymin, unit,
+        salary, posted, seen, rank, regions, skills, flags, apply, paylabel, where, more, places, bounty_usd.
+        Link to a role at https://trainergigs.com/ followed by its page value.
+      prefixItems:
+        - type: string
+          description: key, the role's id
+        - type: string
+          description: page, the role's page name
+        - type: string
+          description: title
+        - type: string
+          description: cat, a key of cats
+        - type: string
+          description: provider, the platform's name
+        - type: [number, string]
+          description: pay, the upper end of listed pay, or an empty string
+        - type: [number, string]
+          description: paymin, the lower end of listed pay, or an empty string
+        - type: string
+          description: unit, one of hr, task, yr, hrtask or an empty string
+        - type: [number, string]
+          description: salary, a yearly figure when unit is yr, otherwise an empty string
+        - type: string
+          description: posted, a day or an empty string
+        - type: string
+          description: seen, the day the board first saw the listing

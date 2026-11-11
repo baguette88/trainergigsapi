@@ -1,0 +1,48 @@
+name: Mirror TrainerGigs data
+
+on:
+  schedule:
+    # every day at 06:30 UTC
+    - cron: "30 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch the files
+        run: |
+          set -eu
+          day=$(date -u +%Y-%m-%d)
+          tmp=$(mktemp -d)
+          for f in ai-training-jobs-data.json ai-training-jobs-data.csv ai-training-jobs-weekly.json ai-training-jobs-weekly.csv
+          do
+            curl -fsS --retry 3 -A "trainergigs-mirror/1.0 (hello@trainergigs.com)" "https://trainergigs.com/$f" -o "$tmp/$f"
+            # keep a file only when it differs from the latest saved copy of it
+            last=$(ls -d data/*/"$f" 2>/dev/null | sort | tail -n 1 || true)
+            if [ -n "$last" ] && cmp -s "$last" "$tmp/$f"
+            then
+              continue
+            fi
+            mkdir -p "data/$day"
+            cp "$tmp/$f" "data/$day/$f"
+          done
+
+      - name: Commit changes
+        run: |
+          set -eu
+          if [ -z "$(git status --porcelain data)" ]
+          then
+            echo "No change. Nothing to commit."
+            exit 0
+          fi
+          git config user.name "TrainerGigs"
+          git config user.email "hello@trainergigs.com"
+          git add data
+          git commit -m "Add data for $(date -u +%Y-%m-%d)"
+          git push

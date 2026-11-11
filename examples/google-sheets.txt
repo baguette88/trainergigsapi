@@ -1,0 +1,1 @@
+=IMPORTDATA("https://trainergigs.com/ai-training-jobs-data.csv")
