@@ -1,5 +1,7 @@
 # AI training jobs API
 
+[![Tests](https://github.com/baguette88/trainergigsapi/actions/workflows/tests.yml/badge.svg)](https://github.com/baguette88/trainergigsapi/actions/workflows/tests.yml)
+
 Free, read-only data on remote AI training jobs from [TrainerGigs](https://trainergigs.com/?src=github). No key and no sign-up. Fetch the files, use them, and credit the source.
 
 Looking for the jobs themselves? Search every open role by field, country and listed pay on the board: **[trainergigs.com](https://trainergigs.com/?src=github)**.
