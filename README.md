@@ -1,6 +1,8 @@
 # AI training jobs API
 
-Free, read-only data on remote AI training jobs from [TrainerGigs](https://trainergigs.com). No key and no sign-up. Fetch the files, use them, and credit the source.
+Free, read-only data on remote AI training jobs from [TrainerGigs](https://trainergigs.com/?src=github). No key and no sign-up. Fetch the files, use them, and credit the source.
+
+Looking for the jobs themselves? Search every open role by field, country and listed pay on the board: **[trainergigs.com](https://trainergigs.com/?src=github)**.
 
 This repository holds a field reference, an OpenAPI description, a small Python client, runnable examples and a dated archive of the daily and weekly files.
 
