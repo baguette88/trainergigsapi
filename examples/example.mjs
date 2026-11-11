@@ -1,6 +1,5 @@
 // Print the day's totals from the TrainerGigs daily file.
-// Runs in Node 18 or newer. A browser page on another site cannot fetch the file yet,
-// because the site does not send an Access-Control-Allow-Origin header today.
+// Runs in Node 18 or newer, and in a browser page on any site.
 // Data: TrainerGigs, https://trainergigs.com
 const res = await fetch("https://trainergigs.com/ai-training-jobs-data.json")
 if (!res.ok) throw new Error("HTTP " + res.status)

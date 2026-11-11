@@ -14,7 +14,7 @@ All addresses are on `https://trainergigs.com`. A CDN caches each file for 5 min
 | `/ai-training-jobs-data.csv` | CSV | The same rows as the daily JSON | Rebuilt daily |
 | `/ai-training-jobs-weekly.json` | JSON | Every closed week, with a total row and rows by platform and field | A week is added after it closes |
 | `/ai-training-jobs-weekly.csv` | CSV | The same weeks as one long table | A week is added after it closes |
-| `/ai-training-jobs-roles.json` | JSON | Every open role, one line each, with its own page on trainergigs.com | Rebuilt daily. Goes live with the site's next release |
+| `/ai-training-jobs-roles.json` | JSON | Every open role, one line each, with its own page on trainergigs.com | Rebuilt daily |
 | `/feed.xml` | RSS | Roles on the board | With the site build |
 | `/feed-weekly.xml` | RSS | One item per closed week | A week is added after it closes |
 | `/feed-changes.xml` | RSS | Platforms whose open roles grew, week by week | A week is added after it closes |
@@ -25,7 +25,7 @@ The site does not publish a build time. Read the `date` or `built` field in a fi
 
 ### Browser use
 
-These files send no `Access-Control-Allow-Origin` header today. A web page on another site cannot fetch them with `fetch` yet. Servers, scripts, notebooks and spreadsheets are not affected. The examples here run outside a browser.
+These files send `Access-Control-Allow-Origin: *`. A web page on any site can read them with `fetch`.
 
 ## Counts on Nov 11, 2026
 
@@ -84,8 +84,6 @@ How to read them, from the file's own notes and method:
 The weekly CSV (`ai-training-jobs-weekly.csv`) has one row per week, platform and field. Its columns are `week`, `week_start`, `week_end`, `last_day`, `days_counted`, `closed_on`, `revised`, `platform`, `field`, `open_sunday`, `open_prev_sunday`, `listed_any_day`, `new_roles`, `gone_roles`, `renewed`, `newly_tracked`, `old_postings`, `roles_100_plus`, `roles_with_hourly_pay`, `median_listed_hourly_usd`, `q1_listed_hourly_usd`, `q3_listed_hourly_usd`, `platforms_read`, `feeds_not_read`, `languages_named`, `countries_named`, `days_listed_median`, `days_listed_n`. Platform and field are blank on the week's total row. Field is blank on a platform's row. Platform is blank on a field's row. The week's own numbers, from `platforms_read` to `days_listed_n`, are on its total row only.
 
 ### Roles file: `ai-training-jobs-roles.json`
-
-This file goes live with the site's next release. Until then the address does not answer.
 
 Top level: `source`, `counted`, `license`, `fields`, `totals`, `roles`.
 
