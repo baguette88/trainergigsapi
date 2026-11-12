@@ -74,7 +74,7 @@
 | \$90 to \$170/hr | [Military Training and Readiness Advisor](https://trainergigs.com/job-micro1-cf209626-7a62-4d74-a629-8d324d339a71?src=api) | micro1 | Other | 2026-11-04 |
 | \$126/hr | [Crash Simulation Engineers: Vehicle Crash Simulation Workflows](https://trainergigs.com/job-terac-c51173b9-76bb-4726-ae1e-4ba736aaf7cb?src=api) | Terac | Software Engineering | 2026-10-31 |
 | \$110 to \$140/hr | [Content Marketing Manager (US-Remote)](https://trainergigs.com/job-braintrust-17929?src=api) | Braintrust | Business & Operations | 2026-11-03 |
-| \$100 to \$150/hr | [Senior AI Consultant \| Braintrust AI Experts Network (Remote)](https://trainergigs.com/job-braintrust-18128?src=api) | Braintrust | Business & Operations | 2026-11-11 |
+| \$100 to \$150/hr | [Senior AI Consultant \| Braintrust AI Experts Network (Remote)](https://trainergigs.com/job-braintrust-18128?src=api) | Braintrust | Business & Operations | 2026-11-12 |
 | \$80 to \$170/hr | [Civilian Intelligence Agency Expert – U.S. & Allied Government](https://trainergigs.com/job-micro1-4700a242-8b55-4ffd-afd2-17172f16dac1?src=api) | micro1 | Other | 2026-10-30 |
 | \$80 to \$170/hr | [Defense Analyst](https://trainergigs.com/job-micro1-7feee246-52db-48df-880c-58a87bbc9c65?src=api) | micro1 | Other | 2026-10-24 |
 | \$80 to \$170/hr | [Fighter Pilot](https://trainergigs.com/job-micro1-761ff1a6-68bf-4e45-8047-41f475c66823?src=api) | micro1 | Other | 2026-10-24 |
@@ -110,6 +110,8 @@
 | Up to \$100/hr | [Physicians (MD/DO) - Review Clinical Cases for Medical AI, Remote, Up to \$100/hr](https://trainergigs.com/job-mindrift-1a20d705ff?src=api) | Mindrift | Medicine | 2026-10-19 |
 | \$50 to \$150/hr | [Healthcare Expert — AI Training & Evaluation](https://trainergigs.com/job-rise-data-labs-2e272660-d356-4f16-b8bb-b93520fc81ce?src=api) | Rise Data Labs | Medicine | 2026-10-31 |
 | \$50 to \$150/hr | [Legal & Paralegal Expert — AI Training & Evaluation](https://trainergigs.com/job-rise-data-labs-51f60ced-b58b-498a-9fa1-476746d82027?src=api) | Rise Data Labs | Law | 2026-10-31 |
+| \$100/hr | [Economists: Economic Analysis for AI Training](https://trainergigs.com/job-terac-4d65412b-b414-4522-b684-892c39e449dd?src=api) | Terac | Finance | 2026-11-12 |
+| \$100/hr | [P&C Insurance Professionals: Paid AI Training Project](https://trainergigs.com/job-terac-367416c1-93c8-43c7-8e72-8ec1d6a20d63?src=api) | Terac | Finance | 2026-11-12 |
 | \$70 to \$130/hr | [2D Game Developer (Defold)](https://trainergigs.com/job-micro1-c56b1ad7-74cd-4ac3-8fac-96c3fe46e0dc?src=api) | micro1 | Arts & Design | 2026-11-03 |
 | \$80 to \$120/hr, paid per task | [Aerodynamics Expert (MSc. or PhD)](https://trainergigs.com/job-micro1-99ef9e98-e4de-4503-b2e3-980390dab872?src=api) | micro1 | Other | 2026-10-16 |
 | \$70 to \$130/hr | [Combat Arms & Targeting SME](https://trainergigs.com/job-micro1-a287e691-92ad-4e86-bacc-322b0e92aeec?src=api) | micro1 | Other | 2026-10-22 |

@@ -11,7 +11,7 @@ Free, read-only data on remote AI training jobs from [TrainerGigs](https://train
 Looking for the jobs themselves? Search every open role by field, country and listed pay on the board: **[trainergigs.com](https://trainergigs.com/?src=github)**.
 
 <!-- counts:start -->
-On Nov 12, 2026 the daily file stated **2,979 open roles on 33 platforms**, and 443 paid research studies, which it counts apart. The median listed pay was $40 an hour, across 2,087 roles that state hourly pay. The middle half list $35.50 to $75.
+On Nov 12, 2026 the daily file stated **2,978 open roles on 33 platforms**, and 449 paid research studies, which it counts apart. The median listed pay was $40 an hour, across 2,091 roles that state hourly pay. The middle half list $35.50 to $75.
 <!-- counts:end -->
 
 **On this page:** [Quick start](#quick-start) · [Install](#install) · [What you can build](#what-you-can-build) · [The files](#the-files) · [A role](#a-role) · [Filters and commands](#filters-and-commands) · [Recipes](#recipes) · [How the files are served](#how-the-files-are-served) · [Field reference](#field-reference) · [How the numbers are counted](#how-the-numbers-are-counted) · [The dated archive](#the-dated-archive) · [Versions](#versions) · [Terms](#terms)
