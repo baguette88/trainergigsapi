@@ -31,8 +31,7 @@ def run(args, fetch=tg.roles_file, send=None):
     seen = set() if first else set(json.loads(seen_path.read_text(encoding="utf-8")))
     data = fetch()
     found = tg.roles(field=args.field, min_pay=args.min_pay, country=args.country, unnamed=args.unnamed, data=data)
-    new = [r for r in found if r["id"] not in seen]
-    new.sort(key=lambda r: -(tg.hourly_midpoint(r) or 0))
+    new = tg.by_pay([r for r in found if r["id"] not in seen])
     if new and not first:
         (send or post)(args.webhook, message(new))
     seen_path.write_text(json.dumps(sorted(seen | {r["id"] for r in found})), encoding="utf-8")

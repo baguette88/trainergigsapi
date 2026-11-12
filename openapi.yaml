@@ -1,11 +1,21 @@
 openapi: 3.1.0
 info:
   title: TrainerGigs AI training jobs data
-  version: "1.1.0"
+  version: "1.2.0"
   summary: Free, read-only files on remote AI training jobs.
   description: |
-    Free files from trainergigs.com. No key. A CDN caches each file for 5 minutes.
-    The files send Access-Control-Allow-Origin: *, so a page on any site can fetch them.
+    Free files from trainergigs.com. No key and no sign-up. Every address is a plain GET.
+
+    A CDN caches each file for 5 minutes. The files send Access-Control-Allow-Origin: *, so a page on any site
+    can fetch them. They are served gzipped to a client that asks, and a request with If-Modified-Since gets a
+    304 when the file has not changed.
+
+    Name your program in the User-Agent header. On Nov 12, 2026 the CDN refused the default one of Python's
+    urllib (Python-urllib) with a 403. Every other client that was tried got the file.
+
+    New fields may be added to a file at any time. A field is never taken away without a new major version, so
+    read the fields you know and pass over the rest.
+
     Credit line: "Data: TrainerGigs, https://trainergigs.com". Pay is as each listing states it.
   contact:
     name: TrainerGigs
@@ -16,14 +26,35 @@ info:
     url: https://creativecommons.org/licenses/by/4.0/
 servers:
   - url: https://trainergigs.com
+security: []
+externalDocs:
+  description: How the numbers are counted
+  url: https://trainergigs.com/data-method
+tags:
+  - name: roles
+    description: Every open role, one by one
+  - name: counts
+    description: Open roles by platform and field, by day and by closed week
+  - name: feeds
+    description: RSS feeds, the sitemap and the plain list of pages
 paths:
   /ai-training-jobs-data.json:
     get:
       operationId: getDaily
+      tags: [counts]
       summary: Open roles by platform and field, with the day's totals
       responses:
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "403":
+          $ref: "#/components/responses/Refused"
         "200":
           description: The daily file, rebuilt with the site build.
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: "#/components/headers/AllowOrigin"
+            Cache-Control:
+              $ref: "#/components/headers/CacheControl"
           content:
             application/json:
               schema:
@@ -31,10 +62,20 @@ paths:
   /ai-training-jobs-data.csv:
     get:
       operationId: getDailyCsv
+      tags: [counts]
       summary: The daily rows as CSV
       responses:
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "403":
+          $ref: "#/components/responses/Refused"
         "200":
           description: One row per platform and field. The columns are the fields of a daily row.
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: "#/components/headers/AllowOrigin"
+            Cache-Control:
+              $ref: "#/components/headers/CacheControl"
           content:
             text/csv:
               schema:
@@ -42,10 +83,20 @@ paths:
   /ai-training-jobs-weekly.json:
     get:
       operationId: getWeekly
+      tags: [counts]
       summary: Every closed week
       responses:
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "403":
+          $ref: "#/components/responses/Refused"
         "200":
           description: The weekly file.
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: "#/components/headers/AllowOrigin"
+            Cache-Control:
+              $ref: "#/components/headers/CacheControl"
           content:
             application/json:
               schema:
@@ -53,10 +104,20 @@ paths:
   /ai-training-jobs-weekly.csv:
     get:
       operationId: getWeeklyCsv
+      tags: [counts]
       summary: Every closed week by platform and field, as CSV
       responses:
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "403":
+          $ref: "#/components/responses/Refused"
         "200":
           description: One row per week, platform and field.
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: "#/components/headers/AllowOrigin"
+            Cache-Control:
+              $ref: "#/components/headers/CacheControl"
           content:
             text/csv:
               schema:
@@ -64,11 +125,21 @@ paths:
   /ai-training-jobs-roles.json:
     get:
       operationId: getRoles
+      tags: [roles]
       summary: Every open role, one line each
       description: Rebuilt with the site build. Each role links to its own page on trainergigs.com.
       responses:
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "403":
+          $ref: "#/components/responses/Refused"
         "200":
           description: The roles file.
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: "#/components/headers/AllowOrigin"
+            Cache-Control:
+              $ref: "#/components/headers/CacheControl"
           content:
             application/json:
               schema:
@@ -76,10 +147,20 @@ paths:
   /feed.xml:
     get:
       operationId: getFeed
-      summary: RSS feed of roles on the board
+      tags: [feeds]
+      summary: RSS feed of the newest roles on the board
       responses:
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "403":
+          $ref: "#/components/responses/Refused"
         "200":
           description: RSS 2.0.
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: "#/components/headers/AllowOrigin"
+            Cache-Control:
+              $ref: "#/components/headers/CacheControl"
           content:
             application/xml:
               schema:
@@ -87,10 +168,20 @@ paths:
   /feed-weekly.xml:
     get:
       operationId: getFeedWeekly
+      tags: [feeds]
       summary: RSS feed with one item per closed week
       responses:
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "403":
+          $ref: "#/components/responses/Refused"
         "200":
           description: RSS 2.0.
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: "#/components/headers/AllowOrigin"
+            Cache-Control:
+              $ref: "#/components/headers/CacheControl"
           content:
             application/xml:
               schema:
@@ -98,10 +189,20 @@ paths:
   /feed-changes.xml:
     get:
       operationId: getFeedChanges
+      tags: [feeds]
       summary: RSS feed of platforms whose open roles grew, week by week
       responses:
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "403":
+          $ref: "#/components/responses/Refused"
         "200":
           description: RSS 2.0.
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: "#/components/headers/AllowOrigin"
+            Cache-Control:
+              $ref: "#/components/headers/CacheControl"
           content:
             application/xml:
               schema:
@@ -109,10 +210,20 @@ paths:
   /sitemap.xml:
     get:
       operationId: getSitemap
+      tags: [feeds]
       summary: Sitemap of every page
       responses:
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "403":
+          $ref: "#/components/responses/Refused"
         "200":
           description: Sitemap protocol XML.
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: "#/components/headers/AllowOrigin"
+            Cache-Control:
+              $ref: "#/components/headers/CacheControl"
           content:
             application/xml:
               schema:
@@ -120,15 +231,41 @@ paths:
   /llms.txt:
     get:
       operationId: getLlmsTxt
+      tags: [feeds]
       summary: A plain list of every page, with its number of the day
       responses:
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "403":
+          $ref: "#/components/responses/Refused"
         "200":
           description: Plain text.
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: "#/components/headers/AllowOrigin"
+            Cache-Control:
+              $ref: "#/components/headers/CacheControl"
           content:
             text/plain:
               schema:
                 type: string
 components:
+  headers:
+    AllowOrigin:
+      description: Always "*". A page on any site can read the file.
+      schema:
+        type: string
+        const: "*"
+    CacheControl:
+      description: The file may be kept for 5 minutes.
+      schema:
+        type: string
+        example: public, max-age=300, stale-if-error=86400
+  responses:
+    NotModified:
+      description: The file has not changed since the day and time sent in If-Modified-Since.
+    Refused:
+      description: The CDN refused the request. On Nov 12, 2026 it did so for the default User-Agent of Python's urllib. Name your program in the User-Agent header.
   schemas:
     Daily:
       type: object
@@ -356,8 +493,22 @@ components:
             $ref: "#/components/schemas/Role"
     Role:
       type: object
+      description: One open listing. New fields may be added, so pass over a field you do not know.
       required: [id, url, title, platform, field, kind, pay_min, pay_max, pay_unit, paid_per_task, where, countries, posted]
-      additionalProperties: false
+      example:
+        id: job-lionbridge-27259005-4bd4-4767-b4e3-bff478b57cab
+        url: https://trainergigs.com/job-lionbridge-27259005-4bd4-4767-b4e3-bff478b57cab?src=api
+        title: US English Transcriber
+        platform: Lionbridge
+        field: Language & Audio
+        kind: role
+        pay_min: 25
+        pay_max: 34
+        pay_unit: hr
+        paid_per_task: false
+        where: US
+        countries: [US]
+        posted: "2026-04-13"
       properties:
         id:
           type: string
@@ -368,26 +519,33 @@ components:
           description: The role's own page on trainergigs.com, with the tag src=api. Link to it as it is.
         title:
           type: string
+          description: The listing's title.
         platform:
           type: string
+          description: The platform that lists the role.
         field:
           type: string
           description: The board's name for the role's field of work.
         kind:
           type: string
           enum: [role, study]
+          description: role, or study for a paid research study. Studies are counted apart and are never called roles.
         pay_min:
           type: [number, "null"]
+          description: The lower end of the listed pay. Null when the listing states no pay, and when it states a top only ("Up to $90/hr").
         pay_max:
           type: [number, "null"]
+          description: The upper end of the listed pay. Null when the listing states no pay, and when it states a bottom only. One rate is both ends.
         pay_unit:
           type: [string, "null"]
           enum: [hr, task, yr, null]
+          description: The unit of the listed pay, per hour, per task or per year. Null when the listing states no pay.
         paid_per_task:
           type: boolean
           description: True when the listing gives an hourly figure but says it pays per task.
         where:
           type: string
+          description: The board's short place text, such as "US" or "58 countries". Empty when no country is named.
         countries:
           type: array
           items:
@@ -397,3 +555,4 @@ components:
         posted:
           type: [string, "null"]
           format: date
+          description: The day the platform itself dated the listing. Null when it gives none.

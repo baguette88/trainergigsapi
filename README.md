@@ -1,21 +1,38 @@
 # AI training jobs API
 
 [![Tests](https://github.com/baguette88/trainergigsapi/actions/workflows/tests.yml/badge.svg)](https://github.com/baguette88/trainergigsapi/actions/workflows/tests.yml)
+[![Open roles today](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Ftrainergigs.com%2Fai-training-jobs-data.json&query=%24.totals.open_roles&label=open%20roles%20today&color=1f6feb)](https://trainergigs.com/?src=github)
+[![Counted](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Ftrainergigs.com%2Fai-training-jobs-data.json&query=%24.date&label=counted&color=555)](https://trainergigs.com/ai-training-jobs-data.json)
+[![Data: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-2ea44f)](LICENSE-DATA.md)
+[![Code: MIT](https://img.shields.io/badge/code-MIT-2ea44f)](LICENSE)
 
-Free, read-only data on remote AI training jobs from [TrainerGigs](https://trainergigs.com/?src=github). No key and no sign-up. Fetch the files, use them, and credit the source.
+Free, read-only data on remote AI training jobs from [TrainerGigs](https://trainergigs.com/?src=github): every open role with its listed pay, field and countries, and the counts by platform for each day and each closed week. No key and no sign-up. Fetch the files, use them, and credit the source.
 
 Looking for the jobs themselves? Search every open role by field, country and listed pay on the board: **[trainergigs.com](https://trainergigs.com/?src=github)**.
 
-This repository holds a field reference, an OpenAPI description, a small Python client, runnable examples and a dated archive of the daily and weekly files.
+<!-- counts:start -->
+On Nov 12, 2026 the daily file stated **2,979 open roles on 33 platforms**, and 443 paid research studies, which it counts apart. The median listed pay was $40 an hour, across 2,087 roles that state hourly pay. The middle half list $35.50 to $75.
+<!-- counts:end -->
+
+**On this page:** [Quick start](#quick-start) · [Install](#install) · [The files](#the-files) · [A role](#a-role) · [Filters and commands](#filters-and-commands) · [Recipes](#recipes) · [How the files are served](#how-the-files-are-served) · [Field reference](#field-reference) · [How the numbers are counted](#how-the-numbers-are-counted) · [The dated archive](#the-dated-archive) · [Versions](#versions) · [Terms](#terms)
 
 ## Quick start
 
-The roles open to people in Nigeria that list $20 an hour or more, best paid first:
+With nothing to install, the roles whose listings name Nigeria:
+
+```sh
+curl -s https://trainergigs.com/ai-training-jobs-roles.json \
+  | jq -r '.roles[] | select(.kind == "role" and (.countries | index("NG"))) | [.title, .platform, .url] | @tsv'
+```
+
+With the Python client, the same roles that list $20 an hour or more, best paid first:
 
 ```sh
 git clone https://github.com/baguette88/trainergigsapi && cd trainergigsapi
 python3 clients/python/trainergigs.py roles --country NG --min-pay 20 --limit 10
 ```
+
+It prints the day the roles were counted, how many it found, and one line for each role: the listed pay, the title, the platform and the role's own page.
 
 The same in Python, with the standard library only:
 
@@ -24,62 +41,217 @@ import sys
 sys.path.insert(0, "clients/python")
 import trainergigs as tg
 
-for role in tg.roles(country="NG", min_pay=20):
+found = tg.by_pay(tg.roles(country="NG", min_pay=20))
+for role in found[:10]:
     print(tg.line(role))
 ```
 
 And in JavaScript, in Node 18 or newer or in a browser page on any site:
 
 ```js
-import { roles } from "./clients/js/trainergigs.mjs"
+import { roles, byPay, line } from "./clients/js/trainergigs.mjs"
 
-for (const role of await roles({ country: "NG", minPay: 20 })) {
-  console.log(role.title, role.platform, role.url)
-}
+const found = byPay(await roles({ country: "NG", minPay: 20 }))
+for (const role of found.slice(0, 10)) console.log(line(role))
 ```
 
 Every role links to its own page on trainergigs.com. The full listing and the way to apply are there.
 
-Both clients take the same filters: a country code, a field, a platform, a least hourly pay and a day (`since`). A role whose listing names no country is left out of a country search unless you ask for it (`--unnamed`, `unnamed=True`, `unnamed: true`).
+## Install
 
-### What you can build
+Each client is one file with no dependency, so you can copy it into your project. You can also install from this repository.
 
-* A daily post of new roles in a Discord channel: `examples/discord_new_roles.py` does it with a webhook and remembers what it posted.
-* A page of roles for one country or one field on your own site, read by `fetch` from the roles file.
-* A sheet that tracks open roles by platform week by week, from the weekly CSV.
+Python 3.9 or newer. This adds the module and a `trainergigs` command:
 
-Link each role to its `url` as it is. The tag on it tells the site that the visit came through this data, which is how the data stays free.
+```sh
+pip install git+https://github.com/baguette88/trainergigsapi
+trainergigs roles --country NG --min-pay 20
+```
 
-## Endpoints
+Node 18 or newer:
 
-All addresses are on `https://trainergigs.com`. A CDN caches each file for 5 minutes.
+```sh
+npm install github:baguette88/trainergigsapi
+```
+
+```js
+import { roles } from "trainergigs"
+```
+
+A browser page, with nothing to install:
+
+```html
+<script type="module">
+import { roles } from "https://cdn.jsdelivr.net/gh/baguette88/trainergigsapi@v1.2.0/clients/js/trainergigs.mjs"
+console.log(await roles({ country: "NG" }))
+</script>
+```
+
+## The files
+
+All addresses are on `https://trainergigs.com`. Each is a plain GET.
 
 | Address | Format | What it holds | How often it changes |
 |---|---|---|---|
+| `/ai-training-jobs-roles.json` | JSON | Every open role, one line each, with its own page on trainergigs.com | With the site build |
 | `/ai-training-jobs-data.json` | JSON | Open roles by platform and field, the day's totals, the counting method | With the site build |
 | `/ai-training-jobs-data.csv` | CSV | The same rows as the daily JSON | With the site build |
-| `/ai-training-jobs-weekly.json` | JSON | Every closed week, with a total row and rows by platform and field | A week is added after it closes |
-| `/ai-training-jobs-weekly.csv` | CSV | The same weeks as one long table | A week is added after it closes |
-| `/ai-training-jobs-roles.json` | JSON | Every open role, one line each, with its own page on trainergigs.com | With the site build |
-| `/feed.xml` | RSS | Roles on the board | With the site build |
+| `/ai-training-jobs-weekly.json` | JSON | Every closed week, with its totals and the counting method | A week is added after it closes |
+| `/ai-training-jobs-weekly.csv` | CSV | Every closed week as one long table, with rows by platform and field | A week is added after it closes |
+| `/feed.xml` | RSS | The newest roles on the board | With the site build |
 | `/feed-weekly.xml` | RSS | One item per closed week | A week is added after it closes |
 | `/feed-changes.xml` | RSS | Platforms whose open roles grew, week by week | A week is added after it closes |
 | `/sitemap.xml` | XML | Every page on the site | With the site build |
 | `/llms.txt` | Text | A plain list of every page, with its number of the day | With the site build |
 
-The site does not publish a build time. Read the `date` or `built` field in a file to see its day.
+The site builds about once an hour. To see a file's day, read `date` in the daily file, `counted` in the roles file and `closed_on` on a week.
 
-### Browser use
+`openapi.yaml` describes every address and every field for tools that read OpenAPI 3.1.
 
-These files send `Access-Control-Allow-Origin: *`. A web page on any site can read them with `fetch`.
+## A role
 
-## Counts on Nov 11, 2026
+One item of `roles` in the roles file, from the saved copy in `tests/samples/`:
 
-Read on Nov 11, 2026, the daily file stated 3,102 open roles on 33 platforms and 439 paid research studies, which it counts apart from the roles. The file can change through the day. For any other day, fetch the file. The live number is always in `totals` in the daily JSON.
+```json
+{
+  "id": "job-lionbridge-27259005-4bd4-4767-b4e3-bff478b57cab",
+  "url": "https://trainergigs.com/job-lionbridge-27259005-4bd4-4767-b4e3-bff478b57cab?src=api",
+  "title": "US English Transcriber",
+  "platform": "Lionbridge",
+  "field": "Language & Audio",
+  "kind": "role",
+  "pay_min": 25,
+  "pay_max": 34,
+  "pay_unit": "hr",
+  "paid_per_task": false,
+  "where": "US",
+  "countries": ["US"],
+  "posted": "2026-04-13"
+}
+```
+
+Link each role to its `url` as it is. The tag on it tells the site that the visit came through this data, which is how the data stays free.
+
+## Filters and commands
+
+Both clients take the same filters. Every one may be left out.
+
+| Filter | Command line | Python | JavaScript | What it keeps |
+|---|---|---|---|---|
+| Country | `--country NG` | `country="NG"` | `country: "NG"` | Roles whose listing names that country, by its two-letter code |
+| No country named | `--unnamed` | `unnamed=True` | `unnamed: true` | With a country: also the roles whose listing names no country |
+| Field | `--field Law` | `field="Law"` | `field: "Law"` | Roles in that field of work |
+| Platform | `--platform Appen` | `platform="Appen"` | `platform: "Appen"` | Roles that platform lists |
+| Least pay | `--min-pay 40` | `min_pay=40` | `minPay: 40` | Roles whose listed hourly pay, a range at its midpoint, is at least that |
+| Day | `--since 2026-11-01` | `since="2026-11-01"` | `since: "2026-11-01"` | Roles their platform dated on or after that day |
+| Studies | `--studies` | `kind="study"` | `kind: "study"` | Paid research studies in place of roles |
+
+A role whose listing names no country is left out of a country search unless you ask for it. Case does not matter in a field or a platform name.
+
+The field names in the file on Nov 12, 2026:
+
+<!-- fields:start -->
+`AI & Machine Learning`, `Applied Engineering`, `Arts & Design`, `Business & Operations`, `Cybersecurity`, `Data Analysis`, `Education`, `Finance`, `Generalist`, `Humanities`, `Language & Audio`, `Law`, `Medicine`, `Other`, `Research Studies`, `Retail & Hospitality`, `Robotics`, `Science & Research`, `Software Engineering`
+<!-- fields:end -->
+
+The command line prints the names of the day, with the count under each. Every filter works with every command but `totals`.
+
+| Command | What it prints |
+|---|---|
+| `trainergigs.py roles` | The roles, best paid first. `--limit 0` shows all of them |
+| `trainergigs.py totals` | The day's numbers as the file states them |
+| `trainergigs.py fields` | Each field of work and how many roles are in it |
+| `trainergigs.py platforms` | Each platform and how many roles it lists |
+| `trainergigs.py countries` | Each country code and how many listings name it |
+| `trainergigs.py pay` | The median listed hourly pay and its middle half, counted as the site counts them |
+
+So `python3 clients/python/trainergigs.py pay --country KE --field Law` gives the median listed hourly pay of the law roles whose listings name Kenya, or says that fewer than 8 of them state hourly pay. Add `--json` to any command to get data in place of lines.
+
+In code the same counts are `tally` and `pay_stats` in Python, and `tally` and `payStats` in JavaScript.
+
+## Recipes
+
+### pandas
+
+```python
+import pandas as pd
+
+who = {"User-Agent": "my-project/1.0"}
+rows = pd.read_csv("https://trainergigs.com/ai-training-jobs-data.csv", storage_options=who)
+```
+
+Keep the `storage_options` line. pandas reads through Python's urllib, and the site refuses urllib's default User-Agent with a 403. `examples/pandas_example.py` goes on to the median listed pay of each field.
+
+### Google Sheets
+
+```
+=IMPORTDATA("https://trainergigs.com/ai-training-jobs-data.csv")
+```
+
+### A web page
+
+`examples/roles_page.html` is one file that lists the roles for a country on your own page, best paid first. It reads the roles file with `fetch`, and it needs no key and no build step.
+
+No code at all? The site makes a ready widget for the whole board, a field or a country: [trainergigs.com/jobs-widget](https://trainergigs.com/jobs-widget?src=github).
+
+### A Discord channel
+
+`examples/discord_new_roles.py` posts the roles that are new since its last run through a webhook, and remembers what it posted. Run it once a day.
+
+### Curl
+
+```sh
+curl -s https://trainergigs.com/ai-training-jobs-data.json | jq .totals
+curl -s https://trainergigs.com/ai-training-jobs-weekly.csv -o weekly.csv
+```
+
+`examples/example.py`, `examples/example.mjs` and `examples/example.sh` print the day's totals in Python, in Node and with curl.
+
+## How the files are served
+
+* **No key.** Nothing to sign up for, and nothing to send but a GET.
+* **Name your program.** Send a `User-Agent` header that says what is asking. On Nov 12, 2026 the site refused the default one of Python's urllib (`Python-urllib`) with a 403, which is also what a plain `pandas.read_csv` sends. Curl, Node, browsers, `requests` and the clients here all get the file as they are.
+* **Five minutes.** A CDN caches each file for 5 minutes, so fetching more often than that returns the same file.
+* **Gzip.** Ask with `Accept-Encoding: gzip` and the roles file is about 150 KB in place of 1.5 MB. Curl does this with `--compressed`. Browsers, Node and the Python client here do it by themselves.
+* **Not changed.** A request with `If-Modified-Since` gets a 304 and no body when the file is the same.
+* **Any site.** The files send `Access-Control-Allow-Origin: *`, so a web page on any site can read them with `fetch`.
+
+Please keep requests modest. Once an hour is as fresh as the data gets.
 
 ## Field reference
 
-Every field below was read from the live files on Nov 11, 2026.
+Every field below was read from the live files on Nov 12, 2026. `tests/test_docs.py` fails when a field in the saved files is missing from this page or from `openapi.yaml`.
+
+### Roles file: `ai-training-jobs-roles.json`
+
+Top level: `source`, `counted`, `license`, `fields`, `totals`, `roles`.
+
+* `counted` is the day the roles were counted.
+* `fields` says in one sentence what each role field holds.
+* `totals` holds the same numbers as `totals` in the daily file.
+* `roles` is sorted by platform, then title, then address.
+
+Each item in `roles`:
+
+| Field | Meaning |
+|---|---|
+| `id` | The role's key on the site, the last part of its address. It stays the same for as long as the role is open |
+| `url` | The role's own page on trainergigs.com, with the tag `src=api`. Link to it as it is |
+| `title` | The listing's title |
+| `platform` | The platform that lists the role |
+| `field` | The board's name for the role's field of work |
+| `kind` | `role`, or `study` for a paid research study. Studies are counted apart and are never called roles |
+| `pay_min` | The lower end of the listed pay as a number. Null when the listing states no pay, and when it states a top only ("Up to $90/hr") |
+| `pay_max` | The upper end of the listed pay as a number. Null when the listing states no pay, and when it states a bottom only. One rate is both ends |
+| `pay_unit` | `hr`, `task` or `yr`, or null when the listing states no pay |
+| `paid_per_task` | True when the listing gives an hourly figure but says it pays per task, otherwise false |
+| `where` | The board's short place text, such as "US" or "58 countries". Empty when no country is named |
+| `countries` | The two-letter codes of the countries the listing names for applicants, in its order. Empty when it names none |
+| `posted` | The day the platform itself dated the listing, or null when it gives none |
+
+The rows marked `role` add up to `totals.open_roles`. The rows marked `study` add up to `totals.paid_research_studies`. The file holds no apply address and no description. Link to a role through its `url`.
+
+Pay in words: `pay_text` in Python and `payText` in JavaScript write a role's pay as its listing states it, so a top with no bottom reads "Up to $90/hr" and never "$90/hr".
 
 ### Daily file: `ai-training-jobs-data.json`
 
@@ -114,11 +286,9 @@ Top level: `name`, `date`, `source`, `method`, `totals`, `fields`, `rows`.
 
 ### Weekly file: `ai-training-jobs-weekly.json`
 
-Top level: `name`, `source`, `method`, `notes`, `revisions`, `weeks`. Each item in `weeks` has these fields:
+Top level: `name`, `source`, `method`, `notes`, `revisions`, `weeks`.
 
-`week`, `week_start`, `week_end`, `last_day`, `days_counted`, `days_missing`, `closed_on`, `revised`, `open_sunday`, `open_prev_sunday`, `studies_sunday`, `listed_any_day`, `new_roles`, `renewed_new`, `gone_roles`, `renewed_gone`, `newly_tracked`, `old_postings`, `roles_100_plus`, `roles_100_plus_prev`, `roles_with_hourly_pay`, `median_listed_hourly_usd`, `q1_listed_hourly_usd`, `q3_listed_hourly_usd`, `platforms_read`, `feeds_not_read`, `languages_named`, `countries_named`, `days_listed_median`, `days_listed_n`, `roles_sunday`, `roles_prev_sunday`, `roles_new`, `roles_gone`, `platforms_with_roles`, `url`.
-
-How to read them, from the file's own notes and method:
+How to read a week, from the file's own notes and method:
 
 * A week runs Monday to Sunday, UTC. `last_day` is its day of record.
 * `open_sunday`, `open_prev_sunday`, `new_roles` and `gone_roles` count every listing, paid research studies among them.
@@ -127,77 +297,20 @@ How to read them, from the file's own notes and method:
 * `roles_100_plus` counts roles whose listed hourly pay reaches $100.
 * `url` is the week's own page on trainergigs.com.
 
-The weekly CSV (`ai-training-jobs-weekly.csv`) has one row per week, platform and field. Its columns are `week`, `week_start`, `week_end`, `last_day`, `days_counted`, `closed_on`, `revised`, `platform`, `field`, `open_sunday`, `open_prev_sunday`, `listed_any_day`, `new_roles`, `gone_roles`, `renewed`, `newly_tracked`, `old_postings`, `roles_100_plus`, `roles_with_hourly_pay`, `median_listed_hourly_usd`, `q1_listed_hourly_usd`, `q3_listed_hourly_usd`, `platforms_read`, `feeds_not_read`, `languages_named`, `countries_named`, `days_listed_median`, `days_listed_n`. Platform and field are blank on the week's total row. Field is blank on a platform's row. Platform is blank on a field's row. The week's own numbers, from `platforms_read` to `days_listed_n`, are on its total row only.
+<details>
+<summary>Every field of a week, and every column of the weekly CSV</summary>
 
-### Roles file: `ai-training-jobs-roles.json`
+Each item in `weeks` has these fields:
 
-Top level: `source`, `counted`, `license`, `fields`, `totals`, `roles`.
+`week`, `week_start`, `week_end`, `last_day`, `days_counted`, `days_missing`, `closed_on`, `revised`, `open_sunday`, `open_prev_sunday`, `studies_sunday`, `listed_any_day`, `new_roles`, `renewed_new`, `gone_roles`, `renewed_gone`, `newly_tracked`, `old_postings`, `roles_100_plus`, `roles_100_plus_prev`, `roles_with_hourly_pay`, `median_listed_hourly_usd`, `q1_listed_hourly_usd`, `q3_listed_hourly_usd`, `platforms_read`, `feeds_not_read`, `languages_named`, `countries_named`, `days_listed_median`, `days_listed_n`, `roles_sunday`, `roles_prev_sunday`, `roles_new`, `roles_gone`, `platforms_with_roles`, `url`.
 
-* `counted` is the day the roles were counted.
-* `fields` says in one sentence what each role field holds.
-* `totals` holds the same numbers as `totals` in the daily file.
-* `roles` is sorted by platform, then title, then address.
-* The file's version history is in `CHANGELOG.md`. A field is never taken away without a new major version.
+The weekly CSV (`ai-training-jobs-weekly.csv`) has one row per week, platform and field. Its columns are:
 
-Each item in `roles`:
+`week`, `week_start`, `week_end`, `last_day`, `days_counted`, `closed_on`, `revised`, `platform`, `field`, `open_sunday`, `open_prev_sunday`, `listed_any_day`, `new_roles`, `gone_roles`, `renewed`, `newly_tracked`, `old_postings`, `roles_100_plus`, `roles_with_hourly_pay`, `median_listed_hourly_usd`, `q1_listed_hourly_usd`, `q3_listed_hourly_usd`, `platforms_read`, `feeds_not_read`, `languages_named`, `countries_named`, `days_listed_median`, `days_listed_n`.
 
-| Field | Meaning |
-|---|---|
-| `id` | The role's key on the site, the last part of its address. It stays the same for as long as the role is open |
-| `url` | The role's own page on trainergigs.com, with the tag `src=api`. Link to it as it is |
-| `title` | The listing's title |
-| `platform` | The platform that lists the role |
-| `field` | The board's name for the role's field of work |
-| `kind` | `role`, or `study` for a paid research study. Studies are counted apart and are never called roles |
-| `pay_min` | The lower end of the listed pay as a number, or null when the listing states no pay |
-| `pay_max` | The upper end of the listed pay as a number, or null when the listing states no pay |
-| `pay_unit` | `hr`, `task` or `yr`, or null when the listing states no pay |
-| `paid_per_task` | True when the listing gives an hourly figure but says it pays per task, otherwise false |
-| `where` | The board's short place text, empty when no country is named |
-| `countries` | The two-letter codes of the countries the listing names for applicants, in its order. Empty when it names none |
-| `posted` | The day the platform itself dated the listing, or null when it gives none |
+Platform and field are blank on the week's total row. Field is blank on a platform's row. Platform is blank on a field's row. The week's own numbers, from `platforms_read` to `days_listed_n`, are on its total row only.
 
-The rows marked `role` add up to `totals.open_roles`. The rows marked `study` add up to `totals.paid_research_studies`. The file holds no apply address and no description. Link to a role through its `url`.
-
-## Examples
-
-Curl:
-
-```sh
-curl -s https://trainergigs.com/ai-training-jobs-data.json
-curl -s https://trainergigs.com/ai-training-jobs-weekly.csv -o weekly.csv
-```
-
-Python, standard library only (`examples/example.py`):
-
-```python
-import json
-import urllib.request
-
-url = "https://trainergigs.com/ai-training-jobs-data.json"
-req = urllib.request.Request(url, headers={"User-Agent": "trainergigs-api-client/1.0"})
-with urllib.request.urlopen(req, timeout=30) as resp:
-    data = json.load(resp)
-print(data["date"], data["totals"]["open_roles"], "open roles")
-```
-
-Node 18 or newer (`examples/example.mjs`):
-
-```js
-const res = await fetch("https://trainergigs.com/ai-training-jobs-data.json")
-const data = await res.json()
-console.log(data.date, data.totals.open_roles, "open roles")
-```
-
-This runs in Node. It also runs in a browser page on any site, as a module script.
-
-Google Sheets, on the CSV:
-
-```
-=IMPORTDATA("https://trainergigs.com/ai-training-jobs-data.csv")
-```
-
-The clients are `clients/python/trainergigs.py` and `clients/js/trainergigs.mjs`. `python3 clients/python/trainergigs.py --help` lists the command line's filters, and `--json` prints the roles as data. Run `python3 clients/python/trainergigs.py` to print five open roles. That demo reads the live roles file. Run `python3 -m unittest` inside `clients/python` to test it against the saved files in `tests/samples/`. The roles sample is a cut of 20 rows.
+</details>
 
 ## How the numbers are counted
 
@@ -222,21 +335,37 @@ Weekly file:
 * Pay is the hourly pay a listing states, a range at its midpoint, a median from 8 roles or more, nothing estimated or converted. $100+ counts the roles whose listed hourly pay reaches $100.
 * days_listed_median is explained in the file's own method list.
 
+You can count the day's median again from the roles file. Take the rows marked `role` whose `pay_unit` is `hr`, whose `paid_per_task` is false and whose listing states both ends, and count each at its midpoint. That gives `roles_with_hourly_pay` and the median and quartiles in `totals`. `pay_stats` in the Python client does it, and `tools/check_live.py` checks it against the live files each day.
+
 The site's page on the method is https://trainergigs.com/data-method.
 
 Pay is as each listing states it. Nothing here promises pay, hiring or speed.
 
 ## The dated archive
 
-A daily workflow in `.github/workflows/mirror.yml` saves the two daily files and the two weekly files into `data/<YYYY-MM-DD>/`. It saves a file only when it changed since the last saved copy. Each folder is the day the file was fetched, in UTC.
+A daily workflow in `.github/workflows/mirror.yml` saves the two daily files and the two weekly files into `data/<YYYY-MM-DD>/`. It saves a file only when it changed since the last saved copy. Each folder is the day the file was fetched, in UTC. The first folder is `data/2026-11-12`.
+
+The same workflow writes the day's numbers into the paragraph near the top of this page, and then runs `tools/check_live.py`, which fails when a documented field is gone from a live file or the files stop adding up.
+
+## Versions
+
+`CHANGELOG.md` lists every change. A field may be added to a file at any time. A field is never taken away without a new major version, so read the fields you know and pass over the rest.
+
+To test the clients against the saved files in `tests/samples/`, with nothing fetched:
+
+```sh
+python3 -m unittest discover -s clients/python
+python3 -m unittest discover -s tests
+node --test clients/js/trainergigs.test.mjs
+```
+
+The roles sample is a cut of 24 rows. The other samples are whole files.
 
 ## Terms
 
 The code in this repository is under the MIT license (`LICENSE`). The data is under CC BY 4.0 (`LICENSE-DATA.md`). Credit line:
 
 > Data: TrainerGigs, https://trainergigs.com
-
-Please keep requests modest. The files are cached for 5 minutes, so fetching more often than that returns the same file.
 
 ## How to cite
 

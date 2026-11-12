@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remote AI training roles</title>
+<h1>Remote AI training roles</h1>
+<p id="said">Reading the roles.</p>
+<ul id="roles"></ul>
+<p><a href="https://trainergigs.com/?src=api">Data: TrainerGigs</a></p>
+<script type="module">
+// Open roles for one country, best paid first, on a page of any site. Change the three settings below.
+// Data: TrainerGigs, https://trainergigs.com
+import { rolesFile, roles, byPay, payText } from "https://cdn.jsdelivr.net/gh/baguette88/trainergigsapi@v1.2.0/clients/js/trainergigs.mjs"
+
+const country = "NG" // a two-letter code, or null for every country
+const minPay = 20 // the least listed hourly pay, or null
+const most = 25 // how many roles to show
+
+const said = document.querySelector("#said")
+try {
+  const data = await rolesFile()
+  const found = byPay(await roles({ data, country, minPay }))
+  said.textContent = found.length + " open roles, counted on " + data.counted + ". Pay is as each listing states it."
+  const list = document.querySelector("#roles")
+  for (const role of found.slice(0, most)) {
+    // A title comes from a listing, so it goes in as text and never as HTML.
+    const link = document.createElement("a")
+    link.href = role.url
+    link.textContent = role.title
+    const item = document.createElement("li")
+    item.append(link, " · " + payText(role) + " · " + role.platform)
+    list.append(item)
+  }
+} catch (err) {
+  said.textContent = "The roles could not be read. Try again in a few minutes."
+}
+</script>
+</html>

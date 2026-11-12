@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trainergigs"
+version = "1.2.0"
+description = "Free, read-only data on remote AI training jobs from TrainerGigs. No key. Standard library only."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "TrainerGigs", email = "hello@trainergigs.com" }]
+keywords = ["ai-training-jobs", "data-annotation", "remote-jobs", "jobs-api", "open-data"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+[project.urls]
+Homepage = "https://trainergigs.com/?src=github"
+Repository = "https://github.com/baguette88/trainergigsapi"
+Changelog = "https://github.com/baguette88/trainergigsapi/blob/main/CHANGELOG.md"
+
+[project.scripts]
+trainergigs = "trainergigs:main"
+
+[tool.setuptools]
+package-dir = { "" = "clients/python" }
+py-modules = ["trainergigs"]

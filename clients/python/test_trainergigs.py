@@ -85,9 +85,40 @@ class FilterTests(unittest.TestCase):
 
     def test_pay_as_words(self):
         self.assertEqual(tg.pay_text({"pay_min": 40, "pay_max": 60, "pay_unit": "hr"}), "$40 to $60/hr")
-        self.assertEqual(tg.pay_text({"pay_min": 47.5, "pay_max": 47.5, "pay_unit": "hr", "paid_per_task": True}), "$47.5/hr, paid per task")
+        self.assertEqual(tg.pay_text({"pay_min": 47.5, "pay_max": 47.5, "pay_unit": "hr", "paid_per_task": True}), "$47.50/hr, paid per task")
         self.assertEqual(tg.pay_text({"pay_min": None, "pay_max": None, "pay_unit": None}), "pay not listed")
         self.assertEqual(tg.pay_text({"pay_min": 130000, "pay_max": 180000, "pay_unit": "yr"}), "$130,000 to $180,000/yr")
+        self.assertEqual(tg.pay_text({"pay_min": 0.01, "pay_max": 0.01, "pay_unit": "task"}), "$0.01/task")
+
+    def test_a_listing_with_one_end_keeps_its_own_words(self):
+        top = {"pay_min": None, "pay_max": 90, "pay_unit": "hr"}
+        self.assertEqual(tg.pay_text(top), "Up to $90/hr")  # never "$90/hr": the listing states no lower end
+        self.assertEqual(tg.pay_text({"pay_min": 25, "pay_max": None, "pay_unit": "hr"}), "From $25/hr")
+        self.assertEqual(tg.hourly_midpoint(top), 90)
+        self.assertEqual(tg.pay_stats([top] * 8)["roles"], 0)  # the site's medians leave such a listing out
+
+    def test_best_paid_first_and_the_rest_in_their_order(self):
+        a, b, c, d = ({"id": "a", "pay_unit": None}, {"id": "b", "pay_unit": "hr", "pay_min": 20, "pay_max": 30},
+                      {"id": "c", "pay_unit": "hr", "pay_min": 60, "pay_max": 60}, {"id": "d", "pay_unit": "task", "pay_min": 500, "pay_max": 500})
+        self.assertEqual([r["id"] for r in tg.by_pay([a, b, c, d])], ["c", "b", "a", "d"])
+
+    def test_counts_under_each_name(self):
+        everything = tg.roles(kind=None, data=self.data)
+        fields = tg.tally(everything, "field")
+        self.assertEqual(sum(n for _, n in fields), len(everything))
+        self.assertEqual([n for _, n in fields], sorted((n for _, n in fields), reverse=True))
+        countries = dict(tg.tally(everything, "countries"))
+        self.assertEqual(countries["NG"], len(tg.roles(country="NG", kind=None, data=self.data)))
+        self.assertEqual(dict(tg.tally(everything, "kind")), {"role": len(tg.roles(data=self.data)), "study": len(tg.roles(kind="study", data=self.data))})
+
+    def test_the_median_is_counted_as_the_site_counts_it(self):
+        hourly = lambda low, high, **more: dict({"pay_unit": "hr", "pay_min": low, "pay_max": high}, **more)
+        eight = [hourly(x, x) for x in (10, 20, 30, 40, 50, 60, 70, 80)]
+        self.assertEqual(tg.pay_stats(eight), {"roles": 8, "q1": 27.5, "median": 45.0, "q3": 62.5})
+        self.assertEqual(tg.pay_stats(eight[:7]), {"roles": 7, "q1": None, "median": None, "q3": None})
+        left_out = [hourly(900, 900, paid_per_task=True), hourly(None, 900), {"pay_unit": "yr", "pay_min": 9e4, "pay_max": 9e4}, {"pay_unit": None}]
+        self.assertEqual(tg.pay_stats(eight + left_out), tg.pay_stats(eight))
+        self.assertEqual(tg.pay_stats([hourly(40, 60)] * 8)["median"], 50)  # a range at its midpoint
 
     def test_the_command_line(self):
         said = []
@@ -103,7 +134,85 @@ class FilterTests(unittest.TestCase):
         self.assertEqual(mids, sorted(mids, reverse=True))  # best paid first
         said.clear()
         tg.main(["totals"], out=said.append, fetch=lambda: self.data)
-        self.assertIn(str(self.data["totals"]["open_roles"]), said[0])
+        self.assertIn("{:,} open roles on".format(self.data["totals"]["open_roles"]), said[0])
+        self.assertIn("Counted on " + self.data["counted"], said[0])
+        said.clear()
+        tg.main(["totals", "--json"], out=said.append, fetch=lambda: self.data)
+        self.assertEqual(json.loads(said[0]), self.data["totals"])
+
+    def test_the_commands_that_count(self):
+        said = []
+        self.assertEqual(tg.main(["fields"], out=said.append, fetch=lambda: self.data), 0)
+        self.assertIn("Counted on", said[0])
+        self.assertEqual(said[-1], "Data: TrainerGigs, https://trainergigs.com")
+        names = [l.split(None, 1)[1] for l in said[1:-1]]
+        self.assertEqual(sorted(names), sorted({r["field"] for r in self.data["roles"] if r["kind"] == "role"}))
+        for what, key in (("platforms", "platform"), ("countries", "countries"), ("fields", "field")):
+            said.clear()
+            tg.main([what, "--country", "NG", "--json"], out=said.append, fetch=lambda: self.data)
+            self.assertEqual(json.loads(said[0]), dict(tg.tally(tg.roles(country="NG", data=self.data), key)))
+        said.clear()
+        tg.main(["pay", "--json"], out=said.append, fetch=lambda: self.data)
+        got = json.loads(said[0])
+        self.assertEqual(got["roles"], tg.pay_stats(tg.roles(data=self.data))["roles"])
+        self.assertEqual(got["counted"], self.data["counted"])
+        said.clear()
+        tg.main(["pay", "--platform", "nobody"], out=said.append, fetch=lambda: self.data)
+        self.assertIn("No median", said[1])
+
+    def test_a_failed_read_ends_with_one_line_and_no_traceback(self):
+        import contextlib
+        import io
+        import urllib.error
+
+        def down():
+            raise urllib.error.URLError("no route")
+        said, err = [], io.StringIO()
+        with contextlib.redirect_stderr(err):
+            self.assertEqual(tg.main(["roles"], out=said.append, fetch=down), 1)
+        self.assertEqual(said, [])
+        self.assertIn("Could not read https://trainergigs.com/ai-training-jobs-roles.json", err.getvalue())
+
+
+class Fetching(unittest.TestCase):
+    """How a file is asked for, with the network replaced: nothing is fetched."""
+
+    def read(self, body, encoding=None):
+        import urllib.request
+        asked = []
+
+        class Answer:
+            headers = {"Content-Encoding": encoding} if encoding else {}
+
+            def read(self):
+                return body
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *a):
+                return False
+
+        def urlopen(req, timeout=None):
+            asked.append(req)
+            return Answer()
+        real, urllib.request.urlopen = urllib.request.urlopen, urlopen
+        try:
+            return tg._get("/x.json"), asked[0]
+        finally:
+            urllib.request.urlopen = real
+
+    def test_it_names_itself_and_asks_for_gzip(self):
+        text, req = self.read(b'{"a": 1}')
+        self.assertEqual(text, '{"a": 1}')
+        self.assertEqual(req.full_url, "https://trainergigs.com/x.json")
+        self.assertEqual(req.get_header("User-agent"), "trainergigs-api-client/" + tg.__version__)
+        self.assertEqual(req.get_header("Accept-encoding"), "gzip")
+
+    def test_a_gzipped_answer_is_opened(self):
+        import gzip
+        text, _ = self.read(gzip.compress("é".encode("utf-8")), encoding="gzip")
+        self.assertEqual(text, "é")
 
 
 class DiscordRecipe(unittest.TestCase):

@@ -1,0 +1,33 @@
+{
+  "name": "trainergigs",
+  "version": "1.2.0",
+  "description": "Free, read-only data on remote AI training jobs from TrainerGigs. No key and no dependency.",
+  "type": "module",
+  "main": "./clients/js/trainergigs.mjs",
+  "exports": "./clients/js/trainergigs.mjs",
+  "files": [
+    "clients/js/trainergigs.mjs",
+    "LICENSE",
+    "LICENSE-DATA.md"
+  ],
+  "scripts": {
+    "test": "node --test clients/js/trainergigs.test.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "ai-training-jobs",
+    "data-annotation",
+    "remote-jobs",
+    "jobs-api",
+    "open-data"
+  ],
+  "homepage": "https://trainergigs.com/?src=github",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baguette88/trainergigsapi.git"
+  },
+  "author": "TrainerGigs <hello@trainergigs.com> (https://trainergigs.com)",
+  "license": "MIT"
+}

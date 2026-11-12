@@ -1,5 +1,20 @@
 # Changes
 
+## 1.2.0, Nov 12, 2026
+
+- Pay in words keeps the listing's own words. A top with no bottom reads "Up to $90/hr", where 1.1.0 wrote "$90/hr". A bottom with no top reads "From $25/hr". Cents are written in full: "$47.50/hr".
+- New in both clients: `by_pay` (`byPay`) sorts best paid first, `tally` counts the roles under each field, platform or country, and `pay_stats` (`payStats`) gives the median listed hourly pay as the site counts it. The JavaScript client gains `payText` and `line`.
+- The command line gains `fields`, `platforms`, `countries` and `pay`, each with every filter. `totals` prints lines in place of a Python dict. A failed read ends with one line, not a traceback.
+- The Python client asks for gzip, so the roles file comes as about 150 KB in place of 1.5 MB.
+- It installs from this repository: `pip install git+https://github.com/baguette88/trainergigsapi` and `npm install github:baguette88/trainergigsapi`.
+- `openapi.yaml` no longer forbids fields it does not list on a role, since fields may be added. It says when `pay_min` and `pay_max` are null, and it describes the 304 and the 403.
+- The README says that the site refuses the default User-Agent of Python's urllib, which a plain `pandas.read_csv` sends, and shows the one line that fixes it.
+- `tools/check_live.py` checks the live files against the documents each day, and `tests/test_docs.py` fails when a field is missing from the README or from `openapi.yaml`.
+- The daily workflow writes the day's numbers into the README, and it no longer saves a file that does not parse.
+- New examples: `examples/pandas_example.py` and `examples/roles_page.html`.
+
+Nothing was taken away, and the files on trainergigs.com did not change.
+
 ## 1.1.0, Nov 11, 2026
 
 - The roles file gives each role an `id`, its `countries` as two-letter codes, and its `url` with the tag `src=api`.

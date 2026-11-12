@@ -7,7 +7,8 @@ import urllib.request
 
 URL = "https://trainergigs.com/ai-training-jobs-data.json"
 
-req = urllib.request.Request(URL, headers={"User-Agent": "trainergigs-api-client/1.0"})
+# Name your program here. The site refuses the default User-Agent of urllib with a 403.
+req = urllib.request.Request(URL, headers={"User-Agent": "my-project/1.0"})
 with urllib.request.urlopen(req, timeout=30) as resp:
     data = json.load(resp)
 
