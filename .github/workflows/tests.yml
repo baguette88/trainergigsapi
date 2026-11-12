@@ -48,3 +48,25 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: The JavaScript client, on the samples
         run: node --test clients/js/trainergigs.test.mjs
+
+  action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: The action, on the live file
+        id: table
+        uses: ./
+        with:
+          country: "KE"
+          field: "Language & Audio"
+          markdown: "${{ runner.temp }}/roles.md"
+          csv: "${{ runner.temp }}/roles.csv"
+      - name: It wrote a table and said how many roles
+        env:
+          FOUND: ${{ steps.table.outputs.found }}
+        run: |
+          set -eu
+          test "$FOUND" -ge 0
+          head -n 1 "$RUNNER_TEMP/roles.csv" | grep -q "^pay,title,platform,"
+          grep -q "Data: \[TrainerGigs\](https://trainergigs.com/?src=api)" "$RUNNER_TEMP/roles.md"
+          head -n 5 "$RUNNER_TEMP/roles.md"

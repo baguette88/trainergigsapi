@@ -1,6 +1,6 @@
 // A small client for the TrainerGigs open data. No dependency. Node 18 or newer, and a browser page on any site.
 // Data: TrainerGigs, https://trainergigs.com
-export const VERSION = "1.4.0"
+export const VERSION = "1.5.0"
 export const BASE = "https://trainergigs.com"
 export const CREDIT = "Data: TrainerGigs, https://trainergigs.com"
 

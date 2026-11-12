@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: TrainerGigs AI training jobs data
-  version: "1.4.0"
+  version: "1.5.0"
   summary: Free, read-only files on remote AI training jobs.
   description: |
     Free files from trainergigs.com. No key and no sign-up. Every address is a plain GET.

@@ -84,7 +84,7 @@ A browser page, with nothing to install:
 
 ```html
 <script type="module">
-import { roles } from "https://cdn.jsdelivr.net/gh/baguette88/trainergigsapi@v1.4.0/clients/js/trainergigs.mjs"
+import { roles } from "https://cdn.jsdelivr.net/gh/baguette88/trainergigsapi@v1.5.0/clients/js/trainergigs.mjs"
 console.log(await roles({ country: "NG" }))
 </script>
 ```
@@ -258,13 +258,33 @@ In code the same counts are `tally` and `pay_stats` in Python, and `tally` and `
 
 ### A daily file in your own repository
 
-`examples/daily-roles.yml` is a GitHub Actions workflow for a repository of yours. Each day it writes `roles.md`, a table of the open roles for your country or field that GitHub shows as a page, and `roles.csv`, the same roles for a spreadsheet. It commits them only when they changed, so the history of the two files is a record of what opened and closed.
+This repository is also a GitHub Action. One step writes `roles.md`, a table of the open roles for your country or field that GitHub shows as a page, and `roles.csv`, the same roles for a spreadsheet:
+
+```yaml
+- uses: baguette88/trainergigsapi@v1.5.0
+  with:
+    country: "NG"
+    min-pay: "20"
+```
+
+`examples/daily-roles.yml` is the whole workflow around that step. It runs each day and commits the two files only when they changed, so their history is a record of what opened and closed.
 
 1. Copy `examples/daily-roles.yml` into the folder `.github/workflows/` of your repository.
-2. Set `COUNTRY`, `FIELD` and `MIN_PAY` near the top of the file. Leave one empty to leave that filter out. Set at least one: the table of every role was about 530 KB on Nov 12, 2026, which is long for one page.
+2. Set `country`, `field` and `min-pay` in the file. Leave one empty to leave that filter out. Set at least one: the table of every role was about 530 KB on Nov 12, 2026, which is long for one page.
 3. Push. To try it at once, open the Actions tab, pick "Daily AI training roles" and press "Run workflow".
 
-It needs no key and no secret. It installs this client at a fixed version, and the client names itself in its `User-Agent`, so the site answers it.
+It needs no key and no secret, and it installs nothing. The client names itself in its `User-Agent`, so the site answers it. It runs on the Linux and macOS runners.
+
+| Input | What it takes | Without it |
+|---|---|---|
+| `country` | A two-letter code such as `NG` | Every country |
+| `field` | A field as the file names it, such as `Law` | Every field |
+| `min-pay` | The least listed hourly pay in US dollars, a range at its midpoint | Every role |
+| `since` | A day such as `2026-11-01` | Every day |
+| `markdown` | Where to write the table | `roles.md` |
+| `csv` | Where to write the CSV | `roles.csv` |
+
+The step's output `found` is the number of roles in the table. A filter that could never match stops the step, and the files of the day before stay as they were.
 
 ### pandas
 

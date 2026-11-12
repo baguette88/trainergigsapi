@@ -1,6 +1,6 @@
 # A daily table of open remote AI training roles, kept in your own repository.
 #
-# Copy this file into the folder .github/workflows/ of a repository of yours. Set the three values under "env".
+# Copy this file into the folder .github/workflows/ of a repository of yours. Set the three values under "with".
 # Each day it writes roles.md, a table that GitHub shows as a page, and roles.csv, the same roles for a spreadsheet,
 # and it commits them when they changed. It needs no key and no secret.
 #
@@ -18,47 +18,21 @@ on:
 permissions:
   contents: write
 
-env:
-  # A two-letter country code such as NG, KE, IN, PH or US. Leave it empty for every country.
-  COUNTRY: "NG"
-  # A field such as Law, Medicine or Software Engineering. Leave it empty for every field.
-  FIELD: ""
-  # The least listed hourly pay in US dollars, such as 20. Leave it empty for every role.
-  MIN_PAY: ""
-
 jobs:
   roles:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v7
-        with:
-          python-version: "3.13"
-
-      - name: Install the client
-        run: python3 -m pip install --quiet "git+https://github.com/baguette88/trainergigsapi@v1.4.0"
-
       - name: Write roles.md and roles.csv
-        run: |
-          set -eu
-          set -- roles --limit 0
-          if [ -n "$COUNTRY" ]
-          then
-            set -- "$@" --country "$COUNTRY"
-          fi
-          if [ -n "$FIELD" ]
-          then
-            set -- "$@" --field "$FIELD"
-          fi
-          if [ -n "$MIN_PAY" ]
-          then
-            set -- "$@" --min-pay "$MIN_PAY"
-          fi
-          trainergigs "$@" --md > roles.md.new
-          trainergigs "$@" --csv > roles.csv.new
-          mv roles.md.new roles.md
-          mv roles.csv.new roles.csv
+        uses: baguette88/trainergigsapi@v1.5.0
+        with:
+          # A two-letter country code such as NG, KE, IN, PH or US. Leave it empty for every country.
+          country: "NG"
+          # A field such as Law, Medicine or Software Engineering. Leave it empty for every field.
+          field: ""
+          # The least listed hourly pay in US dollars, such as 20. Leave it empty for every role.
+          min-pay: ""
 
       - name: Commit the files when they changed
         run: |

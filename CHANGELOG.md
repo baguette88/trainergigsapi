@@ -1,7 +1,9 @@
 # Changes
 
-## Since 1.4.0
+## 1.5.0, Nov 12, 2026
 
+- This repository is a GitHub Action. One step, `uses: baguette88/trainergigsapi@v1.5.0`, writes `roles.md` and `roles.csv` for a country, a field, a least pay or a day. It needs no key, no secret and no install. `action.yml` names the inputs, and the README lists them.
+- `examples/daily-roles.yml` uses that step. In 1.4.0 it installed the client with pip and set its filters under `env`. A copy of the 1.4.0 file keeps working.
 - A new issue here first offers the board to a reader who is looking for a job, and the page on the method to one who doubts a number.
 - The README says to set at least one filter in the daily workflow, since the table of every role is long for one page.
 

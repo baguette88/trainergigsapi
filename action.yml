@@ -1,0 +1,79 @@
+name: "AI training roles table"
+description: "Write a Markdown table and a CSV of the open remote AI training roles for a country or a field. No key and no secret."
+author: "TrainerGigs"
+branding:
+  icon: "list"
+  color: "blue"
+
+inputs:
+  country:
+    description: "A two-letter country code such as NG, KE, IN, PH or US. Empty for every country."
+    required: false
+    default: ""
+  field:
+    description: "A field such as Law, Medicine or Software Engineering. Empty for every field."
+    required: false
+    default: ""
+  min-pay:
+    description: "The least listed hourly pay in US dollars, a range at its midpoint, such as 20. Empty for every role."
+    required: false
+    default: ""
+  since:
+    description: "A day such as 2026-11-01. Keeps the roles their platform dated on or after it. Empty for every day."
+    required: false
+    default: ""
+  markdown:
+    description: "Where to write the Markdown table."
+    required: false
+    default: "roles.md"
+  csv:
+    description: "Where to write the CSV."
+    required: false
+    default: "roles.csv"
+
+outputs:
+  found:
+    description: "How many roles the table holds."
+    value: ${{ steps.write.outputs.found }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Write the two files
+      id: write
+      shell: bash
+      env:
+        TG_COUNTRY: ${{ inputs.country }}
+        TG_FIELD: ${{ inputs.field }}
+        TG_MIN_PAY: ${{ inputs.min-pay }}
+        TG_SINCE: ${{ inputs.since }}
+        TG_MARKDOWN: ${{ inputs.markdown }}
+        TG_CSV: ${{ inputs.csv }}
+      run: |
+        set -eu
+        client="$GITHUB_ACTION_PATH/clients/python/trainergigs.py"
+        set -- roles --limit 0
+        if [ -n "$TG_COUNTRY" ]
+        then
+          set -- "$@" --country "$TG_COUNTRY"
+        fi
+        if [ -n "$TG_FIELD" ]
+        then
+          set -- "$@" --field "$TG_FIELD"
+        fi
+        if [ -n "$TG_MIN_PAY" ]
+        then
+          set -- "$@" --min-pay "$TG_MIN_PAY"
+        fi
+        if [ -n "$TG_SINCE" ]
+        then
+          set -- "$@" --since "$TG_SINCE"
+        fi
+        # a failed read leaves the files of the day before as they were
+        python3 "$client" "$@" --md > "$TG_MARKDOWN.new"
+        python3 "$client" "$@" --csv > "$TG_CSV.new"
+        mv "$TG_MARKDOWN.new" "$TG_MARKDOWN"
+        mv "$TG_CSV.new" "$TG_CSV"
+        found=$(grep -c '?src=api) | ' "$TG_MARKDOWN" || true)
+        echo "found=$found" >> "$GITHUB_OUTPUT"
+        echo "$found roles written to $TG_MARKDOWN and $TG_CSV"

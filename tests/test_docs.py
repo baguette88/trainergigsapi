@@ -131,46 +131,71 @@ class Recipes(unittest.TestCase):
 
     def test_the_workflow_to_copy_pins_this_version_and_asks_for_no_secret(self):
         text = (ROOT / "examples" / "daily-roles.yml").read_text(encoding="utf-8")
-        self.assertIn('trainergigsapi@v%s"' % tg.__version__, text)
+        self.assertIn("uses: %s@v%s\n" % (re.search(r"github\.com/([\w-]+/[\w-]+)", README).group(1), tg.__version__), text)
         self.assertNotIn("secrets.", text)
         self.assertNotIn("\t", text)
         self.assertRegex(text, r"(?m)^permissions:\n  contents: write$")
-        for name in ("COUNTRY", "FIELD", "MIN_PAY"):
-            self.assertRegex(text, r'(?m)^  %s: "' % name)
+        action = (ROOT / "action.yml").read_text(encoding="utf-8")
+        for name in ("country", "field", "min-pay"):
+            self.assertRegex(text, r'(?m)^          %s: "' % name)
+            self.assertRegex(action, r"(?m)^  %s:$" % name)
+        for name in re.findall(r"(?m)^  ([a-z-]+):\n    description:", action.partition("\noutputs:")[0]):
+            self.assertIn("| `%s` |" % name, README, "README.md does not name the action's input %s" % name)
 
-    def test_the_workflow_step_writes_both_files_with_a_field_of_two_words(self):
+    def test_the_action_writes_both_files_with_a_field_of_two_words(self):
         import os
         import shutil
         import subprocess
         import tempfile
         if not shutil.which("bash"):
             self.skipTest("no bash here")
-        text = (ROOT / "examples" / "daily-roles.yml").read_text(encoding="utf-8")
-        step = re.search(r"- name: Write roles\.md and roles\.csv\n        run: \|\n(.*?)\n\n", text, re.S).group(1)
-        script = "\n".join(line[10:] for line in step.splitlines())
-        found = tg.roles(field="Language & Audio", min_pay=20, data=sample("ai-training-jobs-roles.json"))
+        text = (ROOT / "action.yml").read_text(encoding="utf-8")
+        script = "\n".join(line[8:] for line in text.partition("      run: |\n")[2].splitlines())
+        data = sample("ai-training-jobs-roles.json")
+        found = tg.roles(field="Language & Audio", min_pay=20, data=data)
         self.assertTrue(found)
         with tempfile.TemporaryDirectory() as tmp:
-            # the command, reading the saved roles in place of the live file
-            runner = pathlib.Path(tmp) / "bin" / "run.py"
-            runner.parent.mkdir()
-            runner.write_text(
+            # the action's own folder, with a client that reads the saved roles in place of the live file
+            client = pathlib.Path(tmp) / "action" / "clients" / "python" / "trainergigs.py"
+            client.parent.mkdir(parents=True)
+            client.write_text(
                 "import json, sys\n"
                 "sys.path.insert(0, %r)\n"
-                "import trainergigs as tg\n"
+                "sys.modules.pop('trainergigs', None)\n"
+                "import importlib.util\n"
+                "spec = importlib.util.spec_from_file_location('tg_real', %r)\n"
+                "tg = importlib.util.module_from_spec(spec)\n"
+                "spec.loader.exec_module(tg)\n"
                 "sys.exit(tg.main(sys.argv[1:], fetch=lambda: json.load(open(%r, encoding='utf-8'))))\n"
-                % (str(ROOT / "clients" / "python"), str(SAMPLES / "ai-training-jobs-roles.json")), encoding="utf-8")
-            stand_in = runner.with_name("trainergigs")
-            stand_in.write_text('#!/bin/sh\nexec "%s" "%s" "$@"\n' % (sys.executable, runner), encoding="utf-8")
-            stand_in.chmod(0o755)
-            env = dict(os.environ, PATH=str(stand_in.parent) + os.pathsep + os.environ["PATH"], COUNTRY="", FIELD="Language & Audio", MIN_PAY="20")
-            done = subprocess.run(["bash", "-c", script], cwd=tmp, env=env, capture_output=True, text=True)
+                % (str(ROOT / "clients" / "python"), str(ROOT / "clients" / "python" / "trainergigs.py"),
+                   str(SAMPLES / "ai-training-jobs-roles.json")), encoding="utf-8")
+            work = pathlib.Path(tmp) / "work"
+            work.mkdir()
+            said = work / "output.txt"
+
+            def run(**inputs):
+                env = dict(os.environ, GITHUB_ACTION_PATH=str(client.parents[2]), GITHUB_OUTPUT=str(said), TG_COUNTRY="", TG_FIELD="",
+                           TG_MIN_PAY="", TG_SINCE="", TG_MARKDOWN="roles.md", TG_CSV="out dir/roles.csv")
+                env.update(inputs)
+                return subprocess.run(["bash", "-c", script], cwd=work, env=env, capture_output=True, text=True)
+
+            (work / "out dir").mkdir()
+            done = run(TG_FIELD="Language & Audio", TG_MIN_PAY="20")
             self.assertEqual((done.returncode, done.stderr), (0, ""))
-            table = (pathlib.Path(tmp) / "roles.md").read_text(encoding="utf-8")
-            sheet = (pathlib.Path(tmp) / "roles.csv").read_text(encoding="utf-8")
-        self.assertEqual(table.count("](https://trainergigs.com/job-"), len(found))
-        self.assertEqual(len(sheet.splitlines()), len(found) + 1)
-        self.assertIn("Data: [TrainerGigs](https://trainergigs.com/?src=api)", table)
+            table = (work / "roles.md").read_text(encoding="utf-8")
+            sheet = (work / "out dir" / "roles.csv").read_text(encoding="utf-8")
+            self.assertEqual(said.read_text(encoding="utf-8"), "found=%d\n" % len(found))
+            self.assertEqual(table.count("](https://trainergigs.com/job-"), len(found))
+            self.assertEqual(len(sheet.splitlines()), len(found) + 1)
+            self.assertIn("Data: [TrainerGigs](https://trainergigs.com/?src=api)", table)
+            # no role is a table that says so, and a filter that could never match stops the step and keeps the files
+            said.write_text("", encoding="utf-8")
+            self.assertEqual(run(TG_MIN_PAY="100000").returncode, 0)
+            self.assertEqual(said.read_text(encoding="utf-8"), "found=0\n")
+            before = (work / "roles.md").read_text(encoding="utf-8")
+            self.assertTrue(before.startswith("No open roles matched."))
+            self.assertEqual(run(TG_COUNTRY="Nigeria").returncode, 2)
+            self.assertEqual((work / "roles.md").read_text(encoding="utf-8"), before)
 
 
 class LiveCheck(unittest.TestCase):
