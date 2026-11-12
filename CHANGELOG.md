@@ -2,6 +2,7 @@
 
 ## Since 1.5.0
 
+- The sample in `examples/roles-100.md` keeps to listings dated in the last 30 days and ends with where to send a correction or an addition (`tools/sample_rows.py`).
 - `examples/roles-100.md` shows what the action writes: the open roles whose listed hourly pay is $100 or more, best paid first. The daily workflow writes it again each day.
 
 ## 1.5.0, Nov 12, 2026

@@ -50,6 +50,9 @@ jobs:
           markdown: examples/roles-100.md
           csv: ${{ runner.temp }}/roles-100.csv
 
+      - name: Keep the sample to fresh rows, and say where to write
+        run: python3 tools/sample_rows.py examples/roles-100.md
+
       - name: Commit changes
         run: |
           set -eu

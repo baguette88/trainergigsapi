@@ -267,7 +267,7 @@ This repository is also a GitHub Action. One step writes `roles.md`, a table of 
     min-pay: "20"
 ```
 
-To see what it writes, open [examples/roles-100.md](examples/roles-100.md): the open roles whose listed hourly pay, a range at its midpoint, is $100 or more, best paid first. This step writes it again each day.
+To see what it writes, open [examples/roles-100.md](examples/roles-100.md): open roles whose listed hourly pay, a range at its midpoint, is $100 or more, best paid first. That sample keeps to listings dated in the last 30 days and is written again each day. A correction, or a role or platform to add, goes to hello@trainergigs.com.
 
 `examples/daily-roles.yml` is the whole workflow around that step. It runs each day and commits the two files only when they changed, so their history is a record of what opened and closed.
 
