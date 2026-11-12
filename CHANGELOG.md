@@ -1,5 +1,14 @@
 # Changes
 
+## 1.4.0, Nov 12, 2026
+
+- New: `--md` on `roles`, `fields`, `platforms` and `countries`, and `roles_markdown` in the Python client. It writes a Markdown table with each role linked to its own page, the day the roles were counted and the credit line. The marks in a title are kept as plain text, so a title cannot break the table.
+- New example: `examples/daily-roles.yml`, a scheduled workflow to copy into a repository of your own. Each day it writes `roles.md` and `roles.csv` for your country or field and commits them when they changed. It needs no key and no secret.
+- The README gains "What you can build": three short recipes, each run against the live file, with what it printed that day.
+- `CONTRIBUTING.md`: how to report a problem and how to run the tests.
+
+Nothing was taken away, and the files on trainergigs.com did not change.
+
 ## 1.3.1, Nov 12, 2026
 
 - Types for the JavaScript client, `clients/js/trainergigs.d.ts`: a role, the three files, the filters and every function. An npm install picks them up by itself.

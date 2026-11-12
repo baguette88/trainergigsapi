@@ -110,6 +110,69 @@ class Readme(unittest.TestCase):
         self.assertEqual(readme_counts.rewrite("no marks here", daily), "no marks here")
 
 
+class Recipes(unittest.TestCase):
+    """The recipes a reader copies: the Python under "What you can build" and the workflow in examples/."""
+
+    def test_each_python_recipe_in_the_readme_runs_on_the_saved_roles(self):
+        import contextlib
+        import io
+        part = README.partition("## What you can build")[2].partition("\n## ")[0]
+        blocks = re.findall(r"```python\n(.*?)```", part, re.S)
+        self.assertEqual(len(blocks), 2)
+        live, tg.roles_file = tg.roles_file, lambda base=None: sample("ai-training-jobs-roles.json")
+        try:
+            for block in blocks:
+                said = io.StringIO()
+                with contextlib.redirect_stdout(said):
+                    exec(compile(block, "README.md", "exec"), {"__name__": "recipe"})
+                self.assertIn("2026-11-1", said.getvalue())  # each prints the day the roles were counted
+        finally:
+            tg.roles_file = live
+
+    def test_the_workflow_to_copy_pins_this_version_and_asks_for_no_secret(self):
+        text = (ROOT / "examples" / "daily-roles.yml").read_text(encoding="utf-8")
+        self.assertIn('trainergigsapi@v%s"' % tg.__version__, text)
+        self.assertNotIn("secrets.", text)
+        self.assertNotIn("\t", text)
+        self.assertRegex(text, r"(?m)^permissions:\n  contents: write$")
+        for name in ("COUNTRY", "FIELD", "MIN_PAY"):
+            self.assertRegex(text, r'(?m)^  %s: "' % name)
+
+    def test_the_workflow_step_writes_both_files_with_a_field_of_two_words(self):
+        import os
+        import shutil
+        import subprocess
+        import tempfile
+        if not shutil.which("bash"):
+            self.skipTest("no bash here")
+        text = (ROOT / "examples" / "daily-roles.yml").read_text(encoding="utf-8")
+        step = re.search(r"- name: Write roles\.md and roles\.csv\n        run: \|\n(.*?)\n\n", text, re.S).group(1)
+        script = "\n".join(line[10:] for line in step.splitlines())
+        found = tg.roles(field="Language & Audio", min_pay=20, data=sample("ai-training-jobs-roles.json"))
+        self.assertTrue(found)
+        with tempfile.TemporaryDirectory() as tmp:
+            # the command, reading the saved roles in place of the live file
+            runner = pathlib.Path(tmp) / "bin" / "run.py"
+            runner.parent.mkdir()
+            runner.write_text(
+                "import json, sys\n"
+                "sys.path.insert(0, %r)\n"
+                "import trainergigs as tg\n"
+                "sys.exit(tg.main(sys.argv[1:], fetch=lambda: json.load(open(%r, encoding='utf-8'))))\n"
+                % (str(ROOT / "clients" / "python"), str(SAMPLES / "ai-training-jobs-roles.json")), encoding="utf-8")
+            stand_in = runner.with_name("trainergigs")
+            stand_in.write_text('#!/bin/sh\nexec "%s" "%s" "$@"\n' % (sys.executable, runner), encoding="utf-8")
+            stand_in.chmod(0o755)
+            env = dict(os.environ, PATH=str(stand_in.parent) + os.pathsep + os.environ["PATH"], COUNTRY="", FIELD="Language & Audio", MIN_PAY="20")
+            done = subprocess.run(["bash", "-c", script], cwd=tmp, env=env, capture_output=True, text=True)
+            self.assertEqual((done.returncode, done.stderr), (0, ""))
+            table = (pathlib.Path(tmp) / "roles.md").read_text(encoding="utf-8")
+            sheet = (pathlib.Path(tmp) / "roles.csv").read_text(encoding="utf-8")
+        self.assertEqual(table.count("](https://trainergigs.com/job-"), len(found))
+        self.assertEqual(len(sheet.splitlines()), len(found) + 1)
+        self.assertIn("Data: [TrainerGigs](https://trainergigs.com/?src=api)", table)
+
+
 class LiveCheck(unittest.TestCase):
     """tools/check_live.py on the saved files: the daily, weekly and CSV samples are whole, the roles sample is a cut."""
 

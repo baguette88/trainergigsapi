@@ -14,7 +14,7 @@ Looking for the jobs themselves? Search every open role by field, country and li
 On Nov 12, 2026 the daily file stated **2,979 open roles on 33 platforms**, and 443 paid research studies, which it counts apart. The median listed pay was $40 an hour, across 2,087 roles that state hourly pay. The middle half list $35.50 to $75.
 <!-- counts:end -->
 
-**On this page:** [Quick start](#quick-start) · [Install](#install) · [The files](#the-files) · [A role](#a-role) · [Filters and commands](#filters-and-commands) · [Recipes](#recipes) · [How the files are served](#how-the-files-are-served) · [Field reference](#field-reference) · [How the numbers are counted](#how-the-numbers-are-counted) · [The dated archive](#the-dated-archive) · [Versions](#versions) · [Terms](#terms)
+**On this page:** [Quick start](#quick-start) · [Install](#install) · [What you can build](#what-you-can-build) · [The files](#the-files) · [A role](#a-role) · [Filters and commands](#filters-and-commands) · [Recipes](#recipes) · [How the files are served](#how-the-files-are-served) · [Field reference](#field-reference) · [How the numbers are counted](#how-the-numbers-are-counted) · [The dated archive](#the-dated-archive) · [Versions](#versions) · [Terms](#terms)
 
 ## Quick start
 
@@ -84,10 +84,82 @@ A browser page, with nothing to install:
 
 ```html
 <script type="module">
-import { roles } from "https://cdn.jsdelivr.net/gh/baguette88/trainergigsapi@v1.3.1/clients/js/trainergigs.mjs"
+import { roles } from "https://cdn.jsdelivr.net/gh/baguette88/trainergigsapi@v1.4.0/clients/js/trainergigs.mjs"
 console.log(await roles({ country: "NG" }))
 </script>
 ```
+
+## What you can build
+
+Three short things, each run against the live file on Nov 12, 2026. The lines under each are what it printed that day. Your numbers will be those of your day. The Python ones need the `pip install` above.
+
+**The roles that name your country.** Kenya here, best paid first:
+
+```sh
+trainergigs roles --country KE --limit 3
+```
+
+```
+Counted on 2026-11-12: 414 found, 3 shown
+- $140 to $400/hr | Civil Rights Attorney | micro1 | https://trainergigs.com/job-micro1-2116b175-8be3-49bd-8636-dd3ecef38d70?src=api
+- $140 to $400/hr | Consumer Product Safety Attorney | micro1 | https://trainergigs.com/job-micro1-5888d8c4-69df-47b6-8d73-fac94ab909c0?src=api
+- $140 to $400/hr | Corporate Attorney (BigLaw Firms) | micro1 | https://trainergigs.com/job-micro1-2f7c4611-a5b1-4e6a-be39-d11c167573a0?src=api
+Data: TrainerGigs, https://trainergigs.com
+```
+
+**The fields with the highest listed pay today.** The median listed hourly pay of each field, counted as the site counts it:
+
+```python
+import trainergigs as tg
+
+data = tg.roles_file()
+rows = []
+for field, count in tg.tally(tg.roles(data=data), "field"):
+    stats = tg.pay_stats(tg.roles(field=field, data=data))
+    if stats["median"] is not None:
+        rows.append((stats["median"], field, stats["roles"]))
+print("Counted on", data["counted"])
+for median, field, stated in sorted(rows, reverse=True)[:5]:
+    print("$%.2f an hour in %s, across %d roles that state hourly pay" % (median, field, stated))
+```
+
+```
+Counted on 2026-11-12
+$117.50 an hour in Law, across 67 roles that state hourly pay
+$84.00 an hour in Applied Engineering, across 63 roles that state hourly pay
+$75.00 an hour in Finance, across 102 roles that state hourly pay
+$70.00 an hour in Data Analysis, across 21 roles that state hourly pay
+$62.50 an hour in Software Engineering, across 277 roles that state hourly pay
+```
+
+A field with fewer than 8 roles that state hourly pay has no median and is left out. These are medians of what listings state, not of what anyone was paid.
+
+**The new roles since yesterday, as a Markdown table.** For a README, an issue or a newsletter:
+
+```python
+import datetime
+import trainergigs as tg
+
+yesterday = (datetime.datetime.now(datetime.timezone.utc).date() - datetime.timedelta(days=1)).isoformat()
+data = tg.roles_file()
+new = tg.by_pay(tg.roles(since=yesterday, data=data))
+print(tg.roles_markdown(new, counted=data["counted"]))
+```
+
+On Nov 12, 2026 it printed 74 roles their platforms dated Nov 11 or Nov 12. The first two lines and the last:
+
+```
+| Pay | Role | Platform | Field | Posted |
+|---|---|---|---|---|
+| \$130 to \$140/hr | [Certified Financial Planner (CFP® / CFA)](https://trainergigs.com/job-mercor-list-aaabocs4xiyqlblbntrkf6mm?src=api) | Mercor | Finance | 2026-11-11 |
+| \$100 to \$150/hr | [Senior AI Consultant \| Braintrust AI Experts Network (Remote)](https://trainergigs.com/job-braintrust-18128?src=api) | Braintrust | Business & Operations | 2026-11-11 |
+
+Counted on 2026-11-12. Data: [TrainerGigs](https://trainergigs.com/?src=api)
+```
+
+A role whose platform gives no date is not in a search by day. The marks in a title are kept as plain text, so a title cannot break the table.
+
+Want the table to write itself each day? See [a daily file in your own repository](#a-daily-file-in-your-own-repository).
 
 ## The files
 
@@ -178,11 +250,21 @@ The command line prints the names of the day, with the count under each. Every f
 | `trainergigs.py countries` | Each country code and how many listings name it |
 | `trainergigs.py pay` | The median listed hourly pay and its middle half, counted as the site counts them |
 
-So `python3 clients/python/trainergigs.py pay --country KE --field Law` gives the median listed hourly pay of the law roles whose listings name Kenya, or says that fewer than 8 of them state hourly pay. Add `--json` to any command to get data in place of lines. Add `--csv` to `roles`, `fields`, `platforms` or `countries` to get a table for a spreadsheet.
+So `python3 clients/python/trainergigs.py pay --country KE --field Law` gives the median listed hourly pay of the law roles whose listings name Kenya, or says that fewer than 8 of them state hourly pay. Add `--json` to any command to get data in place of lines. Add `--csv` to `roles`, `fields`, `platforms` or `countries` to get a table for a spreadsheet, or `--md` to get a Markdown table with each role linked to its page.
 
-In code the same counts are `tally` and `pay_stats` in Python, and `tally` and `payStats` in JavaScript.
+In code the same counts are `tally` and `pay_stats` in Python, and `tally` and `payStats` in JavaScript. `roles_csv` and `roles_markdown` in Python write the two tables.
 
 ## Recipes
+
+### A daily file in your own repository
+
+`examples/daily-roles.yml` is a GitHub Actions workflow for a repository of yours. Each day it writes `roles.md`, a table of the open roles for your country or field that GitHub shows as a page, and `roles.csv`, the same roles for a spreadsheet. It commits them only when they changed, so the history of the two files is a record of what opened and closed.
+
+1. Copy `examples/daily-roles.yml` into the folder `.github/workflows/` of your repository.
+2. Set `COUNTRY`, `FIELD` and `MIN_PAY` near the top of the file. Leave one empty to leave that filter out.
+3. Push. To try it at once, open the Actions tab, pick "Daily AI training roles" and press "Run workflow".
+
+It needs no key and no secret. It installs this client at a fixed version, and the client names itself in its `User-Agent`, so the site answers it.
 
 ### pandas
 
@@ -370,7 +452,7 @@ The same workflow writes the day's numbers into the paragraph near the top of th
 
 ## Versions
 
-`CHANGELOG.md` lists every change. A field may be added to a file at any time. A field is never taken away without a new major version, so read the fields you know and pass over the rest.
+`CHANGELOG.md` lists every change. `CONTRIBUTING.md` says how to report a problem or send a fix. A field may be added to a file at any time. A field is never taken away without a new major version, so read the fields you know and pass over the rest.
 
 To test the clients against the saved files in `tests/samples/`, with nothing fetched:
 

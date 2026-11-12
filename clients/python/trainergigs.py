@@ -12,7 +12,7 @@ import re
 import urllib.error
 import urllib.request
 
-__version__ = "1.3.1"
+__version__ = "1.4.0"
 
 BASE = "https://trainergigs.com"
 DAILY = "/ai-training-jobs-data"
@@ -221,6 +221,32 @@ def roles_csv(found):
     return held.getvalue()
 
 
+def _md(text):
+    """Text for a cell of a Markdown table. A title comes from a listing, so its marks are kept as plain text."""
+    text = " ".join(("" if text is None else str(text)).split())
+    return re.sub(r"([\\|\[\]<>*_`$])", r"\\\1", text)
+
+
+def _md_credit(counted=None):
+    credit = "Data: [TrainerGigs](%s/?src=api)" % BASE
+    return "Counted on %s. %s" % (counted, credit) if counted else credit
+
+
+def roles_markdown(found, counted=None):
+    """The roles as a Markdown table, one row each, for a README, an issue or a wiki page.
+
+    The columns are the pay in words, the title as a link to the role's own page on trainergigs.com, the platform,
+    the field and the day the platform dated the listing. The last line gives the credit, and the day the roles
+    were counted when you pass it. With no roles the table is one line that says so."""
+    lines = ["| Pay | Role | Platform | Field | Posted |", "|---|---|---|---|---|"]
+    for r in found:
+        lines.append("| %s | [%s](%s) | %s | %s | %s |" % (
+            _md(pay_text(r)), _md(r.get("title")), r.get("url") or "", _md(r.get("platform")), _md(r.get("field")), r.get("posted") or ""))
+    if not found:
+        lines = ["No open roles matched."]
+    return "\n".join(lines + ["", _md_credit(counted)]) + "\n"
+
+
 def _unknown_name(data, key, name):
     """None when the file has a field or platform of that name. Otherwise the lines that say so and what it does have."""
     names = [n for n, _ in tally(data.get("roles", []), key)]
@@ -254,7 +280,7 @@ def _totals_lines(data):
 
 def main(argv=None, out=print, fetch=roles_file):
     """python3 trainergigs.py [roles|totals|fields|platforms|countries|pay] [--country NG] [--field Law]
-    [--platform micro1] [--min-pay 40] [--since 2026-11-01] [--unnamed] [--studies] [--limit 10] [--json] [--csv]"""
+    [--platform micro1] [--min-pay 40] [--since 2026-11-01] [--unnamed] [--studies] [--limit 10] [--json] [--csv] [--md]"""
     import argparse
     import sys
     ap = argparse.ArgumentParser(
@@ -273,6 +299,7 @@ def main(argv=None, out=print, fetch=roles_file):
     ap.add_argument("--limit", type=int, default=5, help="how many roles to show: 5 unless you say, 0 for all")
     ap.add_argument("--json", action="store_true", help="print data in place of lines")
     ap.add_argument("--csv", action="store_true", help="print CSV for a spreadsheet, with roles and with the counts")
+    ap.add_argument("--md", action="store_true", help="print a Markdown table, with roles and with the counts")
     ap.add_argument("--version", action="version", version="trainergigs " + __version__)
     a = ap.parse_args(argv)
 
@@ -291,10 +318,10 @@ def main(argv=None, out=print, fetch=roles_file):
         return stop(str(err))
     if a.limit < 0:
         return stop("--limit takes 0 for every role, or a number above 0")
-    if a.csv and a.json:
-        return stop("--csv and --json do not go together")
-    if a.csv and a.what in ("totals", "pay"):
-        return stop("--csv goes with roles, fields, platforms and countries")
+    if a.csv + a.json + a.md > 1:
+        return stop("--csv, --json and --md do not go together")
+    if (a.csv or a.md) and a.what in ("totals", "pay"):
+        return stop("--csv and --md go with roles, fields, platforms and countries")
     try:
         data = fetch()
     except (urllib.error.URLError, OSError, ValueError) as err:
@@ -318,6 +345,10 @@ def main(argv=None, out=print, fetch=roles_file):
             return 0
         if a.csv:
             out("\n".join(["name,roles"] + ["%s,%d" % ('"%s"' % _cell(name).replace('"', '""'), n) for name, n in rows]))
+            return 0
+        if a.md:
+            out("\n".join(["| %s | Roles |" % a.what[:-1].capitalize().replace("Countrie", "Country"), "|---|---|"]
+                          + ["| %s | %d |" % (_md(name), n) for name, n in rows] + ["", _md_credit(counted)]))
             return 0
         out("Counted on %s: %d found under %d %s" % (counted, len(found), len(rows), a.what))
         for name, n in rows:
@@ -343,6 +374,9 @@ def main(argv=None, out=print, fetch=roles_file):
         return 0
     if a.csv:
         out(roles_csv(shown).rstrip("\n"))
+        return 0
+    if a.md:
+        out(roles_markdown(shown, counted=counted).rstrip("\n"))
         return 0
     out("Counted on %s: %d found, %d shown" % (counted, len(found), len(shown)))
     for role in shown:

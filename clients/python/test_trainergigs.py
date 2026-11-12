@@ -224,6 +224,31 @@ class FilterTests(unittest.TestCase):
         self.assertEqual(self.run_line("totals", "--csv")[0], 2)
         self.assertEqual(self.run_line("roles", "--csv", "--json")[0], 2)
 
+    def test_roles_and_counts_as_a_markdown_table(self):
+        code, said, err, _ = self.run_line("roles", "--limit", "0", "--md")
+        self.assertEqual((code, err), (0, ""))
+        lines = said[0].splitlines()
+        found = tg.by_pay(tg.roles(data=self.data))
+        self.assertEqual(lines[:2], ["| Pay | Role | Platform | Field | Posted |", "|---|---|---|---|---|"])
+        self.assertEqual(len(lines), len(found) + 4)
+        for row, role in zip(lines[2:], found):
+            self.assertIn("](%s) |" % role["url"], row)
+            self.assertEqual(row.replace("\\|", "").count("|"), 6, row)
+        self.assertEqual(lines[-2:], ["", "Counted on %s. Data: [TrainerGigs](https://trainergigs.com/?src=api)" % self.data["counted"]])
+        code, said, _, _ = self.run_line("fields", "--md")
+        self.assertEqual(said[0].splitlines()[:2], ["| Field | Roles |", "|---|---|"])
+        self.assertEqual(said[0].count("\n| "), len(tg.tally(tg.roles(data=self.data), "field")))
+        self.assertEqual(self.run_line("countries", "--md")[1][0].splitlines()[0], "| Country | Roles |")
+        self.assertEqual(self.run_line("totals", "--md")[0], 2)
+        self.assertEqual(self.run_line("roles", "--md", "--csv")[0], 2)
+
+    def test_a_markdown_table_keeps_a_title_as_plain_text_and_says_when_it_is_empty(self):
+        role = dict(self.data["roles"][0], title="Law | Reviewer [US] <b>*now*</b>\nline two", pay_min=40, pay_max=60, pay_unit="hr", paid_per_task=False)
+        row = tg.roles_markdown([role]).splitlines()[2]
+        self.assertIn("[Law \\| Reviewer \\[US\\] \\<b\\>\\*now\\*\\</b\\> line two](%s)" % role["url"], row)
+        self.assertTrue(row.startswith("| \\$40 to \\$60/hr | "), row)  # two dollar signs on one line are not read as a formula
+        self.assertEqual(tg.roles_markdown([]), "No open roles matched.\n\nData: [TrainerGigs](https://trainergigs.com/?src=api)\n")
+
     def test_a_title_that_begins_like_a_formula_stays_text_in_a_spreadsheet(self):
         role = dict(self.data["roles"][0], title='=HYPERLINK("https://example.com")', platform="+1 Labs")
         row = next(csv.DictReader(tg.roles_csv([role]).splitlines()))
