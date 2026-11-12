@@ -205,7 +205,7 @@ curl -s https://trainergigs.com/ai-training-jobs-data.json | jq .totals
 curl -s https://trainergigs.com/ai-training-jobs-weekly.csv -o weekly.csv
 ```
 
-`examples/example.py`, `examples/example.mjs` and `examples/example.sh` print the day's totals in Python, in Node and with curl.
+`examples/example.py` and `examples/example.mjs` print the day's totals in Python and in Node. `examples/example.sh` saves the daily and weekly files with curl.
 
 ## How the files are served
 
