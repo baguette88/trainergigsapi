@@ -273,7 +273,7 @@ This repository is also a GitHub Action. One step writes `roles.md`, a table of 
 2. Set `country`, `field` and `min-pay` in the file. Leave one empty to leave that filter out. Set at least one: the table of every role was about 530 KB on Nov 12, 2026, which is long for one page.
 3. Push. To try it at once, open the Actions tab, pick "Daily AI training roles" and press "Run workflow".
 
-It needs no key and no secret, and it installs nothing. The client names itself in its `User-Agent`, so the site answers it. It runs on the Linux and macOS runners.
+It needs no key and no secret, and it installs nothing. The client names itself in its `User-Agent`, so the site answers it. It needs `bash` and `python3`, which the Linux and macOS runners have. It is tested on the Linux runner with each push.
 
 | Input | What it takes | Without it |
 |---|---|---|
