@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Looking for a job
+    url: https://trainergigs.com/?src=github
+    about: This repository holds the data and the code. Search every open role by field, country and listed pay on the board.
+  - name: A wrong number, a role in the wrong field or a missing platform
+    url: https://trainergigs.com/data-method
+    about: Read how the numbers are counted first. Then open an issue here with the role's id and the day in "counted".

@@ -1,5 +1,10 @@
 # Changes
 
+## Since 1.4.0
+
+- A new issue here first offers the board to a reader who is looking for a job, and the page on the method to one who doubts a number.
+- The README says to set at least one filter in the daily workflow, since the table of every role is long for one page.
+
 ## 1.4.0, Nov 12, 2026
 
 - New: `--md` on `roles`, `fields`, `platforms` and `countries`, and `roles_markdown` in the Python client. It writes a Markdown table with each role linked to its own page, the day the roles were counted and the credit line. The marks in a title are kept as plain text, so a title cannot break the table.

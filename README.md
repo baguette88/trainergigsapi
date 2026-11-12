@@ -146,7 +146,7 @@ new = tg.by_pay(tg.roles(since=yesterday, data=data))
 print(tg.roles_markdown(new, counted=data["counted"]))
 ```
 
-On Nov 12, 2026 it printed 73 roles their platforms dated Nov 11 or Nov 12. The first two lines and the last:
+On Nov 12, 2026 it printed 73 roles their platforms dated Nov 11 or Nov 12. The head of the table, its first two roles and its last line:
 
 ```
 | Pay | Role | Platform | Field | Posted |
@@ -261,7 +261,7 @@ In code the same counts are `tally` and `pay_stats` in Python, and `tally` and `
 `examples/daily-roles.yml` is a GitHub Actions workflow for a repository of yours. Each day it writes `roles.md`, a table of the open roles for your country or field that GitHub shows as a page, and `roles.csv`, the same roles for a spreadsheet. It commits them only when they changed, so the history of the two files is a record of what opened and closed.
 
 1. Copy `examples/daily-roles.yml` into the folder `.github/workflows/` of your repository.
-2. Set `COUNTRY`, `FIELD` and `MIN_PAY` near the top of the file. Leave one empty to leave that filter out.
+2. Set `COUNTRY`, `FIELD` and `MIN_PAY` near the top of the file. Leave one empty to leave that filter out. Set at least one: the table of every role was about 530 KB on Nov 12, 2026, which is long for one page.
 3. Push. To try it at once, open the Actions tab, pick "Daily AI training roles" and press "Run workflow".
 
 It needs no key and no secret. It installs this client at a fixed version, and the client names itself in its `User-Agent`, so the site answers it.
