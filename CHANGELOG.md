@@ -1,5 +1,13 @@
 # Changes
 
+## 1.3.0, Nov 12, 2026
+
+- A filter that could never match is an error and no longer an empty answer. A country that is not a two-letter code ("Nigeria" for "NG") and a day that is not written `2026-11-01` raise `ValueError` in the Python client and throw a `RangeError` in the JavaScript client. In 1.2.0 both returned no roles.
+- The command line names what went wrong and ends with code 2. A field or a platform the file does not have gets the close names and the way to see them all. `--limit` below 0 is refused. A real name with no role that day still answers "0 found".
+- New: `--csv` on `roles`, `fields`, `platforms` and `countries`, and `roles_csv` in the Python client, for a table to open in a spreadsheet. A title that begins like a formula is kept as text.
+
+Nothing was taken away, and the files on trainergigs.com did not change. One thing to know: code that passed a country name or a date in another form got an empty list in 1.2.0 and gets an error now.
+
 ## 1.2.0, Nov 12, 2026
 
 - Pay in words keeps the listing's own words. A top with no bottom reads "Up to $90/hr", where 1.1.0 wrote "$90/hr". A bottom with no top reads "From $25/hr". Cents are written in full: "$47.50/hr".

@@ -157,8 +157,79 @@ class FilterTests(unittest.TestCase):
         self.assertEqual(got["roles"], tg.pay_stats(tg.roles(data=self.data))["roles"])
         self.assertEqual(got["counted"], self.data["counted"])
         said.clear()
-        tg.main(["pay", "--platform", "nobody"], out=said.append, fetch=lambda: self.data)
+        tg.main(["pay", "--min-pay", "100000"], out=said.append, fetch=lambda: self.data)
         self.assertIn("No median", said[1])
+
+    def run_line(self, *argv):
+        """(exit code, lines printed, text on stderr) of one command on the sample."""
+        import contextlib
+        import io
+        said, err, fetched = [], io.StringIO(), []
+
+        def fetch():
+            fetched.append(1)
+            return self.data
+        with contextlib.redirect_stderr(err):
+            code = tg.main(list(argv), out=said.append, fetch=fetch)
+        return code, said, err.getvalue(), len(fetched)
+
+    def test_a_filter_that_could_never_match_is_said_and_not_answered_with_nothing(self):
+        code, said, err, fetched = self.run_line("roles", "--country", "Nigeria")
+        self.assertEqual((code, said, fetched), (2, [], 0))  # said before anything is fetched
+        self.assertIn('two-letter code such as "NG"', err)
+        self.assertIn('not "Nigeria"', err)
+        code, said, err, fetched = self.run_line("roles", "--since", "yesterday")
+        self.assertEqual((code, said, fetched), (2, [], 0))
+        self.assertIn('"2026-11-01"', err)
+        self.assertEqual(self.run_line("roles", "--limit", "-1")[0], 2)
+        with self.assertRaises(ValueError):
+            tg.roles(country="Nigeria", data=self.data)
+        with self.assertRaises(ValueError):
+            tg.roles(since="11/01/2026", data=self.data)
+        self.assertEqual(tg.roles(country=" ng ", data=self.data), tg.roles(country="NG", data=self.data))
+
+    def test_a_field_or_platform_the_file_does_not_have_gets_the_names_it_does_have(self):
+        fields = sorted({r["field"] for r in self.data["roles"] if r["kind"] == "role"})
+        one = fields[0]
+        code, said, err, _ = self.run_line("roles", "--field", one[:-1] + "x")
+        self.assertEqual((code, said), (2, []))
+        self.assertIn("No field is named", err)
+        self.assertIn("Close to it: " + one, err)
+        for name in fields:
+            self.assertIn(name, err)
+        code, said, err, _ = self.run_line("pay", "--platform", "nobody at all")
+        self.assertEqual((code, said), (2, []))
+        self.assertIn('Run "trainergigs platforms"', err)
+        self.assertEqual(self.run_line("roles", "--field", one.upper())[0], 0)  # case does not matter
+        code, said, err, _ = self.run_line("roles", "--field", one, "--min-pay", "100000")
+        self.assertEqual((code, err), (0, ""))  # a real name with no role today is an honest nothing
+        self.assertIn("0 found", said[0])
+        code, said, err, _ = self.run_line("roles", "--studies", "--field", one, "--platform", self.data["roles"][0]["platform"])
+        self.assertEqual((code, err), (0, ""))  # a name is known when any row has it, role or study
+
+    def test_roles_and_counts_as_csv(self):
+        code, said, err, _ = self.run_line("roles", "--limit", "0", "--csv")
+        self.assertEqual((code, err), (0, ""))
+        rows = list(csv.DictReader(said[0].splitlines()))
+        found = tg.by_pay(tg.roles(data=self.data))
+        self.assertEqual(tuple(rows[0]), tg.CSV_COLUMNS)
+        self.assertEqual([r["url"] for r in rows], [r["url"] for r in found])
+        self.assertEqual([r["pay"] for r in rows], [tg.pay_text(r) for r in found])
+        self.assertEqual([r["countries"].split() for r in rows], [r["countries"] for r in found])
+        self.assertNotIn("None", said[0])
+        code, said, _, _ = self.run_line("fields", "--csv")
+        counts = list(csv.reader(said[0].splitlines()))
+        self.assertEqual(counts[0], ["name", "roles"])
+        self.assertEqual([(n, int(c)) for n, c in counts[1:]], tg.tally(tg.roles(data=self.data), "field"))
+        self.assertEqual(self.run_line("totals", "--csv")[0], 2)
+        self.assertEqual(self.run_line("roles", "--csv", "--json")[0], 2)
+
+    def test_a_title_that_begins_like_a_formula_stays_text_in_a_spreadsheet(self):
+        role = dict(self.data["roles"][0], title='=HYPERLINK("https://example.com")', platform="+1 Labs")
+        row = next(csv.DictReader(tg.roles_csv([role]).splitlines()))
+        self.assertEqual(row["title"], "'" + role["title"])
+        self.assertEqual(row["platform"], "'+1 Labs")
+        self.assertEqual(row["url"], role["url"])
 
     def test_a_failed_read_ends_with_one_line_and_no_traceback(self):
         import contextlib

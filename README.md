@@ -82,7 +82,7 @@ A browser page, with nothing to install:
 
 ```html
 <script type="module">
-import { roles } from "https://cdn.jsdelivr.net/gh/baguette88/trainergigsapi@v1.2.0/clients/js/trainergigs.mjs"
+import { roles } from "https://cdn.jsdelivr.net/gh/baguette88/trainergigsapi@v1.3.0/clients/js/trainergigs.mjs"
 console.log(await roles({ country: "NG" }))
 </script>
 ```
@@ -148,6 +148,17 @@ Both clients take the same filters. Every one may be left out.
 
 A role whose listing names no country is left out of a country search unless you ask for it. Case does not matter in a field or a platform name.
 
+A filter that could never match is an error and not an empty answer. A country must be a two-letter code and a day must be written `2026-11-01`: anything else raises `ValueError` in Python and throws a `RangeError` in JavaScript. The command line also checks the names:
+
+```
+$ trainergigs roles --field Legal
+No field is named "Legal" in the file of 2026-11-12.
+Close to it: Law
+The fields: AI & Machine Learning, Applied Engineering, Arts & Design, ...
+```
+
+A real name with no role that day still answers "0 found".
+
 The field names in the file on Nov 12, 2026:
 
 <!-- fields:start -->
@@ -165,7 +176,7 @@ The command line prints the names of the day, with the count under each. Every f
 | `trainergigs.py countries` | Each country code and how many listings name it |
 | `trainergigs.py pay` | The median listed hourly pay and its middle half, counted as the site counts them |
 
-So `python3 clients/python/trainergigs.py pay --country KE --field Law` gives the median listed hourly pay of the law roles whose listings name Kenya, or says that fewer than 8 of them state hourly pay. Add `--json` to any command to get data in place of lines.
+So `python3 clients/python/trainergigs.py pay --country KE --field Law` gives the median listed hourly pay of the law roles whose listings name Kenya, or says that fewer than 8 of them state hourly pay. Add `--json` to any command to get data in place of lines. Add `--csv` to `roles`, `fields`, `platforms` or `countries` to get a table for a spreadsheet.
 
 In code the same counts are `tally` and `pay_stats` in Python, and `tally` and `payStats` in JavaScript.
 
@@ -187,6 +198,14 @@ Keep the `storage_options` line. pandas reads through Python's urllib, and the s
 ```
 =IMPORTDATA("https://trainergigs.com/ai-training-jobs-data.csv")
 ```
+
+The roles themselves, as a table to open in Sheets or Excel:
+
+```sh
+trainergigs roles --country NG --limit 0 --csv > roles.csv
+```
+
+Each row has the pay in the listing's words, the title, the platform, the field, the countries and the role's own page on trainergigs.com in `url`. A title that begins like a formula is kept as text.
 
 ### A web page
 

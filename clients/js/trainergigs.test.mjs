@@ -45,6 +45,12 @@ test("since keeps the roles dated on or after a day and drops the undated", asyn
   assert.ok(found.every(r => r.posted >= day))
 })
 
+test("a country or a day that could never match throws, and is not answered with nothing", async () => {
+  await assert.rejects(roles({ data, country: "Nigeria" }), /two-letter code such as "NG".*not "Nigeria"/)
+  await assert.rejects(roles({ data, since: "11/01/2026" }), RangeError)
+  assert.deepEqual(await roles({ data, country: " ng " }), await roles({ data, country: "NG" }))
+})
+
 test("pay keeps the listing's own words", () => {
   assert.equal(payText({ pay_min: 40, pay_max: 60, pay_unit: "hr" }), "$40 to $60/hr")
   assert.equal(payText({ pay_min: 47.5, pay_max: 47.5, pay_unit: "hr", paid_per_task: true }), "$47.50/hr, paid per task")

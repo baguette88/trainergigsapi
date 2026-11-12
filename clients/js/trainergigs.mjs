@@ -1,6 +1,6 @@
 // A small client for the TrainerGigs open data. No dependency. Node 18 or newer, and a browser page on any site.
 // Data: TrainerGigs, https://trainergigs.com
-export const VERSION = "1.2.0"
+export const VERSION = "1.3.0"
 export const BASE = "https://trainergigs.com"
 export const CREDIT = "Data: TrainerGigs, https://trainergigs.com"
 
@@ -44,9 +44,17 @@ export function hourlyMidpoint(role) {
 //   since: a day such as "2026-11-01". Keeps the roles their platform dated on or after it.
 //   kind: "role" (the default), "study", or null for both.
 //   data: a roles file you already hold. Without it the live file is fetched.
+// A country that is not a two-letter code, or a day that is not written YYYY-MM-DD, throws a RangeError. Either
+// would match nothing, and an empty answer would look like a day with no such roles.
 export async function roles({ country, unnamed = false, field, platform, minPay, since, kind = "role", data } = {}) {
+  const code = country ? String(country).trim().toUpperCase() : null
+  if (code && !/^[A-Z]{2}$/.test(code)) {
+    throw new RangeError('country takes a two-letter code such as "NG" for Nigeria, not "' + country + '"')
+  }
+  if (since && !/^\d{4}-\d{2}-\d{2}$/.test(String(since))) {
+    throw new RangeError('since takes a day written as "2026-11-01", not "' + since + '"')
+  }
   const file = data ?? await rolesFile()
-  const code = country ? country.toUpperCase() : null
   return file.roles.filter(role => {
     if (kind && role.kind !== kind) return false
     if (field && field.toLowerCase() !== role.field.toLowerCase()) return false

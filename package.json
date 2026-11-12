@@ -1,6 +1,6 @@
 {
   "name": "trainergigs",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Free, read-only data on remote AI training jobs from TrainerGigs. No key and no dependency.",
   "type": "module",
   "main": "./clients/js/trainergigs.mjs",

@@ -8,10 +8,11 @@ import csv
 import gzip
 import io
 import json
+import re
 import urllib.error
 import urllib.request
 
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 
 BASE = "https://trainergigs.com"
 DAILY = "/ai-training-jobs-data"
@@ -20,6 +21,8 @@ ROLES = "/ai-training-jobs-roles.json"
 USER_AGENT = "trainergigs-api-client/" + __version__
 CREDIT = "Data: TrainerGigs, https://trainergigs.com"
 MIN_ROLES = 8  # the site gives a median only when this many roles state hourly pay
+CSV_COLUMNS = ("pay", "title", "platform", "field", "kind", "pay_min", "pay_max", "pay_unit", "paid_per_task",
+               "countries", "posted", "url")
 
 
 def _get(path, base=BASE, timeout=30):
@@ -73,6 +76,24 @@ def hourly_midpoint(role):
     return (high + low) / 2
 
 
+def _country_code(country):
+    if not country:
+        return None
+    code = str(country).strip().upper()
+    if not re.fullmatch(r"[A-Z]{2}", code):
+        raise ValueError('country takes a two-letter code such as "NG" for Nigeria, not "%s"' % country)
+    return code
+
+
+def _day(since):
+    if not since:
+        return None
+    day = str(since).strip()
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", day):
+        raise ValueError('since takes a day written as "2026-11-01", not "%s"' % since)
+    return day
+
+
 def roles(field=None, platform=None, min_pay=None, kind="role", data=None, country=None, unnamed=False, since=None):
     """Open roles from the roles file, filtered. Each role has an "id" and a "url", its own page on trainergigs.com.
 
@@ -83,9 +104,13 @@ def roles(field=None, platform=None, min_pay=None, kind="role", data=None, count
     country: a two-letter country code such as "NG". Keeps the roles whose listing names that country.
     unnamed: with country, also keep the roles whose listing names no country at all.
     since: a day such as "2026-11-01". Keeps the roles their platform dated on or after it.
-    data: a roles file dict you already hold. Without it the live file is fetched."""
+    data: a roles file dict you already hold. Without it the live file is fetched.
+
+    A country that is not a two-letter code, or a day that is not written YYYY-MM-DD, raises ValueError. Either
+    would match nothing, and an empty answer would look like a day with no such roles."""
+    code = _country_code(country)
+    since = _day(since)
     found = (data if data is not None else roles_file())["roles"]
-    code = country.upper() if country else None
     out = []
     for role in found:
         if kind and role["kind"] != kind:
@@ -174,6 +199,47 @@ def line(role):
     return "%s | %s | %s | %s" % (pay_text(role), role["title"], role["platform"], role["url"])
 
 
+def _cell(text):
+    """Text for a spreadsheet cell. A title comes from a listing, so one that begins like a formula is kept as text."""
+    text = "" if text is None else str(text)
+    return "'" + text if text[:1] in ("=", "+", "-", "@") else text
+
+
+def roles_csv(found):
+    """The roles as CSV text for a spreadsheet, one row each, with a header row. The columns are CSV_COLUMNS.
+
+    "pay" is the pay in words, as pay_text writes it. "countries" holds the codes with a space between them.
+    "url" is the role's own page on trainergigs.com."""
+    held = io.StringIO()
+    rows = csv.writer(held, lineterminator="\n")
+    rows.writerow(CSV_COLUMNS)
+    for r in found:
+        rows.writerow([pay_text(r), _cell(r.get("title")), _cell(r.get("platform")), _cell(r.get("field")), r.get("kind") or "",
+                       "" if r.get("pay_min") is None else r["pay_min"], "" if r.get("pay_max") is None else r["pay_max"],
+                       r.get("pay_unit") or "", "true" if r.get("paid_per_task") else "false",
+                       " ".join(r.get("countries") or []), r.get("posted") or "", r.get("url") or ""])
+    return held.getvalue()
+
+
+def _unknown_name(data, key, name):
+    """None when the file has a field or platform of that name. Otherwise the lines that say so and what it does have."""
+    names = [n for n, _ in tally(data.get("roles", []), key)]
+    if not name or name.lower() in (n.lower() for n in names):
+        return None
+    import difflib
+    lower = {n.lower(): n for n in names}
+    near = [lower[n] for n in difflib.get_close_matches(name.lower(), list(lower), n=3, cutoff=0.5)]
+    near += [n for n in names if name.lower() in n.lower() and n not in near]
+    said = ['No %s is named "%s" in the file of %s.' % (key, name, data.get("counted"))]
+    if near:
+        said.append("Close to it: " + ", ".join(near[:5]))
+    if key == "field":
+        said.append("The fields: " + ", ".join(sorted(names)))
+    else:
+        said.append('Run "trainergigs %ss" to see every name.' % key)
+    return said
+
+
 def _totals_lines(data):
     t = data.get("totals") or {}
     said = ["Counted on %s" % data.get("counted", data.get("date")),
@@ -188,7 +254,7 @@ def _totals_lines(data):
 
 def main(argv=None, out=print, fetch=roles_file):
     """python3 trainergigs.py [roles|totals|fields|platforms|countries|pay] [--country NG] [--field Law]
-    [--platform micro1] [--min-pay 40] [--since 2026-11-01] [--unnamed] [--studies] [--limit 10] [--json]"""
+    [--platform micro1] [--min-pay 40] [--since 2026-11-01] [--unnamed] [--studies] [--limit 10] [--json] [--csv]"""
     import argparse
     import sys
     ap = argparse.ArgumentParser(
@@ -206,8 +272,29 @@ def main(argv=None, out=print, fetch=roles_file):
     ap.add_argument("--studies", action="store_true", help="paid research studies in place of roles")
     ap.add_argument("--limit", type=int, default=5, help="how many roles to show: 5 unless you say, 0 for all")
     ap.add_argument("--json", action="store_true", help="print data in place of lines")
+    ap.add_argument("--csv", action="store_true", help="print CSV for a spreadsheet, with roles and with the counts")
     ap.add_argument("--version", action="version", version="trainergigs " + __version__)
     a = ap.parse_args(argv)
+
+    def stop(*said):
+        print("\n".join(said), file=sys.stderr)
+        return 2
+
+    # A filter that could never match is said before anything is fetched. An empty answer would read as "no such roles".
+    try:
+        _country_code(a.country)
+    except ValueError as err:
+        return stop(str(err), 'Run "trainergigs countries" to see the codes in the file.')
+    try:
+        _day(a.since)
+    except ValueError as err:
+        return stop(str(err))
+    if a.limit < 0:
+        return stop("--limit takes 0 for every role, or a number above 0")
+    if a.csv and a.json:
+        return stop("--csv and --json do not go together")
+    if a.csv and a.what in ("totals", "pay"):
+        return stop("--csv goes with roles, fields, platforms and countries")
     try:
         data = fetch()
     except (urllib.error.URLError, OSError, ValueError) as err:
@@ -217,12 +304,20 @@ def main(argv=None, out=print, fetch=roles_file):
     if a.what == "totals":
         out(json.dumps(data.get("totals"), indent=1) if a.json else "\n".join(_totals_lines(data)))
         return 0
-    found = roles(field=a.field, platform=a.platform, min_pay=a.min_pay, kind="study" if a.studies else "role", data=data,
+    kind = "study" if a.studies else "role"
+    for key, name in (("field", a.field), ("platform", a.platform)):
+        unknown = _unknown_name(data, key, name)
+        if unknown:
+            return stop(*unknown)
+    found = roles(field=a.field, platform=a.platform, min_pay=a.min_pay, kind=kind, data=data,
                   country=a.country, unnamed=a.unnamed, since=a.since)
     if a.what in ("fields", "platforms", "countries"):
         rows = tally(found, {"fields": "field", "platforms": "platform", "countries": "countries"}[a.what])
         if a.json:
             out(json.dumps(dict(rows), indent=1))
+            return 0
+        if a.csv:
+            out("\n".join(["name,roles"] + ["%s,%d" % ('"%s"' % _cell(name).replace('"', '""'), n) for name, n in rows]))
             return 0
         out("Counted on %s: %d found under %d %s" % (counted, len(found), len(rows), a.what))
         for name, n in rows:
@@ -245,6 +340,9 @@ def main(argv=None, out=print, fetch=roles_file):
     shown = found[:a.limit] if a.limit else found
     if a.json:
         out(json.dumps(shown, indent=1))
+        return 0
+    if a.csv:
+        out(roles_csv(shown).rstrip("\n"))
         return 0
     out("Counted on %s: %d found, %d shown" % (counted, len(found), len(shown)))
     for role in shown:
