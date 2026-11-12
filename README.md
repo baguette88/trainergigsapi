@@ -146,7 +146,7 @@ new = tg.by_pay(tg.roles(since=yesterday, data=data))
 print(tg.roles_markdown(new, counted=data["counted"]))
 ```
 
-On Nov 12, 2026 it printed 74 roles their platforms dated Nov 11 or Nov 12. The first two lines and the last:
+On Nov 12, 2026 it printed 73 roles their platforms dated Nov 11 or Nov 12. The first two lines and the last:
 
 ```
 | Pay | Role | Platform | Field | Posted |
