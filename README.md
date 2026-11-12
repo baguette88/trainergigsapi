@@ -267,6 +267,8 @@ This repository is also a GitHub Action. One step writes `roles.md`, a table of 
     min-pay: "20"
 ```
 
+To see what it writes, open [examples/roles-100.md](examples/roles-100.md): the open roles whose listed hourly pay, a range at its midpoint, is $100 or more, best paid first. This step writes it again each day.
+
 `examples/daily-roles.yml` is the whole workflow around that step. It runs each day and commits the two files only when they changed, so their history is a record of what opened and closed.
 
 1. Copy `examples/daily-roles.yml` into the folder `.github/workflows/` of your repository.
@@ -468,7 +470,7 @@ Pay is as each listing states it. Nothing here promises pay, hiring or speed.
 
 A daily workflow in `.github/workflows/mirror.yml` saves the two daily files and the two weekly files into `data/<YYYY-MM-DD>/`. It saves a file only when it changed since the last saved copy. Each folder is the day the file was fetched, in UTC. The first folder is `data/2026-11-12`.
 
-The same workflow writes the day's numbers into the paragraph near the top of this page, and then runs `tools/check_live.py`, which fails when a documented field is gone from a live file or the files stop adding up.
+The same workflow writes the day's numbers into the paragraph near the top of this page and the table in `examples/roles-100.md`, and then runs `tools/check_live.py`, which fails when a documented field is gone from a live file or the files stop adding up.
 
 ## Versions
 

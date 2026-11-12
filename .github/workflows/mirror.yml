@@ -43,17 +43,24 @@ jobs:
           # the day's numbers in the README, from the file just fetched
           python3 tools/readme_counts.py "$tmp/ai-training-jobs-data.json"
 
+      - name: The roles that list 100 dollars an hour or more, as the action writes them
+        uses: ./
+        with:
+          min-pay: "100"
+          markdown: examples/roles-100.md
+          csv: ${{ runner.temp }}/roles-100.csv
+
       - name: Commit changes
         run: |
           set -eu
-          if [ -z "$(git status --porcelain data README.md)" ]
+          if [ -z "$(git status --porcelain data README.md examples/roles-100.md)" ]
           then
             echo "No change. Nothing to commit."
             exit 0
           fi
           git config user.name "TrainerGigs"
           git config user.email "hello@trainergigs.com"
-          git add data README.md
+          git add data README.md examples/roles-100.md
           git commit -m "Add data for $(date -u +%Y-%m-%d)"
           git push
 

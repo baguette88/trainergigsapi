@@ -1,5 +1,9 @@
 # Changes
 
+## Since 1.5.0
+
+- `examples/roles-100.md` shows what the action writes: the open roles whose listed hourly pay is $100 or more, best paid first. The daily workflow writes it again each day.
+
 ## 1.5.0, Nov 12, 2026
 
 - This repository is a GitHub Action. One step, `uses: baguette88/trainergigsapi@v1.5.0`, writes `roles.md` and `roles.csv` for a country, a field, a least pay or a day. It needs no key, no secret and no install. `action.yml` names the inputs, and the README lists them.
