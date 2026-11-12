@@ -481,7 +481,7 @@ components:
           type: string
         fields:
           type: object
-          description: What each role field holds, in one sentence each.
+          description: What each role field holds, in plain words.
           additionalProperties:
             type: string
         totals:

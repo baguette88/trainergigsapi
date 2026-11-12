@@ -227,7 +227,7 @@ Every field below was read from the live files on Nov 12, 2026. `tests/test_docs
 Top level: `source`, `counted`, `license`, `fields`, `totals`, `roles`.
 
 * `counted` is the day the roles were counted.
-* `fields` says in one sentence what each role field holds.
+* `fields` says in plain words what each role field holds.
 * `totals` holds the same numbers as `totals` in the daily file.
 * `roles` is sorted by platform, then title, then address.
 

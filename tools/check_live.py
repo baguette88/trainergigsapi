@@ -78,8 +78,9 @@ def check(daily, weekly, roles, daily_rows, weekly_rows):
         if n != roles["totals"][key]:
             bad.append("%d rows of the roles file are marked %s, its totals.%s says %d" % (n, kind, key, roles["totals"][key]))
     stats = tg.pay_stats(tg.roles(data=roles))
-    stated = {"roles": roles["totals"]["roles_with_hourly_pay"], "q1": roles["totals"]["q1_listed_hourly_usd"],
-              "median": roles["totals"]["median_listed_hourly_usd"], "q3": roles["totals"]["q3_listed_hourly_usd"]}
+    said = roles["totals"]
+    stated = {"roles": said.get("roles_with_hourly_pay", 0), "q1": said.get("q1_listed_hourly_usd"),
+              "median": said.get("median_listed_hourly_usd"), "q3": said.get("q3_listed_hourly_usd")}
     near = lambda a, b: a == b or (a is not None and b is not None and abs(a - b) < 0.01)
     if stats["roles"] != stated["roles"] or not all(near(stats[k], stated[k]) for k in ("q1", "median", "q3")):
         bad.append("hourly pay counted from the roles gives %s, the totals say %s" % (stats, stated))
