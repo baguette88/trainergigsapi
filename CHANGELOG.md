@@ -1,5 +1,11 @@
 # Changes
 
+## 1.3.1, Nov 12, 2026
+
+- Types for the JavaScript client, `clients/js/trainergigs.d.ts`: a role, the three files, the filters and every function. An npm install picks them up by itself.
+
+Nothing else changed.
+
 ## 1.3.0, Nov 12, 2026
 
 - A filter that could never match is an error and no longer an empty answer. A country that is not a two-letter code ("Nigeria" for "NG") and a day that is not written `2026-11-01` raise `ValueError` in the Python client and throw a `RangeError` in the JavaScript client. In 1.2.0 both returned no roles.

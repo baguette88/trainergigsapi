@@ -1,12 +1,19 @@
 {
   "name": "trainergigs",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Free, read-only data on remote AI training jobs from TrainerGigs. No key and no dependency.",
   "type": "module",
   "main": "./clients/js/trainergigs.mjs",
-  "exports": "./clients/js/trainergigs.mjs",
+  "types": "./clients/js/trainergigs.d.ts",
+  "exports": {
+    ".": {
+      "types": "./clients/js/trainergigs.d.ts",
+      "default": "./clients/js/trainergigs.mjs"
+    }
+  },
   "files": [
     "clients/js/trainergigs.mjs",
+    "clients/js/trainergigs.d.ts",
     "LICENSE",
     "LICENSE-DATA.md"
   ],

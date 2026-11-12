@@ -12,7 +12,7 @@ import re
 import urllib.error
 import urllib.request
 
-__version__ = "1.3.0"
+__version__ = "1.3.1"
 
 BASE = "https://trainergigs.com"
 DAILY = "/ai-training-jobs-data"

@@ -90,6 +90,27 @@ test("the median is counted as the site counts it", () => {
   assert.equal(payStats(Array(8).fill(hourly(40, 60))).median, 50)
 })
 
+test("the types name every export, every field of a role and every filter", async () => {
+  const types = await readFile(new URL("./trainergigs.d.ts", import.meta.url), "utf8")
+  const client = await import("./trainergigs.mjs")
+  for (const name of Object.keys(client)) {
+    assert.match(types, new RegExp("export declare (const|function) " + name + "\\b"), name + " has no type")
+  }
+  const declared = [...types.matchAll(/^export declare (?:const|function) (\w+)/gm)].map(m => m[1])
+  assert.deepEqual(declared.sort(), Object.keys(client).sort())
+  const role = types.slice(types.indexOf("export interface Role {"), types.indexOf("export interface Totals"))
+  for (const field of Object.keys(data.fields)) assert.match(role, new RegExp("^  " + field + ": ", "m"), field)
+  const totals = types.slice(types.indexOf("export interface Totals {"), types.indexOf("export interface RolesFile"))
+  for (const field of Object.keys(data.totals)) assert.match(totals, new RegExp("^  " + field + ": ", "m"), field)
+  const filters = types.slice(types.indexOf("export interface Filters {"), types.indexOf("export interface PayStats"))
+  const source = await readFile(new URL("./trainergigs.mjs", import.meta.url), "utf8")
+  const taken = source.match(/export async function roles\(\{([^}]+)\}/)[1].split(",").map(s => s.trim().split(" ")[0])
+  for (const name of taken) assert.match(filters, new RegExp("^  " + name + "\\?: ", "m"), name)
+  const pkg = JSON.parse(await readFile(new URL("../../package.json", import.meta.url), "utf8"))
+  assert.equal(pkg.types, "./clients/js/trainergigs.d.ts")
+  assert.ok(pkg.files.includes("clients/js/trainergigs.d.ts"))
+})
+
 test("the client states its version", () => {
   assert.match(VERSION, /^\d+\.\d+\.\d+$/)
 })

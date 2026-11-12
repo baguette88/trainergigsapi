@@ -78,11 +78,13 @@ npm install github:baguette88/trainergigsapi
 import { roles } from "trainergigs"
 ```
 
+TypeScript and editors read the types in `clients/js/trainergigs.d.ts`, so a role's fields complete as you type.
+
 A browser page, with nothing to install:
 
 ```html
 <script type="module">
-import { roles } from "https://cdn.jsdelivr.net/gh/baguette88/trainergigsapi@v1.3.0/clients/js/trainergigs.mjs"
+import { roles } from "https://cdn.jsdelivr.net/gh/baguette88/trainergigsapi@v1.3.1/clients/js/trainergigs.mjs"
 console.log(await roles({ country: "NG" }))
 </script>
 ```
