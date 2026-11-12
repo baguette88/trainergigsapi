@@ -10,6 +10,8 @@ Free, read-only data on remote AI training jobs from [TrainerGigs](https://train
 
 Looking for the jobs themselves? Search every open role by field, country and listed pay on the board: **[trainergigs.com](https://trainergigs.com/?src=github)**.
 
+The files and every field are described on the site's [open data page](https://trainergigs.com/open-data?src=github), with a machine-readable description at [openapi.json](https://trainergigs.com/openapi.json). Short, dated answers to common questions about AI training work, such as what it pays and which countries can apply, are on the [questions page](https://trainergigs.com/ai-training-jobs-faq?src=github). The board also has a free [resume builder](https://trainergigs.com/?src=github#create-resume).
+
 <!-- counts:start -->
 On Nov 12, 2026 the daily file stated **2,978 open roles on 33 platforms**, and 449 paid research studies, which it counts apart. The median listed pay was $40 an hour, across 2,091 roles that state hourly pay. The middle half list $35.50 to $75.
 <!-- counts:end -->
