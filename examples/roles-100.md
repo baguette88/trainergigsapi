@@ -19,9 +19,6 @@
 | \$140 to \$400/hr | [Product Safety & Regulatory Compliance Attorney](https://trainergigs.com/job-micro1-1ed51c75-9e40-41a7-a0b3-b7944ef3dedc?src=api) | micro1 | Law | 2026-10-22 |
 | \$140 to \$400/hr | [Structured Finance Attorney](https://trainergigs.com/job-micro1-114d9490-fbb0-4533-b891-73d0ee1c859d?src=api) | micro1 | Law | 2026-10-22 |
 | \$140 to \$400/hr | [Venture Capital & Corporate Attorney](https://trainergigs.com/job-micro1-5f79859b-3572-42b7-8edc-8ad91532a5cb?src=api) | micro1 | Law | 2026-10-22 |
-| \$100 to \$400/hr | [Principal Research Scientist (Computer Science / Computational Physics)](https://trainergigs.com/job-micro1-83ed9d66-130e-4c8f-8e9f-b1d18acdcf98?src=api) | micro1 | Science & Research | 2026-10-13 |
-| \$100 to \$400/hr | [Research Scientist - Computer Science & Computational Physics](https://trainergigs.com/job-micro1-3cfe73e9-28fa-4b8f-a0b7-bdba2b00f3ef?src=api) | micro1 | Science & Research | 2026-10-13 |
-| \$175 to \$300/hr | [Investment Banking – M&A Advisory.](https://trainergigs.com/job-micro1-51d28c89-faea-4ff7-8ea5-181b4a6dce86?src=api) | micro1 | Finance | 2026-10-14 |
 | \$150 to \$250/hr | [Federal Civil Litigation Attorney](https://trainergigs.com/job-micro1-77d41530-6c46-4946-bdfc-c08bc4fce87a?src=api) | micro1 | Law | 2026-10-30 |
 | \$80 to \$285/hr | [Cardiac Electrophysiologist](https://trainergigs.com/job-micro1-7a2d57b4-20d1-4191-887f-65e554fb5ca8?src=api) | micro1 | Medicine | 2026-11-10 |
 | \$80 to \$285/hr | [Cardiac Imaging Specialist](https://trainergigs.com/job-micro1-e456304b-4e61-4180-b5a6-262f1a1fe678?src=api) | micro1 | Medicine | 2026-11-10 |
@@ -54,19 +51,16 @@
 | \$150/hr | [Finance Expert - AI Training & Evaluation \| Global](https://trainergigs.com/job-rise-data-labs-043e7c7d-552e-41fc-8fdf-1968004737fc?src=api) | Rise Data Labs | Finance | 2026-08-19 |
 | \$150/hr | [Finance Expert - AI Training & Evaluation \| US, Canada & Europe](https://trainergigs.com/job-rise-data-labs-e685422b-44ed-4a2a-af8f-4b81bc2521a1?src=api) | Rise Data Labs | Finance | 2026-08-19 |
 | \$150/hr | [Offensive Cybersecurity Engineers: Build RL Environments for AI Evaluation](https://trainergigs.com/job-terac-342d43ab-ba49-4f68-bfbc-5edbdb097d56?src=api) | Terac | Software Engineering | 2026-11-09 |
+| \$100 to \$200/hr | [Equity & Credit Research Expert](https://trainergigs.com/job-micro1-1372af5c-e0d5-482d-ae96-72b845194268?src=api) | micro1 | Finance | 2026-11-11 |
 | \$147/hr | [Hardware Engineers: RTL Implementation and Evaluation Workflows](https://trainergigs.com/job-terac-3eaf59ca-ea71-4143-b283-a02f31ff9a71?src=api) | Terac | Software Engineering | 2026-10-31 |
 | \$100 to \$180/hr | [Hematology/Oncology Physician](https://trainergigs.com/job-micro1-172b81f5-b398-4f2a-8949-15b2dae8bd5c?src=api) | micro1 | Medicine | 2026-11-10 |
 | \$135/hr | [Emergency Medicine Physician - AI Evaluation](https://trainergigs.com/job-braintrust-18113?src=api) | Braintrust | Medicine | 2026-10-30 |
 | \$85 to \$185/hr | [Aerospace Engineering Expert](https://trainergigs.com/job-micro1-6556d777-99c3-4325-960d-51031c3494fa?src=api) | micro1 | Applied Engineering | 2026-10-31 |
-| \$100 to \$170/hr | [Employment Lawyer](https://trainergigs.com/job-micro1-68d31799-41cb-4899-987b-527eba2ef40a?src=api) | micro1 | Law | 2026-10-14 |
 | \$120 to \$150/hr | [Investment Banking Associate](https://trainergigs.com/job-micro1-254e0a96-f823-486f-b0f5-cc82dca09427?src=api) | micro1 | Finance | 2026-10-17 |
-| \$100 to \$170/hr | [Lawyer](https://trainergigs.com/job-micro1-d484ab8c-eb8b-4b2f-b742-3d00719ca143?src=api) | micro1 | Law | 2026-10-14 |
 | \$85 to \$185/hr | [Manufacturing & Industrial Engineering Expert](https://trainergigs.com/job-micro1-4a2fb544-c427-4da3-80bb-ee83ff4802bb?src=api) | micro1 | Applied Engineering | 2026-10-31 |
 | \$85 to \$185/hr | [Materials Science Expert](https://trainergigs.com/job-micro1-976d5b83-987d-45a2-9b30-f68bb810fdd6?src=api) | micro1 | Applied Engineering | 2026-10-31 |
-| \$100 to \$170/hr | [Personal Injury Lawyer](https://trainergigs.com/job-micro1-47ae77fa-cc3b-40f5-bdc6-eca4d11cc73e?src=api) | micro1 | Law | 2026-10-14 |
 | \$85 to \$185/hr | [Principal Engineer / Professor — Technical Expert](https://trainergigs.com/job-micro1-954f5912-19a0-45c9-bcad-ab62ace16283?src=api) | micro1 | Applied Engineering | 2026-10-31 |
 | \$85 to \$185/hr | [Semiconductor Engineering Expert](https://trainergigs.com/job-micro1-429cb072-8780-4bf4-afa3-788ee4853e43?src=api) | micro1 | Applied Engineering | 2026-10-31 |
-| \$100 to \$170/hr | [Tax Attorney](https://trainergigs.com/job-micro1-abdb5807-b650-4eb8-b4e4-20a5a834301d?src=api) | micro1 | Law | 2026-10-14 |
 | \$95 to \$170/hr | [Operational Law Attorney (JAG) SME](https://trainergigs.com/job-micro1-59a35ba0-5494-4934-8eb9-bbf2b0eb25e8?src=api) | micro1 | Law | 2026-11-09 |
 | \$90 to \$170/hr | [Army Combat Operations Expert](https://trainergigs.com/job-micro1-b41b55bc-97ef-473f-ad12-f7434a652fda?src=api) | micro1 | Other | 2026-10-24 |
 | \$90 to \$170/hr | [Defense Analyst](https://trainergigs.com/job-micro1-7b6e12c7-b37a-480f-a0f6-d40b1b2a7c0b?src=api) | micro1 | Other | 2026-10-29 |
@@ -83,6 +77,7 @@
 | \$80 to \$170/hr | [Intelligence Analyst](https://trainergigs.com/job-micro1-e9f8e23d-b13f-46d1-9e7c-01f56a2c0450?src=api) | micro1 | Other | 2026-10-23 |
 | \$80 to \$170/hr | [Intelligence Operations & Collection Expert](https://trainergigs.com/job-micro1-206a240f-67cf-47d4-8273-6e62ad89fd5c?src=api) | micro1 | Other | 2026-10-29 |
 | \$80 to \$170/hr | [International Humanitarian Law Advisor](https://trainergigs.com/job-micro1-871589f5-7a7e-498f-b121-90215edf6c9e?src=api) | micro1 | Other | 2026-11-07 |
+| \$100 to \$150/hr | [Investment Banking Associate](https://trainergigs.com/job-micro1-f3648a6f-d267-445f-b861-b1be29ae322f?src=api) | micro1 | Finance | 2026-10-18 |
 | \$80 to \$170/hr | [Military Legal Advisor](https://trainergigs.com/job-micro1-21bb587d-cd06-407b-95eb-44a44a5dc803?src=api) | micro1 | Law | 2026-10-23 |
 | \$80 to \$170/hr | [Senior Intelligence Analyst – National Security](https://trainergigs.com/job-micro1-8d2f7ffc-121b-46a2-aef6-fcd1b53f96ff?src=api) | micro1 | Other | 2026-10-28 |
 | \$80 to \$170/hr | [Special Forces Operator](https://trainergigs.com/job-micro1-3afa60e3-4c33-4a5c-b6af-ca18270cc5b7?src=api) | micro1 | Other | 2026-10-24 |
@@ -92,19 +87,24 @@
 | \$65 to \$165/hr | [LibreCAD Expert](https://trainergigs.com/job-micro1-5a618f4f-19bf-497f-83ba-c31c229283b8?src=api) | micro1 | Other | 2026-11-03 |
 | \$80 to \$150/hr, paid per task | [Litigation Attorney](https://trainergigs.com/job-micro1-4e349131-665b-4300-9b7c-1cc6e051eb57?src=api) | micro1 | Law | 2026-10-29 |
 | \$112/hr | [Legal Professionals: Paid Engagement on Specialized Workflows](https://trainergigs.com/job-terac-67df6189-f7b5-4882-96ae-ca7553807304?src=api) | Terac | Law | 2026-10-14 |
+| \$100 to \$121/hr | [Senior Software Engineer- 1133 (Hybrid Brooklyn)](https://trainergigs.com/job-braintrust-18159?src=api) | Braintrust | Software Engineering | 2026-11-12 |
 | \$100 to \$120/hr | [Brand Designer](https://trainergigs.com/job-braintrust-18153?src=api) | Braintrust | Arts & Design | 2026-11-11 |
+| \$90 to \$130/hr | [Web Designer](https://trainergigs.com/job-braintrust-18161?src=api) | Braintrust | Arts & Design | 2026-11-12 |
 | \$90 to \$130/hr | [Education Practitioner - Learning & Assessment Specialist](https://trainergigs.com/job-micro1-c3af6520-9ea8-4717-b8c6-2b9dee8ee470?src=api) | micro1 | Education | 2026-10-15 |
 | \$109/hr | [Industrial Engineers: Equipment Diagnostics and Sensor Data Analysis](https://trainergigs.com/job-terac-16023584-39d7-4ed9-9331-ad5f25e8c3a1?src=api) | Terac | Software Engineering | 2026-10-31 |
 | \$100 to \$115/hr | [Inpatient Care Physician (MD/DO)](https://trainergigs.com/job-micro1-6fe1b365-e42d-4a8f-a474-89801118311e?src=api) | micro1 | Medicine | 2026-10-20 |
 | \$95 to \$115/hr | [Product Manager, Digital Client Experiences](https://trainergigs.com/job-braintrust-18135?src=api) | Braintrust | Other | 2026-11-06 |
+| \$80 to \$130/hr | [Legal Expert (Antitrust & Competition Law)](https://trainergigs.com/job-micro1-5faf40c0-a291-4ca9-bb45-be75d2dde2ed?src=api) | micro1 | Law | 2026-11-13 |
+| \$80 to \$130/hr | [Legal Expert (Civil Rights Law)](https://trainergigs.com/job-micro1-7eba9484-46ef-4914-a284-2159b2ccbd00?src=api) | micro1 | Law | 2026-11-13 |
 | \$80 to \$130/hr | [Legal Expert (Corporate & M&A)](https://trainergigs.com/job-micro1-a17eaf55-907e-4908-9d9e-5a5e2b604f79?src=api) | micro1 | Law | 2026-11-10 |
+| \$80 to \$130/hr | [Legal Expert (Employment & Labor Law)](https://trainergigs.com/job-micro1-6422f784-daa4-41a6-8614-7de3f9025dee?src=api) | micro1 | Law | 2026-11-13 |
 | \$80 to \$130/hr | [Legal Expert (Employment & Labor)](https://trainergigs.com/job-micro1-f41c299b-b54a-4919-a119-2b9bb67ea638?src=api) | micro1 | Law | 2026-11-10 |
+| \$80 to \$130/hr | [Legal Expert (Entertainment Law)](https://trainergigs.com/job-micro1-22682b99-ae27-4f3b-be90-188da60d44d2?src=api) | micro1 | Law | 2026-11-13 |
+| \$80 to \$130/hr | [Legal Expert (Environmental Law)](https://trainergigs.com/job-micro1-25101ed1-9065-439f-aea5-ce77efeb4ef4?src=api) | micro1 | Law | 2026-11-13 |
 | \$80 to \$130/hr | [Legal Expert (Intellectual Property)](https://trainergigs.com/job-micro1-79aa5dad-4ce0-49bd-8d38-d20f5aeb0cd9?src=api) | micro1 | Law | 2026-11-10 |
 | \$80 to \$130/hr | [Legal Expert (Litigation & Disputes)](https://trainergigs.com/job-micro1-7fd100a0-19a0-4c5d-9cc0-d690ed3df112?src=api) | micro1 | Law | 2026-11-10 |
 | \$70 to \$140/hr | [NSA / Signals Intelligence (SIGINT) Expert](https://trainergigs.com/job-micro1-6928f6ef-24cf-4227-99a2-1eb722ac6b79?src=api) | micro1 | Other | 2026-11-04 |
 | \$90 to \$110/hr | [GCP Platform Engineer with DevOps experience (Hybrid: Fort Lauderdale, Irving, NJ or NY)](https://trainergigs.com/job-braintrust-18096?src=api) | Braintrust | Software Engineering | 2026-11-05 |
-| \$50 to \$150/hr | [PhD in Quantitative Finance, Remote AI Research Evaluator](https://trainergigs.com/job-braintrust-17309?src=api) | Braintrust | Finance | 2026-10-28 |
-| \$50 to \$150/hr | [STEM PhD Expert for AI Reasoning & Evaluation](https://trainergigs.com/job-braintrust-17308?src=api) | Braintrust | Other | 2026-10-28 |
 | \$100/hr | [Senior Software Engineer - Python / TypeScript](https://trainergigs.com/job-braintrust-17898?src=api) | Braintrust | Software Engineering | 2026-11-10 |
 | Up to \$100/hr | [Hospitalist / Internist - Remote Case Review, Up to \$100/hr](https://trainergigs.com/job-mindrift-055144f90f?src=api) | Mindrift | Medicine | 2026-11-06 |
 | Up to \$100/hr | [Physicians (MD/DO) - Review Clinical Cases for Medical AI, Remote, Up to \$100/hr](https://trainergigs.com/job-mindrift-1a20d705ff?src=api) | Mindrift | Medicine | 2026-10-19 |
@@ -122,6 +122,6 @@
 | \$70 to \$130/hr | [Software Engineer (Open 3D Engine)](https://trainergigs.com/job-micro1-9f83ac6b-9f94-4abc-87b7-d6d60cc9a70c?src=api) | micro1 | Software Engineering | 2026-11-03 |
 | \$70 to \$130/hr | [Solar2D Game Developer](https://trainergigs.com/job-micro1-7f66e2a9-5b44-4fef-8d96-6c053a75b771?src=api) | micro1 | Software Engineering | 2026-11-03 |
 
-Counted on 2026-11-12. Data: [TrainerGigs](https://trainergigs.com/?src=api)
+Counted on 2026-11-13. Data: [TrainerGigs](https://trainergigs.com/?src=api)
 
 A correction, or a role or platform to add: hello@trainergigs.com
