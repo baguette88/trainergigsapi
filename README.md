@@ -13,7 +13,7 @@ Looking for the jobs themselves? Search every open role by field, country and li
 The files and every field are described on the site's [open data page](https://trainergigs.com/open-data?src=github), with a machine-readable description at [openapi.json](https://trainergigs.com/openapi.json). Short, dated answers to common questions about AI training work, such as what it pays and which countries can apply, are on the [questions page](https://trainergigs.com/ai-training-jobs-faq?src=github). The board also has a free [resume builder](https://trainergigs.com/?src=github#create-resume).
 
 <!-- counts:start -->
-On Nov 13, 2026 the daily file stated **2,879 open roles on 33 platforms**, and 445 paid research studies, which it counts apart. The median listed pay was $40 an hour, across 2,015 roles that state hourly pay. The middle half list $35.50 to $75.
+On Nov 14, 2026 the daily file stated **2,944 open roles on 33 platforms**, and 444 paid research studies, which it counts apart. The median listed pay was $40 an hour, across 2,079 roles that state hourly pay. The middle half list $35.50 to $75.
 <!-- counts:end -->
 
 **On this page:** [Quick start](#quick-start) · [Install](#install) · [What you can build](#what-you-can-build) · [The files](#the-files) · [A role](#a-role) · [Filters and commands](#filters-and-commands) · [Recipes](#recipes) · [How the files are served](#how-the-files-are-served) · [Field reference](#field-reference) · [How the numbers are counted](#how-the-numbers-are-counted) · [The dated archive](#the-dated-archive) · [Versions](#versions) · [Terms](#terms)
