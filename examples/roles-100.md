@@ -32,10 +32,6 @@
 | \$150 to \$180/hr | [Medical Oncologist](https://trainergigs.com/job-micro1-868d0dba-30bc-411e-baff-43b0c90e42ba?src=api) | micro1 | Medicine | 2026-11-10 |
 | \$150 to \$180/hr | [Pediatric Hematology/Oncology Physician](https://trainergigs.com/job-micro1-51a68d9c-317c-49bd-bf15-8acc722179c6?src=api) | micro1 | Medicine | 2026-11-10 |
 | \$158/hr | [Circuit Design Engineers: Paid Technical Project on SPICE Simulation](https://trainergigs.com/job-terac-fe8f9ff1-1cb3-4121-9d8c-6fb8e31838aa?src=api) | Terac | Software Engineering | 2026-10-31 |
-| \$100 to \$200/hr | [Go Senior Software Engineer, AI Training](https://trainergigs.com/job-g2i-417be61a-8e99-4dea-be4f-43d0c9bda33c?src=api) | G2i | Software Engineering | 2026-10-15 |
-| \$100 to \$200/hr | [Java of Senior Software Engineer, AI Training](https://trainergigs.com/job-g2i-3b5a7ce9-e4a1-4ad8-8c2f-ccc0199f5792?src=api) | G2i | Software Engineering | 2026-10-15 |
-| \$100 to \$200/hr | [JavaScript of Senior Software Engineer, AI Training](https://trainergigs.com/job-g2i-f9897ef7-dc32-490a-b671-b7a4a93dee13?src=api) | G2i | Software Engineering | 2026-10-15 |
-| \$100 to \$200/hr | [Python Senior Software Engineer, AI Training](https://trainergigs.com/job-g2i-263fce72-7775-4f9d-a4c1-32a1e3d3167d?src=api) | G2i | Software Engineering | 2026-10-15 |
 | \$100 to \$200/hr | [Remote Python Senior Software Engineer, AI Training](https://trainergigs.com/job-g2i-61fbf200-b49e-4dd6-a47d-6bdf5954274e?src=api) | G2i | Software Engineering | 2026-10-30 |
 | \$100 to \$200/hr | [Senior Software Engineer, AI Training](https://trainergigs.com/job-g2i-7c54f48a-bd33-491a-8130-f1c9b1dfccb1?src=api) | G2i | Software Engineering | 2026-10-26 |
 | \$100 to \$200/hr | [Senior Software Engineer, AI Training - AU](https://trainergigs.com/job-g2i-e375fee4-35a0-40b3-8869-744683056806?src=api) | G2i | Software Engineering | 2026-10-22 |
@@ -48,7 +44,6 @@
 | \$100 to \$200/hr | [Senior Software Engineer, AI Training - UK](https://trainergigs.com/job-g2i-b59d6214-1240-4776-866f-bdeb193fbbd9?src=api) | G2i | Software Engineering | 2026-10-22 |
 | \$100 to \$200/hr | [Senior Software Engineer, AI Training - US](https://trainergigs.com/job-g2i-583075a5-b9a5-40ca-9359-a1ac37f871ac?src=api) | G2i | Software Engineering | 2026-10-22 |
 | \$100 to \$200/hr | [Senior Software Engineer, AI Training - United States](https://trainergigs.com/job-g2i-6ea6a53a-7689-45f2-b429-1146965d3cd7?src=api) | G2i | Software Engineering | 2026-10-26 |
-| \$100 to \$200/hr | [TypeScript Senior Software Engineer, AI Training](https://trainergigs.com/job-g2i-96204444-cf33-4fc9-a4c2-55d9409abb37?src=api) | G2i | Software Engineering | 2026-10-15 |
 | \$150/hr | [Accounting & QuickBooks Expert \| Global](https://trainergigs.com/job-rise-data-labs-5a0e0353-21f2-4010-bb31-79a76983c50f?src=api) | Rise Data Labs | Finance | 2026-09-10 |
 | \$150/hr | [Finance Expert - AI Training & Evaluation \| Global](https://trainergigs.com/job-rise-data-labs-043e7c7d-552e-41fc-8fdf-1968004737fc?src=api) | Rise Data Labs | Finance | 2026-08-19 |
 | \$150/hr | [Finance Expert - AI Training & Evaluation \| US, Canada & Europe](https://trainergigs.com/job-rise-data-labs-e685422b-44ed-4a2a-af8f-4b81bc2521a1?src=api) | Rise Data Labs | Finance | 2026-08-19 |
@@ -91,7 +86,6 @@
 | \$100 to \$121/hr | [Senior Software Engineer- 1133 (Hybrid Brooklyn)](https://trainergigs.com/job-braintrust-18159?src=api) | Braintrust | Software Engineering | 2026-11-12 |
 | \$100 to \$120/hr | [Brand Designer](https://trainergigs.com/job-braintrust-18153?src=api) | Braintrust | Arts & Design | 2026-11-13 |
 | \$90 to \$130/hr | [Web Designer](https://trainergigs.com/job-braintrust-18161?src=api) | Braintrust | Arts & Design | 2026-11-13 |
-| \$90 to \$130/hr | [Education Practitioner - Learning & Assessment Specialist](https://trainergigs.com/job-micro1-c3af6520-9ea8-4717-b8c6-2b9dee8ee470?src=api) | micro1 | Education | 2026-10-15 |
 | \$109/hr | [Industrial Engineers: Equipment Diagnostics and Sensor Data Analysis](https://trainergigs.com/job-terac-16023584-39d7-4ed9-9331-ad5f25e8c3a1?src=api) | Terac | Software Engineering | 2026-10-31 |
 | \$100 to \$115/hr | [Inpatient Care Physician (MD/DO)](https://trainergigs.com/job-micro1-6fe1b365-e42d-4a8f-a474-89801118311e?src=api) | micro1 | Medicine | 2026-10-20 |
 | \$95 to \$115/hr | [Product Manager, Digital Client Experiences](https://trainergigs.com/job-braintrust-18135?src=api) | Braintrust | Other | 2026-11-06 |
@@ -118,7 +112,6 @@
 | \$100/hr | [Economists: Economic Analysis for AI Training](https://trainergigs.com/job-terac-4d65412b-b414-4522-b684-892c39e449dd?src=api) | Terac | Finance | 2026-11-12 |
 | \$100/hr | [P&C Insurance Professionals: Paid AI Training Project](https://trainergigs.com/job-terac-367416c1-93c8-43c7-8e72-8ec1d6a20d63?src=api) | Terac | Finance | 2026-11-12 |
 | \$70 to \$130/hr | [2D Game Developer (Defold)](https://trainergigs.com/job-micro1-c56b1ad7-74cd-4ac3-8fac-96c3fe46e0dc?src=api) | micro1 | Arts & Design | 2026-11-03 |
-| \$80 to \$120/hr, paid per task | [Aerodynamics Expert (MSc. or PhD)](https://trainergigs.com/job-micro1-99ef9e98-e4de-4503-b2e3-980390dab872?src=api) | micro1 | Other | 2026-10-16 |
 | \$70 to \$130/hr | [Combat Arms & Targeting SME](https://trainergigs.com/job-micro1-a287e691-92ad-4e86-bacc-322b0e92aeec?src=api) | micro1 | Other | 2026-10-22 |
 | \$70 to \$130/hr | [Game Developer (Godot Expert)](https://trainergigs.com/job-micro1-8168e928-64b9-4874-86be-720af5a3898e?src=api) | micro1 | Arts & Design | 2026-11-11 |
 | \$70 to \$130/hr | [Godot Game Engine expert](https://trainergigs.com/job-micro1-577e3275-4243-401e-af13-a70e97e4c78b?src=api) | micro1 | Arts & Design | 2026-11-03 |
@@ -126,6 +119,6 @@
 | \$70 to \$130/hr | [Software Engineer (Open 3D Engine)](https://trainergigs.com/job-micro1-9f83ac6b-9f94-4abc-87b7-d6d60cc9a70c?src=api) | micro1 | Software Engineering | 2026-11-03 |
 | \$70 to \$130/hr | [Solar2D Game Developer](https://trainergigs.com/job-micro1-7f66e2a9-5b44-4fef-8d96-6c053a75b771?src=api) | micro1 | Software Engineering | 2026-11-03 |
 
-Counted on 2026-11-14. Data: [TrainerGigs](https://trainergigs.com/?src=api)
+Counted on 2026-11-15. Data: [TrainerGigs](https://trainergigs.com/?src=api)
 
 A correction, or a role or platform to add: hello@trainergigs.com
