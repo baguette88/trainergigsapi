@@ -51,7 +51,6 @@
 | \$147/hr | [Hardware Engineers: RTL Implementation and Evaluation Workflows](https://trainergigs.com/job-terac-3eaf59ca-ea71-4143-b283-a02f31ff9a71?src=api) | Terac | Software Engineering | 2026-10-31 |
 | \$135/hr | [Emergency Medicine Physician - AI Evaluation](https://trainergigs.com/job-braintrust-18113?src=api) | Braintrust | Medicine | 2026-10-30 |
 | \$85 to \$185/hr | [Aerospace Engineering Expert](https://trainergigs.com/job-micro1-6556d777-99c3-4325-960d-51031c3494fa?src=api) | micro1 | Applied Engineering | 2026-10-31 |
-| \$120 to \$150/hr | [Investment Banking Associate](https://trainergigs.com/job-micro1-254e0a96-f823-486f-b0f5-cc82dca09427?src=api) | micro1 | Finance | 2026-10-17 |
 | \$85 to \$185/hr | [Manufacturing & Industrial Engineering Expert](https://trainergigs.com/job-micro1-4a2fb544-c427-4da3-80bb-ee83ff4802bb?src=api) | micro1 | Applied Engineering | 2026-10-31 |
 | \$85 to \$185/hr | [Materials Science Expert](https://trainergigs.com/job-micro1-976d5b83-987d-45a2-9b30-f68bb810fdd6?src=api) | micro1 | Applied Engineering | 2026-10-31 |
 | \$100 to \$170/hr | [Physics Expert (Gravity and Holography)](https://trainergigs.com/job-micro1-6051f146-9e74-44ba-bd0e-6558aab95afa?src=api) | micro1 | Science & Research | 2026-11-14 |
@@ -81,7 +80,6 @@
 | \$80 to \$170/hr | [Weapons Systems Operator](https://trainergigs.com/job-micro1-fdc2913f-8c00-4a0e-b4dc-9cd9c500dd05?src=api) | micro1 | Other | 2026-10-24 |
 | \$100 to \$130/hr | [Experiential Visual Designer](https://trainergigs.com/job-braintrust-18152?src=api) | Braintrust | Arts & Design | 2026-11-13 |
 | \$80 to \$150/hr | [Humanitarian Aid Representative](https://trainergigs.com/job-micro1-6ea926f9-3711-40d7-ba08-6b53367ebbb5?src=api) | micro1 | Humanities | 2026-10-23 |
-| \$65 to \$165/hr | [LibreCAD Expert](https://trainergigs.com/job-micro1-5a618f4f-19bf-497f-83ba-c31c229283b8?src=api) | micro1 | Other | 2026-11-03 |
 | \$80 to \$150/hr, paid per task | [Litigation Attorney](https://trainergigs.com/job-micro1-4e349131-665b-4300-9b7c-1cc6e051eb57?src=api) | micro1 | Law | 2026-10-29 |
 | \$100 to \$121/hr | [Senior Software Engineer- 1133 (Hybrid Brooklyn)](https://trainergigs.com/job-braintrust-18159?src=api) | Braintrust | Software Engineering | 2026-11-12 |
 | \$100 to \$120/hr | [Brand Designer](https://trainergigs.com/job-braintrust-18153?src=api) | Braintrust | Arts & Design | 2026-11-13 |
@@ -111,14 +109,9 @@
 | \$50 to \$150/hr | [Legal & Paralegal Expert — AI Training & Evaluation](https://trainergigs.com/job-rise-data-labs-51f60ced-b58b-498a-9fa1-476746d82027?src=api) | Rise Data Labs | Law | 2026-10-31 |
 | \$100/hr | [Economists: Economic Analysis for AI Training](https://trainergigs.com/job-terac-4d65412b-b414-4522-b684-892c39e449dd?src=api) | Terac | Finance | 2026-11-12 |
 | \$100/hr | [P&C Insurance Professionals: Paid AI Training Project](https://trainergigs.com/job-terac-367416c1-93c8-43c7-8e72-8ec1d6a20d63?src=api) | Terac | Finance | 2026-11-12 |
-| \$70 to \$130/hr | [2D Game Developer (Defold)](https://trainergigs.com/job-micro1-c56b1ad7-74cd-4ac3-8fac-96c3fe46e0dc?src=api) | micro1 | Arts & Design | 2026-11-03 |
 | \$70 to \$130/hr | [Combat Arms & Targeting SME](https://trainergigs.com/job-micro1-a287e691-92ad-4e86-bacc-322b0e92aeec?src=api) | micro1 | Other | 2026-10-22 |
-| \$70 to \$130/hr | [Game Developer (Godot Expert)](https://trainergigs.com/job-micro1-8168e928-64b9-4874-86be-720af5a3898e?src=api) | micro1 | Arts & Design | 2026-11-11 |
-| \$70 to \$130/hr | [Godot Game Engine expert](https://trainergigs.com/job-micro1-577e3275-4243-401e-af13-a70e97e4c78b?src=api) | micro1 | Arts & Design | 2026-11-03 |
 | \$80 to \$120/hr, paid per task | [Senior Software Engineer](https://trainergigs.com/job-micro1-4576465c-1e27-4f52-b18b-be3c85a9fc10?src=api) | micro1 | Software Engineering | 2026-11-08 |
-| \$70 to \$130/hr | [Software Engineer (Open 3D Engine)](https://trainergigs.com/job-micro1-9f83ac6b-9f94-4abc-87b7-d6d60cc9a70c?src=api) | micro1 | Software Engineering | 2026-11-03 |
-| \$70 to \$130/hr | [Solar2D Game Developer](https://trainergigs.com/job-micro1-7f66e2a9-5b44-4fef-8d96-6c053a75b771?src=api) | micro1 | Software Engineering | 2026-11-03 |
 
-Counted on 2026-11-15. Data: [TrainerGigs](https://trainergigs.com/?src=api)
+Counted on 2026-11-16. Data: [TrainerGigs](https://trainergigs.com/?src=api)
 
 A correction, or a role or platform to add: hello@trainergigs.com
