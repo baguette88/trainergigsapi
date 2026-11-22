@@ -1,6 +1,6 @@
 | Pay | Role | Platform | Field | Posted |
 |---|---|---|---|---|
-| \$300/hr | [Human Frontier Collective - Creative Advisor](https://trainergigs.com/job-scale-ai-4747295005?src=api) | Scale AI | Arts & Design | 2026-10-23 |
+| \$300/hr | [Creative Advisor - Human Frontier Collective](https://trainergigs.com/job-scale-ai-4747295005?src=api) | Scale AI | Arts & Design | 2026-10-23 |
 | \$140 to \$400/hr | [Consumer Product Safety Attorney](https://trainergigs.com/job-micro1-5888d8c4-69df-47b6-8d73-fac94ab909c0?src=api) | micro1 | Law | 2026-10-28 |
 | \$140 to \$400/hr | [Gaming/Gambling Regulatory Attorney](https://trainergigs.com/job-micro1-c80af4df-2031-4f3e-a16b-eae08b339e2f?src=api) | micro1 | Law | 2026-10-28 |
 | \$150 to \$350/hr | [Executive Presentation Strategy Expert (GTM/Finance/Consulting)](https://trainergigs.com/job-micro1-90902472-c9d4-4726-bb0b-a82135b1e5ba?src=api) | micro1 | Finance | 2026-11-18 |
@@ -21,6 +21,7 @@
 | \$150 to \$180/hr | [Medical Oncologist](https://trainergigs.com/job-micro1-868d0dba-30bc-411e-baff-43b0c90e42ba?src=api) | micro1 | Medicine | 2026-11-10 |
 | \$150 to \$180/hr | [Pediatric Hematology/Oncology Physician](https://trainergigs.com/job-micro1-51a68d9c-317c-49bd-bf15-8acc722179c6?src=api) | micro1 | Medicine | 2026-11-10 |
 | \$158/hr | [Circuit Design Engineers: Paid Technical Project on SPICE Simulation](https://trainergigs.com/job-terac-fe8f9ff1-1cb3-4121-9d8c-6fb8e31838aa?src=api) | Terac | Software Engineering | 2026-10-31 |
+| \$100 to \$200/hr | [Senior Software Engineer, AI Training](https://trainergigs.com/job-g2i-7c54f48a-bd33-491a-8130-f1c9b1dfccb1?src=api) | G2i | Software Engineering | 2026-11-22 |
 | \$150/hr | [Accounting & QuickBooks Expert \| Global](https://trainergigs.com/job-rise-data-labs-5a0e0353-21f2-4010-bb31-79a76983c50f?src=api) | Rise Data Labs | Finance | 2026-09-10 |
 | \$150/hr | [Finance Expert - AI Training & Evaluation \| Global](https://trainergigs.com/job-rise-data-labs-043e7c7d-552e-41fc-8fdf-1968004737fc?src=api) | Rise Data Labs | Finance | 2026-08-19 |
 | \$150/hr | [Finance Expert - AI Training & Evaluation \| US, Canada & Europe](https://trainergigs.com/job-rise-data-labs-e685422b-44ed-4a2a-af8f-4b81bc2521a1?src=api) | Rise Data Labs | Finance | 2026-08-19 |
@@ -46,12 +47,9 @@
 | \$80 to \$170/hr | [Civilian Intelligence Agency Expert – U.S. & Allied Government](https://trainergigs.com/job-micro1-4700a242-8b55-4ffd-afd2-17172f16dac1?src=api) | micro1 | Other | 2026-10-30 |
 | \$80 to \$170/hr | [Defense Analyst](https://trainergigs.com/job-micro1-7feee246-52db-48df-880c-58a87bbc9c65?src=api) | micro1 | Other | 2026-10-24 |
 | \$80 to \$170/hr | [Fighter Pilot](https://trainergigs.com/job-micro1-761ff1a6-68bf-4e45-8047-41f475c66823?src=api) | micro1 | Other | 2026-10-24 |
-| \$80 to \$170/hr | [Human Intelligence Collector (HUMINT)](https://trainergigs.com/job-micro1-36174963-012b-4a8d-b955-12d48aac7b6f?src=api) | micro1 | Other | 2026-10-23 |
 | \$80 to \$170/hr | [Intelligence Agency Officer](https://trainergigs.com/job-micro1-f6fd0de9-f6ed-4d98-86b0-eeb19256fc2b?src=api) | micro1 | Other | 2026-10-29 |
-| \$80 to \$170/hr | [Intelligence Analyst](https://trainergigs.com/job-micro1-e9f8e23d-b13f-46d1-9e7c-01f56a2c0450?src=api) | micro1 | Other | 2026-10-23 |
 | \$80 to \$170/hr | [Intelligence Operations & Collection Expert](https://trainergigs.com/job-micro1-206a240f-67cf-47d4-8273-6e62ad89fd5c?src=api) | micro1 | Other | 2026-10-29 |
 | \$80 to \$170/hr | [International Humanitarian Law Advisor](https://trainergigs.com/job-micro1-871589f5-7a7e-498f-b121-90215edf6c9e?src=api) | micro1 | Other | 2026-11-07 |
-| \$80 to \$170/hr | [Military Legal Advisor](https://trainergigs.com/job-micro1-21bb587d-cd06-407b-95eb-44a44a5dc803?src=api) | micro1 | Law | 2026-10-23 |
 | \$80 to \$170/hr | [Senior Intelligence Analyst – National Security](https://trainergigs.com/job-micro1-8d2f7ffc-121b-46a2-aef6-fcd1b53f96ff?src=api) | micro1 | Other | 2026-10-28 |
 | \$80 to \$170/hr | [Special Forces Operator](https://trainergigs.com/job-micro1-3afa60e3-4c33-4a5c-b6af-ca18270cc5b7?src=api) | micro1 | Other | 2026-10-24 |
 | \$80 to \$170/hr | [Weapons Systems Operator](https://trainergigs.com/job-micro1-fdc2913f-8c00-4a0e-b4dc-9cd9c500dd05?src=api) | micro1 | Other | 2026-10-24 |
@@ -64,7 +62,6 @@
 | \$100 to \$145/hr | [Trade Surveillance & Markets Compliance Expert (AI Training, Freelance, Remote, US Only)](https://trainergigs.com/job-braintrust-18193?src=api) | Braintrust | Finance | 2026-11-18 |
 | \$100 to \$130/hr | [Experiential Visual Designer](https://trainergigs.com/job-braintrust-18152?src=api) | Braintrust | Arts & Design | 2026-11-16 |
 | \$90 to \$140/hr | [Counterintelligence Technology & Program SME — AI Evaluation (Contract)](https://trainergigs.com/job-micro1-69ce4f10-b0cc-4ca0-93d4-ad306254e0cc?src=api) | micro1 | AI & Machine Learning | 2026-11-10 |
-| \$80 to \$150/hr | [Humanitarian Aid Representative](https://trainergigs.com/job-micro1-6ea926f9-3711-40d7-ba08-6b53367ebbb5?src=api) | micro1 | Humanities | 2026-10-23 |
 | \$80 to \$150/hr, paid per task | [Litigation Attorney](https://trainergigs.com/job-micro1-4e349131-665b-4300-9b7c-1cc6e051eb57?src=api) | micro1 | Law | 2026-10-29 |
 | \$100 to \$121/hr | [Senior Software Engineer- 1133 (Hybrid Brooklyn)](https://trainergigs.com/job-braintrust-18159?src=api) | Braintrust | Software Engineering | 2026-11-12 |
 | \$100 to \$120/hr | [Brand Designer](https://trainergigs.com/job-braintrust-18153?src=api) | Braintrust | Arts & Design | 2026-11-16 |
@@ -103,6 +100,6 @@
 | \$100/hr | [Product Managers: Paid Assessment for AI Training](https://trainergigs.com/job-terac-ec78d0cb-e906-4428-97bb-7cf916be7fb6?src=api) | Terac | Other | 2026-11-18 |
 | \$80 to \$120/hr, paid per task | [Aerodynamics Expert](https://trainergigs.com/job-micro1-fe5f2aeb-ec81-4511-8309-9ae96bab37f6?src=api) | micro1 | Other | 2026-11-16 |
 
-Counted on 2026-11-21. Data: [TrainerGigs](https://trainergigs.com/?src=api)
+Counted on 2026-11-22. Data: [TrainerGigs](https://trainergigs.com/?src=api)
 
 A correction, or a role or platform to add: hello@trainergigs.com
