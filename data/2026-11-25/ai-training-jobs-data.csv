@@ -1,0 +1,157 @@
+platform,field,open_roles,roles_with_hourly_pay,median_listed_hourly_usd,posted_last_7_days,countries_named,feed_read,kind
+Invisible,Language & Audio,329,329,36.5,0,0,2026-11-25,role
+Invisible,Other,86,83,35.5,0,0,2026-11-25,role
+Invisible,Science & Research,54,54,36.5,0,0,2026-11-25,role
+Invisible,Software Engineering,47,46,36.5,0,0,2026-11-25,role
+Invisible,Finance,19,19,36.5,0,0,2026-11-25,role
+Invisible,Medicine,15,15,36.5,0,0,2026-11-25,role
+Invisible,Business & Operations,9,7,,0,0,2026-11-25,role
+Invisible,Arts & Design,8,7,,0,0,2026-11-25,role
+Invisible,Generalist,4,4,,0,0,2026-11-25,role
+Invisible,Law,4,3,,0,0,2026-11-25,role
+Alignerr,Language & Audio,161,161,22.5,0,0,2026-11-25,role
+Alignerr,Software Engineering,134,134,62.5,0,0,2026-11-25,role
+Alignerr,Business & Operations,79,79,35.0,0,1,2026-11-25,role
+Alignerr,Science & Research,64,64,82.5,0,0,2026-11-25,role
+Alignerr,Finance,38,38,72.5,0,0,2026-11-25,role
+Alignerr,Medicine,22,22,58.75,0,0,2026-11-25,role
+Alignerr,Generalist,17,17,80.0,0,0,2026-11-25,role
+Alignerr,Other,12,12,56.25,0,0,2026-11-25,role
+Alignerr,Arts & Design,2,2,,0,0,2026-11-25,role
+Alignerr,Education,2,2,,0,0,2026-11-25,role
+Respondent,Research Studies,415,0,,129,1,2026-11-25,study
+Respondent,Finance,37,0,,11,0,2026-11-25,study
+micro1,Other,85,76,60.0,11,58,2026-11-25,role
+micro1,Law,47,41,105.0,1,58,2026-11-25,role
+micro1,Language & Audio,41,41,47.5,1,61,2026-11-25,role
+micro1,Medicine,35,33,65.0,11,58,2026-11-25,role
+micro1,Generalist,34,26,39.5,14,60,2026-11-25,role
+micro1,Applied Engineering,23,21,87.5,5,58,2026-11-25,role
+micro1,Finance,20,15,90.0,5,58,2026-11-25,role
+micro1,Arts & Design,18,17,77.5,1,58,2026-11-25,role
+micro1,Software Engineering,18,6,,8,58,2026-11-25,role
+micro1,Science & Research,16,9,135.0,3,58,2026-11-25,role
+micro1,Business & Operations,10,10,72.5,5,58,2026-11-25,role
+micro1,Robotics,10,9,14.5,1,58,2026-11-25,role
+micro1,AI & Machine Learning,9,3,,0,58,2026-11-25,role
+micro1,Education,8,8,100.0,7,58,2026-11-25,role
+micro1,Cybersecurity,6,6,,3,58,2026-11-25,role
+micro1,Retail & Hospitality,6,6,,6,58,2026-11-25,role
+micro1,Skilled Trades Construction,3,0,,1,58,2026-11-25,role
+micro1,Data Analysis,2,2,,1,58,2026-11-25,role
+micro1,Humanities,1,1,,0,58,2026-11-25,role
+Welo Data,Language & Audio,236,76,21.9,7,95,2026-11-25,role
+Welo Data,Other,54,4,,2,36,2026-11-25,role
+Welo Data,Business & Operations,12,0,,0,0,2026-11-25,role
+Welo Data,Software Engineering,12,6,,0,8,2026-11-25,role
+Welo Data,Medicine,7,0,,0,0,2026-11-25,role
+Welo Data,Arts & Design,2,2,,0,1,2026-11-25,role
+Welo Data,Finance,1,1,,0,1,2026-11-25,role
+Mercor,Language & Audio,87,86,40.0,0,107,2026-11-25,role
+Mercor,Medicine,37,34,172.5,1,2,2026-11-25,role
+Mercor,Software Engineering,27,24,80.0,0,107,2026-11-25,role
+Mercor,Finance,26,18,85.0,0,42,2026-11-25,role
+Mercor,Science & Research,23,22,112.5,1,107,2026-11-25,role
+Mercor,Applied Engineering,21,21,80.0,0,107,2026-11-25,role
+Mercor,Arts & Design,16,16,80.0,0,107,2026-11-25,role
+Mercor,Business & Operations,14,14,70.0,0,107,2026-11-25,role
+Mercor,Data Analysis,9,9,65.0,0,110,2026-11-25,role
+Mercor,Other,7,7,,0,107,2026-11-25,role
+Mercor,Law,6,6,,1,6,2026-11-25,role
+Mercor,Generalist,1,0,,0,1,2026-11-25,role
+Turing,Other,53,2,,5,11,2026-11-25,role
+Turing,Language & Audio,52,15,15.0,0,0,2026-11-25,role
+Turing,Software Engineering,49,2,,2,16,2026-11-25,role
+Turing,Finance,22,0,,0,1,2026-11-25,role
+Turing,Science & Research,19,0,,2,10,2026-11-25,role
+Turing,Medicine,18,0,,1,0,2026-11-25,role
+Turing,Arts & Design,7,0,,0,9,2026-11-25,role
+Turing,Business & Operations,3,0,,0,0,2026-11-25,role
+Turing,Generalist,3,1,,0,0,2026-11-25,role
+DataAnnotation,Language & Audio,41,0,,0,0,2026-11-25,role
+DataAnnotation,Finance,24,0,,0,0,2026-11-25,role
+DataAnnotation,Medicine,17,0,,0,0,2026-11-25,role
+DataAnnotation,Software Engineering,17,0,,0,0,2026-11-25,role
+DataAnnotation,Other,16,0,,0,0,2026-11-25,role
+DataAnnotation,Science & Research,8,0,,0,0,2026-11-25,role
+DataAnnotation,Law,6,0,,0,0,2026-11-25,role
+DataAnnotation,Arts & Design,2,0,,0,0,2026-11-25,role
+DataAnnotation,Business & Operations,1,0,,0,0,2026-11-25,role
+DataAnnotation,Generalist,1,0,,0,0,2026-11-25,role
+Rise Data Labs,Language & Audio,38,28,30.0,0,220,2026-11-25,role
+Rise Data Labs,Other,26,18,30.0,2,220,2026-11-25,role
+Rise Data Labs,Science & Research,21,17,32.5,1,220,2026-11-25,role
+Rise Data Labs,Software Engineering,14,12,31.25,2,220,2026-11-25,role
+Rise Data Labs,Business & Operations,6,3,,1,220,2026-11-25,role
+Rise Data Labs,Finance,6,5,,0,220,2026-11-25,role
+Rise Data Labs,Medicine,6,3,,2,220,2026-11-25,role
+Rise Data Labs,Arts & Design,4,4,,1,220,2026-11-25,role
+Rise Data Labs,Law,4,1,,2,220,2026-11-25,role
+Rise Data Labs,Generalist,1,1,,0,220,2026-11-25,role
+Braintrust,Language & Audio,35,7,,1,0,2026-11-25,role
+Braintrust,Other,22,21,62.5,18,0,2026-11-25,role
+Braintrust,Software Engineering,15,13,55.0,12,0,2026-11-25,role
+Braintrust,Arts & Design,12,11,70.0,6,0,2026-11-25,role
+Braintrust,Finance,8,7,,2,0,2026-11-25,role
+Braintrust,Medicine,3,2,,1,0,2026-11-25,role
+Braintrust,Business & Operations,2,2,,1,0,2026-11-25,role
+Braintrust,Science & Research,2,2,,0,0,2026-11-25,role
+Braintrust,Generalist,1,1,,1,0,2026-11-25,role
+Terac,Other,18,8,92.5,3,0,2026-11-25,role
+Terac,Finance,10,5,,2,0,2026-11-25,role
+Terac,Software Engineering,8,5,,2,1,2026-11-25,role
+Terac,Science & Research,3,0,,1,0,2026-11-25,role
+Terac,Business & Operations,2,0,,0,0,2026-11-25,role
+Terac,Law,2,1,,0,0,2026-11-25,role
+Terac,Medicine,2,1,,0,0,2026-11-25,role
+Terac,Arts & Design,1,1,,0,0,2026-11-25,role
+Terac,Generalist,1,1,,0,0,2026-11-25,role
+Innodata,Other,18,0,,0,0,2026-11-25,role
+Innodata,Language & Audio,8,0,,0,0,2026-11-25,role
+Innodata,Business & Operations,1,0,,0,0,2026-11-25,role
+Vetto AI,Other,7,0,,0,0,2026-11-25,role
+Vetto AI,Business & Operations,3,0,,0,0,2026-11-25,role
+Vetto AI,Finance,3,0,,0,0,2026-11-25,role
+Vetto AI,Software Engineering,3,0,,0,0,2026-11-25,role
+Vetto AI,Medicine,2,0,,0,0,2026-11-25,role
+Vetto AI,Science & Research,2,0,,0,0,2026-11-25,role
+Vetto AI,Law,1,0,,0,0,2026-11-25,role
+xAI,Other,7,7,,0,4,2026-11-25,role
+xAI,Science & Research,6,6,,0,5,2026-11-25,role
+xAI,Language & Audio,4,4,,0,4,2026-11-25,role
+xAI,Arts & Design,1,1,,0,4,2026-11-25,role
+xAI,Law,1,1,,0,4,2026-11-25,role
+xAI,Medicine,1,1,,0,5,2026-11-25,role
+Lionbridge,Language & Audio,13,13,10.0,0,5,2026-11-25,role
+Lionbridge,Other,1,0,,0,0,2026-11-25,role
+Volga Partners,Other,4,0,,0,6,2026-11-25,role
+Volga Partners,Language & Audio,3,3,,0,9,2026-11-25,role
+Volga Partners,Medicine,1,1,,0,1,2026-11-25,role
+Volga Partners,Science & Research,1,0,,0,1,2026-11-25,role
+Volga Partners,Software Engineering,1,0,,0,1,2026-11-25,role
+Scale AI,Other,3,0,,0,3,2026-11-25,role
+Scale AI,Arts & Design,1,1,,0,0,2026-11-25,role
+Scale AI,Finance,1,0,,0,3,2026-11-25,role
+Scale AI,Law,1,0,,0,3,2026-11-25,role
+Scale AI,Medicine,1,0,,0,3,2026-11-25,role
+Scale AI,Science & Research,1,1,,0,0,2026-11-25,role
+Cohere,Other,3,0,,0,0,2026-11-25,role
+Cohere,Finance,1,0,,1,0,2026-11-25,role
+Cohere,Language & Audio,1,0,,0,0,2026-11-25,role
+Cohere,Science & Research,1,0,,0,0,2026-11-25,role
+Cohere,Software Engineering,1,0,,0,0,2026-11-25,role
+Elsevier Health,Medicine,7,7,,0,1,2026-11-25,role
+Mindrift,Generalist,6,0,,3,29,2026-11-25,role
+Affirm,Education,4,0,,0,0,2026-11-25,role
+Anthropic,Other,2,0,,0,0,2026-11-25,role
+Anthropic,Finance,1,0,,0,0,2026-11-25,role
+Anthropic,Software Engineering,1,0,,0,0,2026-11-25,role
+Testlio,Generalist,2,0,,0,3,2026-11-25,role
+Testlio,Software Engineering,1,0,,0,2,2026-11-25,role
+Sigma AI,Language & Audio,2,0,,1,6,2026-11-25,role
+G2i,Software Engineering,1,1,,1,0,2026-11-25,role
+Mercury,Education,1,0,,0,0,2026-11-25,role
+OpenAI,Software Engineering,1,0,,0,0,2026-11-25,role
+Outlier,Finance,1,0,,0,1,2026-11-25,role
+Snorkel,Science & Research,1,0,,0,0,2026-11-25,role
+Together AI,Software Engineering,1,0,,0,0,2026-11-25,role
