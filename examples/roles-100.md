@@ -33,12 +33,13 @@
 | \$85 to \$185/hr | [Principal Engineer / Professor — Technical Expert](https://trainergigs.com/job-micro1-954f5912-19a0-45c9-bcad-ab62ace16283?src=api) | micro1 | Applied Engineering | 2026-10-31 |
 | \$85 to \$185/hr | [Semiconductor Engineering Expert](https://trainergigs.com/job-micro1-429cb072-8780-4bf4-afa3-788ee4853e43?src=api) | micro1 | Applied Engineering | 2026-10-31 |
 | \$95 to \$170/hr | [Operational Law Attorney (JAG) SME](https://trainergigs.com/job-micro1-59a35ba0-5494-4934-8eb9-bbf2b0eb25e8?src=api) | micro1 | Law | 2026-11-09 |
-| \$90 to \$170/hr | [CARFAX Car Care Specialist](https://trainergigs.com/job-micro1-bd97d4f3-9695-4705-a3c4-1588ead9caf3?src=api) | micro1 | Generalist | 2026-11-25 |
+| \$90 to \$170/hr | [CARFAX Car Care Specialist](https://trainergigs.com/job-micro1-bd97d4f3-9695-4705-a3c4-1588ead9caf3?src=api) | micro1 | Other | 2026-11-25 |
 | \$90 to \$170/hr | [CrowdStrike Specialist](https://trainergigs.com/job-micro1-3f5d773b-80f7-4472-8123-7f54a4550c24?src=api) | micro1 | Cybersecurity | 2026-11-25 |
 | \$90 to \$170/hr | [Defense Analyst](https://trainergigs.com/job-micro1-7b6e12c7-b37a-480f-a0f6-d40b1b2a7c0b?src=api) | micro1 | Other | 2026-10-29 |
 | \$90 to \$170/hr | [Greenhouse ATS Specialist](https://trainergigs.com/job-micro1-da78bff7-a5ae-44ba-b8d0-b7422b07ba5d?src=api) | micro1 | Business & Operations | 2026-11-25 |
 | \$80 to \$180/hr | [Legal Expert (Human Rights Law)](https://trainergigs.com/job-micro1-7e5d9c72-cf06-4f90-a38a-5837ef0b7fd5?src=api) | micro1 | Law | 2026-11-18 |
-| \$90 to \$170/hr | [Lotsa Helping Hands Specialist](https://trainergigs.com/job-micro1-0452e11a-c301-41b6-8e38-fc61c1828924?src=api) | micro1 | Generalist | 2026-11-25 |
+| \$90 to \$170/hr | [Lotsa Helping Hands Specialist](https://trainergigs.com/job-micro1-0452e11a-c301-41b6-8e38-fc61c1828924?src=api) | micro1 | Other | 2026-11-25 |
+| \$90 to \$170/hr | [Military Operations Expert](https://trainergigs.com/job-micro1-775e01a4-c2ea-47a4-ae2e-7c9e129a4409?src=api) | micro1 | Other | 2026-11-25 |
 | \$90 to \$170/hr | [Military Training and Readiness Advisor](https://trainergigs.com/job-micro1-cf209626-7a62-4d74-a629-8d324d339a71?src=api) | micro1 | Other | 2026-11-04 |
 | \$90 to \$170/hr | [Outschool Specialist](https://trainergigs.com/job-micro1-cc0a8cdd-843d-49d7-9d4d-276377b810fa?src=api) | micro1 | Education | 2026-11-25 |
 | \$120 to \$140/hr | [Psychiatrist](https://trainergigs.com/job-micro1-ba5bbe54-fe56-43e7-adc6-915f2886c887?src=api) | micro1 | Medicine | 2026-11-23 |
@@ -46,7 +47,6 @@
 | \$90 to \$170/hr | [Rocket Mortgage Specialist](https://trainergigs.com/job-micro1-27b79e88-fb5d-4cd2-98bd-8f48785619a5?src=api) | micro1 | Finance | 2026-11-25 |
 | \$90 to \$170/hr | [SAP Concur Specialist](https://trainergigs.com/job-micro1-6ba8152f-48f3-4afe-9165-8895d1b6a82a?src=api) | micro1 | Finance | 2026-11-25 |
 | \$90 to \$170/hr | [Teladoc Specialist](https://trainergigs.com/job-micro1-f9e9b530-fe8c-4f0a-b012-2cfb701610b0?src=api) | micro1 | Medicine | 2026-11-25 |
-| \$90 to \$170/hr | [Zoho Desk Specialist](https://trainergigs.com/job-micro1-87dc6e0b-2c68-417f-a4ca-9e11fc02df37?src=api) | micro1 | Business & Operations | 2026-11-25 |
 | \$126/hr | [Crash Simulation Engineers: Vehicle Crash Simulation Workflows](https://trainergigs.com/job-terac-c51173b9-76bb-4726-ae1e-4ba736aaf7cb?src=api) | Terac | Software Engineering | 2026-10-31 |
 | \$110 to \$140/hr | [Content Marketing Manager (US-Remote)](https://trainergigs.com/job-braintrust-17929?src=api) | Braintrust | Business & Operations | 2026-11-20 |
 | \$100 to \$150/hr | [Senior AI Consultant \| Braintrust AI Experts Network (Remote)](https://trainergigs.com/job-braintrust-18128?src=api) | Braintrust | Business & Operations | 2026-11-12 |
@@ -56,6 +56,7 @@
 | \$80 to \$170/hr | [International Humanitarian Law Advisor](https://trainergigs.com/job-micro1-871589f5-7a7e-498f-b121-90215edf6c9e?src=api) | micro1 | Other | 2026-11-07 |
 | \$80 to \$170/hr | [Irregular Warfare Expert](https://trainergigs.com/job-micro1-e01098f5-a33d-4706-bc91-3ba4863d9572?src=api) | micro1 | Other | 2026-11-04 |
 | \$80 to \$170/hr | [National Security Technology Expert](https://trainergigs.com/job-micro1-8ce00a2e-b05d-4644-9409-c944724a8ac3?src=api) | micro1 | Other | 2026-11-04 |
+| \$100 to \$150/hr | [Radiation Oncologist](https://trainergigs.com/job-micro1-9edded39-4798-484c-9973-1b1a5628cd19?src=api) | micro1 | Medicine | 2026-11-25 |
 | \$80 to \$170/hr | [Senior Intelligence Analyst – National Security](https://trainergigs.com/job-micro1-8d2f7ffc-121b-46a2-aef6-fcd1b53f96ff?src=api) | micro1 | Other | 2026-10-28 |
 | \$100 to \$145/hr | [AML / KYC Investigator / Financial Crime Compliance (Freelance, Remote, US Only)](https://trainergigs.com/job-braintrust-18188?src=api) | Braintrust | Finance | 2026-11-18 |
 | \$100 to \$145/hr | [Commodities Research Analyst (AI Training, Freelance, Remote, US Only)](https://trainergigs.com/job-braintrust-18191?src=api) | Braintrust | Science & Research | 2026-11-18 |
@@ -106,17 +107,14 @@
 | \$100/hr | [Government and Public Policy Professionals: AI Training Tasks](https://trainergigs.com/job-terac-4e24cf6b-6d60-43d8-acd1-5d799779c1cc?src=api) | Terac | Other | 2026-11-18 |
 | \$100/hr | [P&C Insurance Experts: AI Training Tasks](https://trainergigs.com/job-terac-367416c1-93c8-43c7-8e72-8ec1d6a20d63?src=api) | Terac | Finance | 2026-11-12 |
 | \$100/hr | [Product Managers: Paid Assessment for AI Training](https://trainergigs.com/job-terac-ec78d0cb-e906-4428-97bb-7cf916be7fb6?src=api) | Terac | Other | 2026-11-18 |
-| \$70 to \$130/hr | [AWS Console Specialist](https://trainergigs.com/job-micro1-5282b89f-63a5-4c98-9139-2536a020ce1a?src=api) | micro1 | Software Engineering | 2026-11-25 |
 | \$80 to \$120/hr, paid per task | [Aerodynamics Expert](https://trainergigs.com/job-micro1-fe5f2aeb-ec81-4511-8309-9ae96bab37f6?src=api) | micro1 | Other | 2026-11-16 |
-| \$70 to \$130/hr | [Cozi Specialist](https://trainergigs.com/job-micro1-a4a29998-c496-4d52-a465-8aab461f469c?src=api) | micro1 | Generalist | 2026-11-25 |
+| \$70 to \$130/hr | [Cozi Specialist](https://trainergigs.com/job-micro1-a4a29998-c496-4d52-a465-8aab461f469c?src=api) | micro1 | Other | 2026-11-25 |
 | \$70 to \$130/hr | [Desmos Specialist](https://trainergigs.com/job-micro1-3952399d-c44b-4a5a-9dac-bce9265569c3?src=api) | micro1 | Education | 2026-11-25 |
 | \$70 to \$130/hr | [IXL Specialist](https://trainergigs.com/job-micro1-e02bd279-4664-4cb3-8bcc-f8a123bfb5bf?src=api) | micro1 | Education | 2026-11-25 |
-| \$70 to \$130/hr | [Microsoft Azure Specialist](https://trainergigs.com/job-micro1-6973d3fe-7ffa-4336-a601-842d53239580?src=api) | micro1 | Software Engineering | 2026-11-25 |
-| \$70 to \$130/hr | [Partiful Specialist](https://trainergigs.com/job-micro1-f51e0ad4-f68e-4a27-ad74-d950ba30a3ac?src=api) | micro1 | Generalist | 2026-11-25 |
-| \$70 to \$130/hr | [PubMed Specialist](https://trainergigs.com/job-micro1-d9d9f98e-5930-413a-9abd-9d4dfa5de220?src=api) | micro1 | Medicine | 2026-11-25 |
-| \$70 to \$130/hr | [TripIt Specialist](https://trainergigs.com/job-micro1-4b6e4a4f-9340-41aa-ae78-0c2b9f8e201f?src=api) | micro1 | Generalist | 2026-11-25 |
-| \$70 to \$130/hr | [Vercel Specialist](https://trainergigs.com/job-micro1-43010f6e-4e92-4b43-b3b7-574686b5c137?src=api) | micro1 | Software Engineering | 2026-11-25 |
+| \$70 to \$130/hr | [Partiful Specialist](https://trainergigs.com/job-micro1-f51e0ad4-f68e-4a27-ad74-d950ba30a3ac?src=api) | micro1 | Other | 2026-11-25 |
+| \$80 to \$120/hr | [Scientist (Natural Sweetener Discovery)](https://trainergigs.com/job-micro1-131b694b-e7e3-439d-a097-39ed17a4045c?src=api) | micro1 | Science & Research | 2026-11-26 |
+| \$70 to \$130/hr | [TripIt Specialist](https://trainergigs.com/job-micro1-4b6e4a4f-9340-41aa-ae78-0c2b9f8e201f?src=api) | micro1 | Other | 2026-11-25 |
 
-Counted on 2026-11-25. Data: [TrainerGigs](https://trainergigs.com/?src=api)
+Counted on 2026-11-26. Data: [TrainerGigs](https://trainergigs.com/?src=api)
 
 A correction, or a role or platform to add: hello@trainergigs.com
